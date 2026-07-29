@@ -7,7 +7,7 @@
 
    MODULES
      01 · Preloader
-     02 · Custom cursor + mouse spotlight
+     02 · Mouse spotlight
      03 · Navigation (sticky, scrollspy, mobile menu)
      04 · Hero entrance timeline
      05 · Typed.js headline
@@ -122,11 +122,9 @@
   }
 
   /* ======================================================================== */
-  /* 02 · CUSTOM CURSOR + MOUSE SPOTLIGHT                                     */
+  /* 02 · MOUSE SPOTLIGHT                                                     */
   /* ======================================================================== */
   function initCursor() {
-    const dot  = $('#cursorDot');
-    const ring = $('#cursorRing');
     const root = document.documentElement;
 
     // Spotlight follows the pointer on every device that has one.
@@ -139,47 +137,12 @@
       spotQueued = false;
     };
 
-    if (IS_TOUCH || REDUCED || !dot || !ring) {
-      // Still track the spotlight for non-touch reduced-motion users.
-      if (!IS_TOUCH) {
-        window.addEventListener('pointermove', (e) => {
-          sx = e.clientX; sy = e.clientY;
-          if (!spotQueued) { spotQueued = true; requestAnimationFrame(paintSpotlight); }
-        }, { passive: true });
-      }
-      return;
-    }
-
-    let mx = sx, my = sy;          // raw pointer
-    let rx = sx, ry = sy;          // eased ring position
+    if (IS_TOUCH) return;
 
     window.addEventListener('pointermove', (e) => {
-      mx = e.clientX; my = e.clientY;
-      sx = mx; sy = my;
-      document.body.classList.add('cursor-ready');
+      sx = e.clientX; sy = e.clientY;
       if (!spotQueued) { spotQueued = true; requestAnimationFrame(paintSpotlight); }
     }, { passive: true });
-
-    // Dot snaps, ring trails — the classic premium two-layer cursor.
-    (function loop() {
-      rx = lerp(rx, mx, 0.16);
-      ry = lerp(ry, my, 0.16);
-      dot.style.transform  = `translate3d(${mx}px, ${my}px, 0)`;
-      ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
-      requestAnimationFrame(loop);
-    })();
-
-    // Grow the ring over anything clickable.
-    const INTERACTIVE = 'a, button, input, textarea, select, [data-tilt], .filter, .stack-tile';
-    document.addEventListener('pointerover', (e) => {
-      if (e.target.closest(INTERACTIVE)) ring.classList.add('is-hover');
-    });
-    document.addEventListener('pointerout', (e) => {
-      if (e.target.closest(INTERACTIVE)) ring.classList.remove('is-hover');
-    });
-
-    document.addEventListener('pointerleave', () => document.body.classList.remove('cursor-ready'));
-    document.addEventListener('pointerenter', () => document.body.classList.add('cursor-ready'));
   }
 
   /* ======================================================================== */
@@ -876,8 +839,10 @@
         img.className = 'portrait__badge-logo';
         img.src = src;
         img.alt = '';
-        img.width = 20;
-        img.height = 20;
+        // Wordmarks are wide — size from the file's own ratio, never a square.
+        const H = 19;
+        img.height = H;
+        img.width = Math.round(H * (probe.naturalWidth / probe.naturalHeight || 1));
         img.decoding = 'async';
 
         mark.insertBefore(img, mark.firstChild);

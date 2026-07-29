@@ -206,8 +206,8 @@ Two optional upgrades worth doing:
 - Visible focus ring on all interactive elements
 - Form errors announced with `aria-invalid` + a live-region status
 - Mobile menu is a labelled dialog, closes on `Escape`
-- **`prefers-reduced-motion` fully honoured** — WebGL, particles, custom cursor,
-  tilt and magnetic effects all switch off; content renders in its final state
+- **`prefers-reduced-motion` fully honoured** — WebGL, particles, tilt and
+  magnetic effects all switch off; content renders in its final state
 
 ---
 

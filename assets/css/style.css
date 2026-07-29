@@ -9,7 +9,7 @@
    02 · Utilities (glass, gradient text, container, buttons, chips)
    03 · Preloader
    04 · Background stack (aurora, webgl, grid, noise, spotlight)
-   05 · Cursor & scroll progress
+   05 · Scroll progress
    06 · Navigation & mobile menu
    07 · Hero
    08 · Section scaffolding
@@ -555,42 +555,8 @@ img { max-width: 100%; display: block; }
 }
 
 /* ========================================================================== */
-/* 05 · CURSOR & SCROLL PROGRESS                                              */
+/* 05 · SCROLL PROGRESS                                                       */
 /* ========================================================================== */
-.cursor {
-  position: fixed;
-  top: 0; left: 0;
-  z-index: 9998;
-  pointer-events: none;
-  border-radius: 50%;
-  opacity: 0;
-  will-change: transform;
-}
-.cursor--dot {
-  width: 6px; height: 6px;
-  background: var(--accent-light);
-  box-shadow: 0 0 12px var(--accent-glow);
-  margin: -3px 0 0 -3px;
-}
-.cursor--ring {
-  width: 40px; height: 40px;
-  margin: -20px 0 0 -20px;
-  border: 1px solid rgba(255,255,255,0.28);
-  background: radial-gradient(circle, rgba(201,162,39,0.12), transparent 70%);
-  transition: width 0.35s var(--ease-out), height 0.35s var(--ease-out),
-              margin 0.35s var(--ease-out), border-color 0.35s var(--ease-out),
-              background 0.35s var(--ease-out);
-}
-/* Grows when hovering anything interactive */
-.cursor--ring.is-hover {
-  width: 74px; height: 74px;
-  margin: -37px 0 0 -37px;
-  border-color: rgba(201,162,39,0.75);
-  background: radial-gradient(circle, rgba(201,162,39,0.22), transparent 68%);
-}
-body.cursor-ready .cursor { opacity: 1; }
-@media (hover: none), (pointer: coarse) { .cursor { display: none; } }
-
 .scroll-progress {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -1168,7 +1134,7 @@ body.cursor-ready .cursor { opacity: 1; }
 .portrait__badge {
   position: absolute;
   left: -1.75rem;
-  bottom: 2rem;
+  top: 0.25rem;
   display: flex;
   align-items: center;
   gap: 0.7rem;
@@ -1192,19 +1158,25 @@ body.cursor-ready .cursor { opacity: 1; }
 }
 .portrait__badge-mark svg { width: 17px; height: 17px; }
 
-/* Real employer logo, injected by main.js when the file exists. The tile drops
-   its gold tint so the logo's own colours read cleanly. */
+/* Real employer logo, injected by main.js when the file exists. It ships with a
+   transparent background, so the tile drops out completely — the wordmark sits
+   straight on the glass with no white box or gold plate behind it. */
 .portrait__badge-logo {
-  width: 20px;
-  height: 20px;
+  height: 19px;
+  width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.7));
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.75));
 }
 .portrait__badge-mark.has-logo {
-  background: rgba(255,255,255,0.09);
-  border-color: rgba(255,255,255,0.18);
+  width: auto; height: auto;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 .portrait__badge-mark.has-logo .portrait__badge-fallback { display: none; }
+.portrait__badge-mark.has-logo .portrait__badge-live { top: -5px; right: -6px; }
 
 .portrait__badge-live {
   position: absolute;
@@ -1268,7 +1240,8 @@ body.cursor-ready .cursor { opacity: 1; }
   filter: drop-shadow(0 1px 3px rgba(0,0,0,0.7));
 }
 
-.floater--php     { top: 6%;  left: -4%;  animation: bob 6s var(--ease-inout) infinite alternate; }
+/* php sits mid-left: the role badge now owns the top-left corner */
+.floater--php     { top: 42%; left: -6%;  animation: bob 6s var(--ease-inout) infinite alternate; }
 .floater--laravel { top: 26%; right: -8%; animation: bob 7.5s var(--ease-inout) 0.6s infinite alternate-reverse; }
 .floater--shopify { bottom: 26%; left: -10%; animation: bob 6.8s var(--ease-inout) 0.3s infinite alternate; }
 .floater--mysql   { bottom: 4%; right: 2%; animation: bob 8s var(--ease-inout) 0.9s infinite alternate-reverse; }
@@ -2406,7 +2379,7 @@ body.cursor-ready .cursor { opacity: 1; }
   .about__pillars { grid-template-columns: 1fr; }
   .awards         { grid-template-columns: 1fr; }
   .floaters       { display: none; }
-  .portrait__badge { left: 50%; transform: translateX(-50%) translateZ(40px); bottom: -1.25rem; }
+  .portrait__badge { left: 50%; transform: translateX(-50%) translateZ(40px); top: -1.25rem; }
 }
 
 @media (max-width: 640px) {
@@ -2435,12 +2408,12 @@ body.cursor-ready .cursor { opacity: 1; }
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .cursor, .webgl-bg, .hero__particles, .noise-overlay { display: none !important; }
+  .webgl-bg, .hero__particles, .noise-overlay { display: none !important; }
   .skill__fill { width: var(--static-w, 0%); }
 }
 
 @media print {
-  .bg-stack, .cursor, .preloader, .navbar, .mobile-menu,
+  .bg-stack, .preloader, .navbar, .mobile-menu,
   .scroll-progress, .to-top, .marquee, .scroll-cue { display: none !important; }
   body { background: #fff; color: #000; }
   .glass-card, .project { border: 1px solid #ccc; background: none; }

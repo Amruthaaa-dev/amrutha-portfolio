@@ -9,6 +9,9 @@
 
    then open http://localhost:5500
 
+   Use a different port with:  PORT=5050 node serve.js
+   (PowerShell:  $env:PORT=5050; node serve.js)
+
    Nothing to install — this uses only Node's built-in modules.
    Not needed in production: GitHub Pages / Netlify already serve over https.
    ========================================================================== */
@@ -17,7 +20,7 @@ const http = require('http');
 const fs   = require('fs');
 const path = require('path');
 
-const PORT = 5500;
+const PORT = Number(process.env.PORT) || 5500;
 const ROOT = __dirname;
 
 const MIME = {
