@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" role="img">
+  <!-- REST API has no official brand mark — custom emblem: a JSON payload
+       between braces, with a live endpoint node at the centre. -->
+  <path d="M9.2 3.5c-2.1 0-2.8 1-2.8 3v2.2c0 1.6-.9 2.6-2.4 3.3 1.5.6 2.4 1.6 2.4 3.2V17.5c0 2 .7 3 2.8 3"
+        stroke="#8B5CF6" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14.8 3.5c2.1 0 2.8 1 2.8 3v2.2c0 1.6.9 2.6 2.4 3.3-1.5.6-2.4 1.6-2.4 3.2V17.5c0 2-.7 3-2.8 3"
+        stroke="#8B5CF6" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="12" cy="12" r="1.9" fill="#34D399"/>
+</svg>

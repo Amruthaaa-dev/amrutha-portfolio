@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" role="img">
+  <!-- AJAX has no official brand mark — custom emblem: asynchronous
+       request/response exchange, drawn in two tones of signal blue. -->
+  <path d="M3.5 8.5h17M17.5 5.5l3 3-3 3"
+        stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M20.5 15.5h-17M6.5 12.5l-3 3 3 3"
+        stroke="#0284C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

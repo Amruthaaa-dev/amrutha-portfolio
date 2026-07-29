@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <!-- ============================================================
+       AMRUTHA HARIDAS — PREMIUM DEVELOPER PORTFOLIO
+       Black Luxury Theme · Champagne Gold Accent (#C9A227)
+       Stack: HTML5 · Tailwind CSS · Vanilla JS · GSAP · AOS
+              Three.js · Typed.js · Particles.js
+       ============================================================ -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
+
+  <!-- ── Primary SEO ──────────────────────────────────────────── -->
+  <title>Amrutha Haridas — Software Engineer | Full Stack PHP Developer</title>
+  <meta name="description" content="Amrutha Haridas — Software Engineer and Full Stack PHP Developer from Kerala, India. Building scalable ERP systems, Shopify stores and modern web applications with Laravel, CodeIgniter and REST APIs." />
+  <meta name="keywords" content="Amrutha Haridas, Software Engineer, Full Stack PHP Developer, Laravel Developer, CodeIgniter, Shopify Developer, ERP Development, REST API, MySQL, Kerala India" />
+  <meta name="author" content="Amrutha Haridas" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://amruthaharidas.dev/" />
+
+  <!-- ── Open Graph / Social ──────────────────────────────────── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Amrutha Haridas" />
+  <meta property="og:title" content="Amrutha Haridas — Software Engineer | Full Stack PHP Developer" />
+  <meta property="og:description" content="Building scalable ERP systems, Shopify Stores and Modern Web Applications." />
+  <meta property="og:url" content="https://amruthaharidas.dev/" />
+  <meta property="og:image" content="https://amruthaharidas.dev/assets/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_IN" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Amrutha Haridas — Software Engineer" />
+  <meta name="twitter:description" content="Building scalable ERP systems, Shopify Stores and Modern Web Applications." />
+  <meta name="twitter:image" content="https://amruthaharidas.dev/assets/images/og-image.jpg" />
+
+  <!-- ── Icons ────────────────────────────────────────────────── -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/images/favicon.svg" />
+
+  <!-- ── Performance: preconnect to third-party origins ───────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+  <!-- ── Typography ───────────────────────────────────────────── -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- ── Tailwind CSS (CDN build) ─────────────────────────────── -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>
+    /* Tailwind design tokens — single source of truth for the theme */
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            ink:    { DEFAULT: '#050505', 800: '#0A0A0C', 700: '#0F0F12', 600: '#16161A' },
+            accent: { DEFAULT: '#C9A227', light: '#E8C766', dark: '#7A5E12', glow: '#FFD766' },
+            bone:   { DEFAULT: '#EDEDED', muted: '#9A9AA2', dim: '#5E5E68' }
+          },
+          fontFamily: {
+            display: ['Sora', 'system-ui', 'sans-serif'],
+            body:    ['Inter', 'system-ui', 'sans-serif'],
+            mono:    ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+          },
+          letterSpacing: { tightest: '-0.055em' }
+        }
+      }
+    };
+  </script>
+
+  <!-- ── AOS (scroll reveal) ──────────────────────────────────── -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+  <!-- ── Project stylesheet (loads last so it wins) ───────────── -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- ── Structured data: rich results for recruiters/search ──── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Amrutha Haridas",
+    "jobTitle": "Software Engineer | Full Stack PHP Developer",
+    "description": "Software Engineer specializing in PHP, Laravel, CodeIgniter, Shopify and REST API development.",
+    "url": "https://amruthaharidas.dev/",
+    "image": "https://amruthaharidas.dev/assets/images/profile.jpg",
+    "address": { "@type": "PostalAddress", "addressRegion": "Kerala", "addressCountry": "IN" },
+    "telephone": "+919946865197",
+    "knowsAbout": ["PHP","Laravel","CodeIgniter","Shopify","MySQL","REST API","JavaScript","AWS"],
+    "worksFor": { "@type": "Organization", "name": "Impex" },
+    "sameAs": [
+      "https://www.linkedin.com/in/amrutha-haridas-71533a257/",
+      "https://github.com/Amruthaaa-dev",
+      "https://www.instagram.com/amrutha_______haridas"
+    ]
+  }
+  </script>
+</head>
+
+<body class="bg-ink text-bone font-body antialiased selection:bg-accent/30 selection:text-white">
+
+  <!-- Accessibility: keyboard users can jump past the chrome -->
+  <a href="#hero" class="skip-link">Skip to main content</a>
+
+  <!-- ============================================================
+       01 · PREMIUM LOADING ANIMATION
+       ============================================================ -->
+  <div id="preloader" class="preloader" role="status" aria-live="polite" aria-label="Loading portfolio">
+    <div class="preloader__inner">
+      <div class="preloader__mark" aria-hidden="true">
+        <span class="preloader__letter">A</span><span class="preloader__letter">H</span>
+      </div>
+      <div class="preloader__name">
+        <span data-pl-word>AMRUTHA</span> <span data-pl-word class="text-accent">HARIDAS</span>
+      </div>
+      <div class="preloader__bar"><i id="preloaderFill"></i></div>
+      <div class="preloader__meta">
+        <span class="font-mono text-xs tracking-[0.3em] text-bone-dim">LOADING EXPERIENCE</span>
+        <span class="font-mono text-xs tracking-[0.2em] text-bone-muted"><b id="preloaderPct">0</b>%</span>
+      </div>
+    </div>
+    <div class="preloader__curtain"></div>
+  </div>
+
+  <!-- ============================================================
+       02 · GLOBAL BACKGROUND LAYERS (aurora · webgl · noise)
+       ============================================================ -->
+  <div class="bg-stack" aria-hidden="true">
+    <div class="aurora">
+      <span class="aurora__blob aurora__blob--1"></span>
+      <span class="aurora__blob aurora__blob--2"></span>
+      <span class="aurora__blob aurora__blob--3"></span>
+    </div>
+    <canvas id="webgl-bg" class="webgl-bg"></canvas>
+    <div class="grid-overlay"></div>
+    <div class="noise-overlay"></div>
+    <div id="spotlight" class="spotlight"></div>
+  </div>
+
+  <!-- Animated cursor (desktop only, injected-safe) -->
+  <div id="cursorRing" class="cursor cursor--ring" aria-hidden="true"></div>
+  <div id="cursorDot"  class="cursor cursor--dot"  aria-hidden="true"></div>
+
+  <!-- Scroll progress -->
+  <div class="scroll-progress" aria-hidden="true"><i id="scrollBar"></i></div>
+
+  <!-- ============================================================
+       03 · NAVIGATION
+       ============================================================ -->
+  <header id="navbar" class="navbar" role="banner">
+    <nav class="nav-shell" aria-label="Primary">
+      <a href="#hero" class="brand magnetic" aria-label="Amrutha Haridas — home">
+        <span class="brand__mark">AH</span>
+        <span class="brand__text">
+          Amrutha<span class="text-accent">.</span>
+          <em>Software Engineer</em>
+        </span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about"        class="nav-link" data-nav>About</a></li>
+        <li><a href="#experience"   class="nav-link" data-nav>Experience</a></li>
+        <li><a href="#stack"        class="nav-link" data-nav>Stack</a></li>
+        <li><a href="#projects"     class="nav-link" data-nav>Projects</a></li>
+        <li><a href="#services"     class="nav-link" data-nav>Services</a></li>
+        <li><a href="#achievements" class="nav-link" data-nav>Awards</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn--ghost btn--sm magnetic hidden sm:inline-flex">
+          <span>Hire Me</span>
+          <svg viewBox="0 0 24 24" class="w-4 h-4"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <button id="menuToggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <ul>
+      <li><a href="#about"        data-mobile-link><i>01</i> About</a></li>
+      <li><a href="#experience"   data-mobile-link><i>02</i> Experience</a></li>
+      <li><a href="#stack"        data-mobile-link><i>03</i> Tech Stack</a></li>
+      <li><a href="#projects"     data-mobile-link><i>04</i> Projects</a></li>
+      <li><a href="#services"     data-mobile-link><i>05</i> Services</a></li>
+      <li><a href="#achievements" data-mobile-link><i>06</i> Achievements</a></li>
+      <li><a href="#contact"      data-mobile-link><i>07</i> Contact</a></li>
+    </ul>
+    <div class="mobile-menu__foot">
+      <a data-config="linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a data-config="github"   href="#" target="_blank" rel="noopener">GitHub</a>
+      <a data-config="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ==========================================================
+         04 · HERO
+         ========================================================== -->
+    <section id="hero" class="hero" aria-label="Introduction">
+      <!-- Particles.js canvas host, hero-scoped for performance -->
+      <div id="particles-js" class="hero__particles" aria-hidden="true"></div>
+
+      <!-- Three columns: identity left · portrait centre · context right -->
+      <div class="container hero__grid">
+
+        <!-- ── Left: identity ─────────────────────────────────── -->
+        <div class="hero__copy hero__copy--left">
+          <p class="hero__eyebrow" data-hero-el>
+            <span class="pulse-dot" aria-hidden="true"></span>
+            Available for work
+          </p>
+
+          <h1 class="hero__title" data-hero-el>
+            <span class="hero__title-line">
+              <span class="reveal-word hero__im">I'm</span>
+            </span>
+            <span class="hero__title-line">
+              <span class="reveal-word text-gradient">Amrutha</span>
+            </span>
+            <span class="hero__title-line">
+              <span class="reveal-word">Haridas</span><span class="text-accent">.</span>
+            </span>
+          </h1>
+
+          <p class="hero__role font-mono" data-hero-el>
+            <span class="text-accent">&lt;</span>
+            <span id="typed" aria-live="polite"></span>
+            <span class="text-accent">/&gt;</span>
+          </p>
+
+          <p class="hero__blurb" data-hero-el>
+            I design with curiosity and build with code. Obsessed with clean
+            architecture, fast APIs and finding new ways to make enterprise
+            software feel effortless.
+          </p>
+
+          <div class="hero__cta" data-hero-el>
+            <a href="assets/resume/Amrutha-Haridas-Resume.pdf" download class="btn btn--primary magnetic">
+              <svg viewBox="0 0 24 24" class="w-[18px] h-[18px]" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Download Resume</span>
+            </a>
+            <a href="#projects" class="btn btn--outline magnetic">
+              <span>View Projects</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- ── Centre: portrait + floating 3D tech icons ──────── -->
+        <div class="hero__visual" data-hero-el>
+          <!-- portrait--bare = no glass box, feathered edges.
+               Upgraded to portrait--cutout by main.js if a transparent
+               profile-cutout.png is present. -->
+          <div class="portrait portrait--bare" data-tilt>
+            <div class="portrait__ring" aria-hidden="true"></div>
+            <div class="portrait__frame">
+              <!-- Drop your photo at assets/images/profile.jpg — falls back to the SVG placeholder -->
+              <img
+                src="assets/images/profile.jpg"
+                onerror="this.onerror=null;this.src='assets/images/profile-placeholder.svg';this.classList.add('is-placeholder')"
+                alt="Portrait of Amrutha Haridas, Software Engineer"
+                width="640" height="800" loading="eager" decoding="async"
+                class="portrait__img" />
+              <div class="portrait__grade" aria-hidden="true"></div>
+              <div class="portrait__sheen" aria-hidden="true"></div>
+            </div>
+
+            <!-- Role badge.
+                 Drop the Impex logo at assets/images/logos/impex.svg (or .png)
+                 and main.js swaps it in automatically. Until then the generic
+                 engineering mark below is shown — it is NOT the Impex logo. -->
+            <div class="portrait__badge glass">
+              <span class="portrait__badge-mark" aria-hidden="true">
+                <svg class="portrait__badge-fallback" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m8.5 17-5-5 5-5M15.5 7l5 5-5 5"/>
+                </svg>
+                <i class="portrait__badge-live"></i>
+              </span>
+              <div>
+                <b>Software Engineer</b>
+                <em>Impex · Kerala, India</em>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3D floating tech chips — official brand marks, served locally -->
+          <div class="floaters" aria-hidden="true">
+            <span class="floater floater--php"     data-depth="0.05"><img class="floater__logo" src="assets/images/logos/php.svg"      alt="" width="18" height="18" loading="lazy" decoding="async">PHP</span>
+            <span class="floater floater--laravel" data-depth="0.09"><img class="floater__logo" src="assets/images/logos/laravel.svg"  alt="" width="18" height="18" loading="lazy" decoding="async">Laravel</span>
+            <span class="floater floater--shopify" data-depth="0.07"><img class="floater__logo" src="assets/images/logos/shopify.svg"  alt="" width="18" height="18" loading="lazy" decoding="async">Shopify</span>
+            <span class="floater floater--mysql"   data-depth="0.11"><img class="floater__logo" src="assets/images/logos/mysql.svg"    alt="" width="18" height="18" loading="lazy" decoding="async">MySQL</span>
+            <span class="floater floater--api"     data-depth="0.06"><img class="floater__logo" src="assets/images/logos/rest-api.svg" alt="" width="18" height="18" loading="lazy" decoding="async">REST API</span>
+          </div>
+        </div>
+
+        <!-- ── Right: context ─────────────────────────────────── -->
+        <div class="hero__copy hero__copy--right">
+          <p class="hero__blurb" data-hero-el>
+            Software Engineer who ships. Building <strong>scalable ERP systems</strong>,
+            <strong>Shopify stores</strong> and <strong>modern web applications</strong>
+            that hold up in production.
+          </p>
+
+          <ul class="hero__stats" data-hero-el>
+            <li>
+              <b class="counter" data-count="10" data-suffix="+">0</b>
+              <span>Projects Shipped</span>
+            </li>
+            <li>
+              <b class="counter" data-count="3" data-suffix="">0</b>
+              <span>Companies</span>
+            </li>
+            <li>
+              <b class="counter" data-count="19" data-suffix="+">0</b>
+              <span>Technologies</span>
+            </li>
+          </ul>
+
+          <ul class="hero__social" data-hero-el aria-label="Social profiles">
+            <li><a data-config="linkedin" href="#" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95C21.6 8.75 23 11 23 14.4V21h-4v-5.9c0-1.4-.03-3.2-2-3.2-2 0-2.3 1.5-2.3 3.1V21h-4V9Z"/></svg>
+            </a></li>
+            <li><a data-config="github" href="#" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+            </a></li>
+            <li><a data-config="instagram" href="#" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.8 3.8 0 0 1-1.38-.9 3.8 3.8 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2Zm0 3.3a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Zm0 2.3a4.2 4.2 0 1 1 0 8.4 4.2 4.2 0 0 1 0-8.4Zm6.8-2.6a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg>
+            </a></li>
+            <li><a data-config="mailto" href="#" class="social-btn magnetic" aria-label="Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-[18px] h-[18px]"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6"/></svg>
+            </a></li>
+          </ul>
+
+          <a href="#contact" class="btn btn--text magnetic hero__talk">
+            <span>Let's talk</span>
+            <svg viewBox="0 0 24 24" class="w-4 h-4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Marquee of the stack -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>PHP</span><i>◆</i><span>Laravel</span><i>◆</i><span>CodeIgniter</span><i>◆</i>
+          <span>Shopify</span><i>◆</i><span>MySQL</span><i>◆</i><span>REST API</span><i>◆</i>
+          <span>JavaScript</span><i>◆</i><span>AJAX</span><i>◆</i><span>Bootstrap</span><i>◆</i>
+          <span>Git</span><i>◆</i><span>AWS</span><i>◆</i><span>Linux</span><i>◆</i>
+          <span>PHP</span><i>◆</i><span>Laravel</span><i>◆</i><span>CodeIgniter</span><i>◆</i>
+          <span>Shopify</span><i>◆</i><span>MySQL</span><i>◆</i><span>REST API</span><i>◆</i>
+          <span>JavaScript</span><i>◆</i><span>AJAX</span><i>◆</i><span>Bootstrap</span><i>◆</i>
+          <span>Git</span><i>◆</i><span>AWS</span><i>◆</i><span>Linux</span><i>◆</i>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-cue" aria-label="Scroll to about section">
+        <span class="scroll-cue__line"><i></i></span>
+        <span class="scroll-cue__text font-mono">SCROLL</span>
+      </a>
+    </section>
+
+    <!-- ==========================================================
+         05 · ABOUT
+         ========================================================== -->
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="container">
+        <header class="section-head" data-aos="fade-up">
+          <span class="section-tag"><i>01</i> About</span>
+          <h2 id="about-title" class="section-title">
+            Engineering that stays <span class="text-gradient">clean</span> under scale.
+          </h2>
+        </header>
+
+        <div class="about">
+          <!-- Left column: signature card -->
+          <aside class="about__aside" data-aos="fade-right" data-aos-delay="80">
+            <div class="glass-card about__card" data-tilt>
+              <div class="about__avatar">
+                <img src="assets/images/profile.jpg"
+                     onerror="this.onerror=null;this.src='assets/images/profile-placeholder.svg';this.classList.add('is-placeholder')"
+                     alt="" aria-hidden="true" loading="lazy" decoding="async" width="200" height="200" />
+              </div>
+              <b class="about__name">Amrutha Haridas</b>
+              <em class="about__role">Software Engineer · Full Stack PHP</em>
+
+              <ul class="about__facts">
+                <li><span>Location</span><b>Kerala, India</b></li>
+                <li><span>Focus</span><b>ERP · eCommerce · APIs</b></li>
+                <li><span>Core</span><b>PHP · Laravel · Shopify</b></li>
+                <li><span>Status</span><b class="text-accent">Open to work</b></li>
+              </ul>
+
+              <a href="#contact" class="btn btn--primary btn--full magnetic">
+                <span>Let's build something</span>
+              </a>
+            </div>
+          </aside>
+
+          <!-- Right column: narrative -->
+          <div class="about__body">
+            <p class="about__lead" data-aos="fade-up" data-aos-delay="120">
+              I am a passionate Software Engineer from <strong>Kerala, India</strong>, specializing in
+              <strong>PHP, Laravel, CodeIgniter, Shopify</strong> and <strong>REST API Development</strong>.
+            </p>
+            <p class="about__text" data-aos="fade-up" data-aos-delay="180">
+              I enjoy building scalable ERP solutions, eCommerce applications and high-performance web
+              platforms with clean architecture and modern UI. Most of my work lives where business logic
+              gets heavy — inventory that has to reconcile, sales and purchase flows that must never drift,
+              dashboards that stay fast when the tables get large.
+            </p>
+            <p class="about__text" data-aos="fade-up" data-aos-delay="220">
+              My approach is simple: model the domain properly, keep queries honest, ship interfaces that
+              feel effortless, and leave code the next engineer can read without a map.
+            </p>
+
+            <div class="about__pillars">
+              <article class="glass-card pillar" data-aos="fade-up" data-aos-delay="120">
+                <span class="pillar__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7V5a1 1 0 0 1 1-1h4M20 7V5a1 1 0 0 0-1-1h-4M4 17v2a1 1 0 0 0 1 1h4M20 17v2a1 1 0 0 1-1 1h-4"/><rect x="8" y="8" width="8" height="8" rx="1.5"/></svg>
+                </span>
+                <h3>Clean Architecture</h3>
+                <p>Layered services, thin controllers, predictable data flow — features stay cheap to add.</p>
+              </article>
+
+              <article class="glass-card pillar" data-aos="fade-up" data-aos-delay="180">
+                <span class="pillar__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v6c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3V6M4.5 12v6c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3v-6"/></svg>
+                </span>
+                <h3>Database First</h3>
+                <p>Normalized schemas, indexed access paths and queries that hold up past a million rows.</p>
+              </article>
+
+              <article class="glass-card pillar" data-aos="fade-up" data-aos-delay="240">
+                <span class="pillar__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 3 4.5 13.5H11l-1 7.5 8.5-10.5H12l1-7.5Z"/></svg>
+                </span>
+                <h3>Performance</h3>
+                <p>Caching, eager loading, payload discipline. Fast is a feature, not an optimization phase.</p>
+              </article>
+
+              <article class="glass-card pillar" data-aos="fade-up" data-aos-delay="300">
+                <span class="pillar__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 4 6.5v5c0 4.6 3.2 8.6 8 9.5 4.8-.9 8-4.9 8-9.5v-5L12 3Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg>
+                </span>
+                <h3>Reliable Delivery</h3>
+                <p>Git discipline, staged deployments, monitoring after release — not just until merge.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         06 · EXPERIENCE TIMELINE
+         ========================================================== -->
+    <section id="experience" class="section section--alt" aria-labelledby="exp-title">
+      <div class="container">
+        <header class="section-head" data-aos="fade-up">
+          <span class="section-tag"><i>02</i> Experience</span>
+          <h2 id="exp-title" class="section-title">
+            Three teams. One <span class="text-gradient">throughline</span>.
+          </h2>
+          <p class="section-sub">
+            ERP platforms, coordinated deployments and production eCommerce — from module ownership
+            to full delivery pipelines.
+          </p>
+        </header>
+
+        <div class="timeline" id="timeline">
+          <div class="timeline__spine" aria-hidden="true"><i id="timelineFill"></i></div>
+
+          <!-- 01 — Impex -->
+          <article class="tl-item" data-aos="fade-up">
+            <div class="tl-node" aria-hidden="true"><span></span></div>
+            <div class="glass-card tl-card" data-tilt>
+              <div class="tl-card__top">
+                <div>
+                  <h3 class="tl-card__role">Software Engineer</h3>
+                  <p class="tl-card__org">Impex</p>
+                </div>
+                <span class="chip chip--live">
+                  <span class="pulse-dot" aria-hidden="true"></span> Current
+                </span>
+              </div>
+              <p class="tl-card__date font-mono">May 2026 — Present</p>
+              <p class="tl-card__desc">
+                Building enterprise web applications end to end — Laravel and CodeIgniter services,
+                Core PHP modules, and production Shopify storefronts with custom theme work and
+                payment gateway integrations.
+              </p>
+              <ul class="tag-list">
+                <li>Enterprise Web Apps</li><li>Laravel</li><li>CodeIgniter</li><li>Core PHP</li>
+                <li>Shopify Store Development</li><li>Theme Customization</li><li>REST API Integration</li>
+                <li>Payment Gateway</li><li>Bug Fixing</li><li>Performance Optimization</li>
+                <li>Database Design</li><li>MySQL</li><li>Git</li><li>Deployment</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 02 — DigitUs IT Solutions -->
+          <article class="tl-item tl-item--right" data-aos="fade-up" data-aos-delay="80">
+            <div class="tl-node" aria-hidden="true"><span></span></div>
+            <div class="glass-card tl-card" data-tilt>
+              <div class="tl-card__top">
+                <div>
+                  <h3 class="tl-card__role">Project &amp; Operation Coordinator</h3>
+                  <p class="tl-card__org">DigitUs IT Solutions</p>
+                </div>
+                <span class="chip">1 yr</span>
+              </div>
+              <p class="tl-card__date font-mono">Nov 2025 — May 2026</p>
+              <p class="tl-card__desc">
+                Owned the path from requirement to production — coordinating delivery, shipping Laravel
+                features, deploying to AWS, monitoring servers and keeping clients informed at every stage.
+              </p>
+              <ul class="tag-list">
+                <li>Project Coordination</li><li>Laravel Development</li><li>AWS Deployment</li>
+                <li>Server Monitoring</li><li>Client Communication</li><li>DevOps Support</li>
+                <li>GitHub Management</li><li>Requirement Gathering</li><li>Production Deployment</li>
+                <li>Database Maintenance</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 03 — Mentor Performance Rating -->
+          <article class="tl-item" data-aos="fade-up" data-aos-delay="160">
+            <div class="tl-node" aria-hidden="true"><span></span></div>
+            <div class="glass-card tl-card" data-tilt>
+              <div class="tl-card__top">
+                <div>
+                  <h3 class="tl-card__role">Software Developer</h3>
+                  <p class="tl-card__org">Mentor Performance Rating Pvt Ltd</p>
+                </div>
+                <span class="chip">8 mos</span>
+              </div>
+              <p class="tl-card__date font-mono">Jan 2025 — Aug 2025</p>
+              <p class="tl-card__desc">
+                Developed core ERP modules — Sales, Purchase and Inventory — on Laravel and MySQL,
+                with reporting, REST APIs and AJAX-driven interfaces built on Bootstrap and DataTables.
+              </p>
+              <ul class="tag-list">
+                <li>ERP Development</li><li>Sales Module</li><li>Purchase Module</li><li>Inventory Module</li>
+                <li>Laravel</li><li>MySQL</li><li>Report Generation</li><li>REST APIs</li>
+                <li>AJAX</li><li>Bootstrap</li><li>DataTables</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         07 · TECH STACK
+         ========================================================== -->
+    <section id="stack" class="section" aria-labelledby="stack-title">
+      <div class="container">
+        <header class="section-head" data-aos="fade-up">
+          <span class="section-tag"><i>03</i> Tech Stack</span>
+          <h2 id="stack-title" class="section-title">
+            Tools I reach for <span class="text-gradient">every day</span>.
+          </h2>
+        </header>
+
+        <!-- 3D floating icon grid.
+             Official brand marks, stored locally in assets/images/logos/ so the
+             page makes no third-party requests. Logos are decorative (alt="")
+             because the visible <b> label already names each technology.
+             AJAX and REST API have no official mark — those two are custom
+             emblems drawn to match. -->
+        <div class="stack-grid" data-aos="fade-up" data-aos-delay="60">
+          <!-- Each tile floats on its own loop; hover lifts it in 3D -->
+          <div class="stack-tile" style="--i:0"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/php.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>PHP</b></div>
+          <div class="stack-tile" style="--i:1"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/laravel.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>Laravel</b></div>
+          <div class="stack-tile" style="--i:2"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/codeigniter.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>CodeIgniter</b></div>
+          <div class="stack-tile" style="--i:3"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/shopify.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>Shopify</b></div>
+          <div class="stack-tile" style="--i:4"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/mysql.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>MySQL</b></div>
+          <div class="stack-tile" style="--i:5"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/html5.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>HTML5</b></div>
+          <div class="stack-tile" style="--i:6"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/css3.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>CSS3</b></div>
+          <div class="stack-tile" style="--i:7"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/javascript.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>JavaScript</b></div>
+          <div class="stack-tile" style="--i:8"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/bootstrap.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>Bootstrap</b></div>
+          <div class="stack-tile" style="--i:9"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/jquery.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>jQuery</b></div>
+          <div class="stack-tile" style="--i:10"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/ajax.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>AJAX</b></div>
+          <div class="stack-tile" style="--i:11"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/rest-api.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>REST API</b></div>
+          <div class="stack-tile" style="--i:12"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/git.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>Git</b></div>
+          <div class="stack-tile" style="--i:13"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/github.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>GitHub</b></div>
+          <div class="stack-tile" style="--i:14"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/postman.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>Postman</b></div>
+          <div class="stack-tile" style="--i:15"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/aws.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>AWS Basics</b></div>
+          <div class="stack-tile" style="--i:16"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/linux.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>Linux</b></div>
+          <div class="stack-tile" style="--i:17"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/vscode.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>VS Code</b></div>
+          <div class="stack-tile" style="--i:18"><span class="stack-tile__glyph"><img class="stack-tile__logo" src="assets/images/logos/php.svg" alt="" width="32" height="32" loading="lazy" decoding="async"></span><b>Core PHP</b></div>
+        </div>
+
+        <!-- Animated skill bars -->
+        <div class="skills">
+          <div class="skills__col" data-aos="fade-up">
+            <h3 class="skills__title"><span class="text-accent">/</span> Backend &amp; Data</h3>
+            <div class="skill" data-skill="95"><div class="skill__head"><b>PHP</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+            <div class="skill" data-skill="92"><div class="skill__head"><b>Laravel</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+            <div class="skill" data-skill="88"><div class="skill__head"><b>CodeIgniter</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+            <div class="skill" data-skill="90"><div class="skill__head"><b>MySQL</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+            <div class="skill" data-skill="90"><div class="skill__head"><b>REST API</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+          </div>
+
+          <div class="skills__col" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="skills__title"><span class="text-accent">/</span> Frontend &amp; Commerce</h3>
+            <div class="skill" data-skill="94"><div class="skill__head"><b>HTML5 &amp; CSS3</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+            <div class="skill" data-skill="88"><div class="skill__head"><b>Shopify</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+            <div class="skill" data-skill="90"><div class="skill__head"><b>Bootstrap</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+            <div class="skill" data-skill="84"><div class="skill__head"><b>JavaScript</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+            <div class="skill" data-skill="88"><div class="skill__head"><b>jQuery &amp; AJAX</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+          </div>
+
+          <div class="skills__col" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="skills__title"><span class="text-accent">/</span> Tooling &amp; Ops</h3>
+            <div class="skill" data-skill="86"><div class="skill__head"><b>Git &amp; GitHub</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+            <div class="skill" data-skill="85"><div class="skill__head"><b>Postman</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+            <div class="skill" data-skill="72"><div class="skill__head"><b>AWS Basics</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+            <div class="skill" data-skill="74"><div class="skill__head"><b>Linux</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+            <div class="skill" data-skill="92"><div class="skill__head"><b>VS Code</b><i class="skill__pct">0%</i></div><div class="skill__track"><span class="skill__fill"></span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         08 · PROJECTS
+         ========================================================== -->
+    <section id="projects" class="section section--alt" aria-labelledby="proj-title">
+      <div class="container">
+        <header class="section-head" data-aos="fade-up">
+          <span class="section-tag"><i>04</i> Projects</span>
+          <h2 id="proj-title" class="section-title">
+            Systems built to <span class="text-gradient">run the business</span>.
+          </h2>
+          <p class="section-sub">Hover a card to see the interface come alive.</p>
+        </header>
+
+        <!-- Filter -->
+        <div class="filters" data-aos="fade-up" data-aos-delay="60" role="tablist" aria-label="Project filters">
+          <button class="filter is-active" data-filter="all"       role="tab" aria-selected="true">All</button>
+          <button class="filter" data-filter="erp"        role="tab" aria-selected="false">ERP</button>
+          <button class="filter" data-filter="ecommerce"  role="tab" aria-selected="false">eCommerce</button>
+          <button class="filter" data-filter="api"        role="tab" aria-selected="false">API</button>
+          <button class="filter" data-filter="dashboard"  role="tab" aria-selected="false">Dashboard</button>
+        </div>
+
+        <div class="projects" id="projectGrid">
+
+          <!-- 01 ERP Management System -->
+          <article class="project project--wide" data-category="erp" data-aos="fade-up" data-tilt>
+            <div class="project__visual">
+              <div class="mock mock--erp" aria-hidden="true">
+                <div class="mock__bar"><i></i><i></i><i></i></div>
+                <div class="mock__body">
+                  <div class="mock__side"><span></span><span></span><span></span><span></span><span></span></div>
+                  <div class="mock__main">
+                    <div class="mock__kpis"><b></b><b></b><b></b></div>
+                    <div class="mock__chart"><i style="--h:38%"></i><i style="--h:64%"></i><i style="--h:47%"></i><i style="--h:82%"></i><i style="--h:56%"></i><i style="--h:71%"></i><i style="--h:90%"></i></div>
+                    <div class="mock__rows"><span></span><span></span><span></span></div>
+                  </div>
+                </div>
+              </div>
+              <span class="project__glow" aria-hidden="true"></span>
+            </div>
+            <div class="project__body">
+              <span class="project__index font-mono">01</span>
+              <h3 class="project__title">ERP Management System</h3>
+              <p class="project__desc">
+                A full enterprise resource platform tying Sales, Purchase, Inventory and reporting into a
+                single Laravel codebase — role-based access, audit trails and reports that reconcile to the rupee.
+              </p>
+              <ul class="tag-list tag-list--sm"><li>Laravel</li><li>MySQL</li><li>REST API</li><li>DataTables</li></ul>
+            </div>
+          </article>
+
+          <!-- 02 Inventory Management -->
+          <article class="project" data-category="erp" data-aos="fade-up" data-aos-delay="60" data-tilt>
+            <div class="project__visual">
+              <div class="mock mock--inventory" aria-hidden="true">
+                <div class="mock__bar"><i></i><i></i><i></i></div>
+                <div class="mock__stock">
+                  <span style="--w:82%"></span><span style="--w:46%"></span>
+                  <span style="--w:68%"></span><span style="--w:34%"></span><span style="--w:91%"></span>
+                </div>
+              </div>
+              <span class="project__glow" aria-hidden="true"></span>
+            </div>
+            <div class="project__body">
+              <span class="project__index font-mono">02</span>
+              <h3 class="project__title">Inventory Management</h3>
+              <p class="project__desc">
+                Real-time stock ledger with batch tracking, low-stock triggers and warehouse transfers —
+                every movement traceable to its source document.
+              </p>
+              <ul class="tag-list tag-list--sm"><li>Laravel</li><li>MySQL</li><li>AJAX</li></ul>
+            </div>
+          </article>
+
+          <!-- 03 Sales & Purchase System -->
+          <article class="project" data-category="erp" data-aos="fade-up" data-aos-delay="120" data-tilt>
+            <div class="project__visual">
+              <div class="mock mock--sales" aria-hidden="true">
+                <div class="mock__bar"><i></i><i></i><i></i></div>
+                <svg class="mock__line" viewBox="0 0 240 110" preserveAspectRatio="none">
+                  <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#C9A227" stop-opacity=".45"/>
+                    <stop offset="100%" stop-color="#C9A227" stop-opacity="0"/>
+                  </linearGradient></defs>
+                  <path class="mock__area" d="M0,90 L30,72 L60,80 L90,48 L120,58 L150,30 L180,42 L210,18 L240,26 L240,110 L0,110 Z" fill="url(#sg)"/>
+                  <path class="mock__stroke" d="M0,90 L30,72 L60,80 L90,48 L120,58 L150,30 L180,42 L210,18 L240,26" fill="none" stroke="#E8C766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="project__glow" aria-hidden="true"></span>
+            </div>
+            <div class="project__body">
+              <span class="project__index font-mono">03</span>
+              <h3 class="project__title">Sales &amp; Purchase System</h3>
+              <p class="project__desc">
+                Quotation → order → invoice → payment, with GST handling, credit limits and margin
+                reporting across the whole cycle.
+              </p>
+              <ul class="tag-list tag-list--sm"><li>Laravel</li><li>MySQL</li><li>Reports</li></ul>
+            </div>
+          </article>
+
+          <!-- 04 Dealer Portal -->
+          <article class="project" data-category="dashboard" data-aos="fade-up" data-tilt>
+            <div class="project__visual">
+              <div class="mock mock--dealer" aria-hidden="true">
+                <div class="mock__bar"><i></i><i></i><i></i></div>
+                <div class="mock__cards"><b></b><b></b><b></b><b></b></div>
+              </div>
+              <span class="project__glow" aria-hidden="true"></span>
+            </div>
+            <div class="project__body">
+              <span class="project__index font-mono">04</span>
+              <h3 class="project__title">Dealer Portal</h3>
+              <p class="project__desc">
+                Self-service portal where dealers place orders, track dispatch, download invoices and
+                view live account statements — no phone calls required.
+              </p>
+              <ul class="tag-list tag-list--sm"><li>Laravel</li><li>REST API</li><li>Bootstrap</li></ul>
+            </div>
+          </article>
+
+          <!-- 05 Shopify eCommerce Store -->
+          <article class="project project--wide" data-category="ecommerce" data-aos="fade-up" data-aos-delay="60" data-tilt>
+            <div class="project__visual">
+              <div class="mock mock--shop" aria-hidden="true">
+                <div class="mock__bar"><i></i><i></i><i></i></div>
+                <div class="mock__shop">
+                  <div class="mock__hero"></div>
+                  <div class="mock__products"><b></b><b></b><b></b><b></b></div>
+                </div>
+              </div>
+              <span class="project__glow" aria-hidden="true"></span>
+            </div>
+            <div class="project__body">
+              <span class="project__index font-mono">05</span>
+              <h3 class="project__title">Shopify eCommerce Store</h3>
+              <p class="project__desc">
+                Custom Liquid theme development and storefront customization — conversion-focused product
+                pages, tuned checkout flow and payment gateway integration.
+              </p>
+              <ul class="tag-list tag-list--sm"><li>Shopify</li><li>Liquid</li><li>JavaScript</li><li>Payments</li></ul>
+            </div>
+          </article>
+
+          <!-- 06 REST API Integrations -->
+          <article class="project" data-category="api" data-aos="fade-up" data-aos-delay="120" data-tilt>
+            <div class="project__visual">
+              <div class="mock mock--api" aria-hidden="true">
+                <div class="mock__bar"><i></i><i></i><i></i></div>
+                <pre class="mock__code"><code><span class="c-key">GET</span> <span class="c-str">/api/v1/orders</span>
+<span class="c-dim">200 OK · 42ms</span>
+{
+  <span class="c-str">"status"</span>: <span class="c-key">true</span>,
+  <span class="c-str">"data"</span>: [ … ]
+}</code></pre>
+              </div>
+              <span class="project__glow" aria-hidden="true"></span>
+            </div>
+            <div class="project__body">
+              <span class="project__index font-mono">06</span>
+              <h3 class="project__title">REST API Integrations</h3>
+              <p class="project__desc">
+                Versioned, token-authenticated APIs connecting ERP data to mobile apps, storefronts and
+                third-party services — documented and Postman-tested.
+              </p>
+              <ul class="tag-list tag-list--sm"><li>Laravel</li><li>JWT</li><li>Postman</li></ul>
+            </div>
+          </article>
+
+          <!-- 07 Admin Dashboard -->
+          <article class="project" data-category="dashboard" data-aos="fade-up" data-aos-delay="180" data-tilt>
+            <div class="project__visual">
+              <div class="mock mock--admin" aria-hidden="true">
+                <div class="mock__bar"><i></i><i></i><i></i></div>
+                <div class="mock__admin">
+                  <div class="mock__donut"></div>
+                  <div class="mock__list"><span></span><span></span><span></span><span></span></div>
+                </div>
+              </div>
+              <span class="project__glow" aria-hidden="true"></span>
+            </div>
+            <div class="project__body">
+              <span class="project__index font-mono">07</span>
+              <h3 class="project__title">Admin Dashboard</h3>
+              <p class="project__desc">
+                Operations command centre — live KPIs, drill-down reports, exportable datasets and
+                granular permissions, built to stay responsive at scale.
+              </p>
+              <ul class="tag-list tag-list--sm"><li>Laravel</li><li>Charts</li><li>DataTables</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         09 · SERVICES
+         ========================================================== -->
+    <section id="services" class="section" aria-labelledby="svc-title">
+      <div class="container">
+        <header class="section-head" data-aos="fade-up">
+          <span class="section-tag"><i>05</i> Services</span>
+          <h2 id="svc-title" class="section-title">
+            What I can <span class="text-gradient">build for you</span>.
+          </h2>
+        </header>
+
+        <div class="services">
+          <article class="glass-card service" data-aos="fade-up" data-tilt>
+            <span class="service__num font-mono">01</span>
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/></svg>
+            </span>
+            <h3>ERP Development</h3>
+            <p>Sales, purchase, inventory and accounting modules designed around your actual workflow — not a generic template.</p>
+          </article>
+
+          <article class="glass-card service" data-aos="fade-up" data-aos-delay="80" data-tilt>
+            <span class="service__num font-mono">02</span>
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16l-1.4 11.2A2 2 0 0 1 16.6 20H7.4a2 2 0 0 1-2-1.8L4 7Z"/><path d="M9 7V5.5a3 3 0 0 1 6 0V7"/></svg>
+            </span>
+            <h3>Shopify &amp; eCommerce</h3>
+            <p>Custom theme development, Liquid customization, app integration and checkout tuning for stores that convert.</p>
+          </article>
+
+          <article class="glass-card service" data-aos="fade-up" data-aos-delay="160" data-tilt>
+            <span class="service__num font-mono">03</span>
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m9 18-6-6 6-6M15 6l6 6-6 6"/></svg>
+            </span>
+            <h3>Laravel Web Apps</h3>
+            <p>Full-stack applications with authentication, roles, queues, notifications and an admin panel that ages well.</p>
+          </article>
+
+          <article class="glass-card service" data-aos="fade-up" data-aos-delay="60" data-tilt>
+            <span class="service__num font-mono">04</span>
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18Z"/></svg>
+            </span>
+            <h3>REST API Development</h3>
+            <p>Clean, versioned, secure endpoints with proper status codes, pagination and documentation your team can trust.</p>
+          </article>
+
+          <article class="glass-card service" data-aos="fade-up" data-aos-delay="140" data-tilt>
+            <span class="service__num font-mono">05</span>
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+            <h3>Performance Optimization</h3>
+            <p>Query profiling, index strategy, caching layers and asset pipelines — measurable speed, not guesswork.</p>
+          </article>
+
+          <article class="glass-card service" data-aos="fade-up" data-aos-delay="220" data-tilt>
+            <span class="service__num font-mono">06</span>
+            <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6.5 19a4.5 4.5 0 0 1-.4-9A6 6 0 0 1 17.7 9.3 3.85 3.85 0 0 1 18 17H6.5Z"/><path d="M12 12v5M12 12l-2 2M12 12l2 2"/></svg>
+            </span>
+            <h3>Deployment &amp; DevOps</h3>
+            <p>AWS deployment, Linux server setup, Git workflows, monitoring and zero-drama production releases.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         10 · ACHIEVEMENTS
+         ========================================================== -->
+    <section id="achievements" class="section section--alt" aria-labelledby="ach-title">
+      <div class="container">
+        <header class="section-head" data-aos="fade-up">
+          <span class="section-tag"><i>06</i> Achievements</span>
+          <h2 id="ach-title" class="section-title">
+            Numbers behind the <span class="text-gradient">work</span>.
+          </h2>
+        </header>
+
+        <div class="stats" data-aos="fade-up" data-aos-delay="60">
+          <div class="glass-card stat">
+            <b class="counter" data-count="10" data-suffix="+">0</b>
+            <span>Projects Delivered</span>
+          </div>
+          <div class="glass-card stat">
+            <b class="counter" data-count="1" data-suffix="">0</b>
+            <span>ERP System Owned</span>
+          </div>
+          <div class="glass-card stat">
+            <b class="counter" data-count="10" data-suffix="+">0</b>
+            <span>REST APIs Built</span>
+          </div>
+          <div class="glass-card stat">
+            <b class="counter" data-count="99" data-suffix="%">0</b>
+            <span>On-Time Delivery</span>
+          </div>
+        </div>
+
+        <div class="awards">
+          <article class="glass-card award" data-aos="fade-up">
+            <span class="award__icon" aria-hidden="true">★</span>
+            <div>
+              <h3>End-to-End ERP Ownership</h3>
+              <p>Designed and shipped the Sales, Purchase and Inventory modules of a production ERP — schema through UI.</p>
+            </div>
+          </article>
+          <article class="glass-card award" data-aos="fade-up" data-aos-delay="80">
+            <span class="award__icon" aria-hidden="true">⚡</span>
+            <div>
+              <h3>Performance Turnarounds</h3>
+              <p>Cut heavy report and listing load times dramatically through query rewrites, indexing and caching.</p>
+            </div>
+          </article>
+          <article class="glass-card award" data-aos="fade-up" data-aos-delay="160">
+            <span class="award__icon" aria-hidden="true">☁</span>
+            <div>
+              <h3>Production AWS Deployments</h3>
+              <p>Took Laravel applications live on AWS with server monitoring, backups and maintained uptime.</p>
+            </div>
+          </article>
+          <article class="glass-card award" data-aos="fade-up" data-aos-delay="240">
+            <span class="award__icon" aria-hidden="true">◆</span>
+            <div>
+              <h3>Commerce at Scale</h3>
+              <p>Delivered custom Shopify storefronts with theme customization and integrated payment gateways.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         11 · CONTACT
+         ========================================================== -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="container">
+        <header class="section-head section-head--center" data-aos="fade-up">
+          <span class="section-tag"><i>07</i> Contact</span>
+          <h2 id="contact-title" class="section-title">
+            Let's build something <span class="text-gradient">worth shipping</span>.
+          </h2>
+          <p class="section-sub">
+            Open to full-time roles, freelance builds and long-term collaborations.
+            I reply within a day.
+          </p>
+        </header>
+
+        <div class="contact">
+          <!-- Contact channels -->
+          <div class="contact__info" data-aos="fade-right" data-aos-delay="60">
+            <a data-config="mailto" href="#" class="glass-card contact-card magnetic">
+              <span class="contact-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6"/></svg>
+              </span>
+              <div><em>Email</em><b data-config-text="email">—</b></div>
+            </a>
+
+            <a data-config="tel" href="#" class="glass-card contact-card magnetic">
+              <span class="contact-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 5.5 5.5L16 12l4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3h1Z"/></svg>
+              </span>
+              <div><em>Phone</em><b data-config-text="phone">—</b></div>
+            </a>
+
+            <a data-config="linkedin" href="#" target="_blank" rel="noopener" class="glass-card contact-card magnetic">
+              <span class="contact-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95C21.6 8.75 23 11 23 14.4V21h-4v-5.9c0-1.4-.03-3.2-2-3.2-2 0-2.3 1.5-2.3 3.1V21h-4V9Z"/></svg>
+              </span>
+              <div><em>LinkedIn</em><b data-config-text="linkedinHandle">—</b></div>
+            </a>
+
+            <a data-config="github" href="#" target="_blank" rel="noopener" class="glass-card contact-card magnetic">
+              <span class="contact-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+              </span>
+              <div><em>GitHub</em><b data-config-text="githubHandle">—</b></div>
+            </a>
+
+            <div class="glass-card contact-card contact-card--static">
+              <span class="contact-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              </span>
+              <div><em>Location</em><b>Kerala, India</b></div>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <form id="contactForm" class="glass-card contact__form" data-aos="fade-left" data-aos-delay="120" novalidate>
+            <div class="field">
+              <label for="cf-name">Your name</label>
+              <input id="cf-name" name="name" type="text" required autocomplete="name" placeholder="Jane Doe" />
+              <small class="field__error" data-error-for="cf-name"></small>
+            </div>
+
+            <div class="field">
+              <label for="cf-email">Email address</label>
+              <input id="cf-email" name="email" type="email" required autocomplete="email" placeholder="jane@company.com" />
+              <small class="field__error" data-error-for="cf-email"></small>
+            </div>
+
+            <div class="field">
+              <label for="cf-subject">Subject</label>
+              <input id="cf-subject" name="subject" type="text" required placeholder="Project enquiry" />
+              <small class="field__error" data-error-for="cf-subject"></small>
+            </div>
+
+            <div class="field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" rows="5" required placeholder="Tell me what you're building…"></textarea>
+              <small class="field__error" data-error-for="cf-message"></small>
+            </div>
+
+            <!-- Honeypot: hidden from people, tempting to bots. Web3Forms
+                 rejects any submission where this is filled in. -->
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off"
+                   aria-hidden="true" style="display:none !important" />
+
+            <button type="submit" class="btn btn--primary btn--full magnetic">
+              <span>Send Message</span>
+              <svg viewBox="0 0 24 24" class="w-[18px] h-[18px]" aria-hidden="true"><path d="M4 12h15M13 5.5 20.5 12 13 18.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+
+            <p class="form-note" id="formStatus" role="status" aria-live="polite">
+              Opens your mail client with the message pre-filled.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       12 · FOOTER
+       ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <h2 class="footer__name">Amrutha<span class="text-accent">.</span></h2>
+          <p class="footer__tag">
+            Software Engineer &amp; Full Stack PHP Developer building scalable ERP systems,
+            Shopify stores and modern web applications from Kerala, India.
+          </p>
+          <ul class="footer__social" aria-label="Social profiles">
+            <li><a data-config="linkedin" href="#" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95C21.6 8.75 23 11 23 14.4V21h-4v-5.9c0-1.4-.03-3.2-2-3.2-2 0-2.3 1.5-2.3 3.1V21h-4V9Z"/></svg></a></li>
+            <li><a data-config="github" href="#" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a></li>
+            <li><a data-config="instagram" href="#" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.8 3.8 0 0 1-1.38-.9 3.8 3.8 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2Zm0 3.3a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Zm0 2.3a4.2 4.2 0 1 1 0 8.4 4.2 4.2 0 0 1 0-8.4Zm6.8-2.6a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg></a></li>
+          </ul>
+        </div>
+
+        <nav class="footer__nav" aria-label="Footer">
+          <div>
+            <h3>Navigate</h3>
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#stack">Tech Stack</a>
+            <a href="#projects">Projects</a>
+          </div>
+          <div>
+            <h3>Work</h3>
+            <a href="#services">Services</a>
+            <a href="#achievements">Achievements</a>
+            <a href="#contact">Contact</a>
+            <a href="assets/resume/Amrutha-Haridas-Resume.pdf" download>Resume</a>
+          </div>
+          <div>
+            <h3>Reach out</h3>
+            <a data-config="mailto" href="#" data-config-text="email">Email</a>
+            <a data-config="tel" href="#" data-config-text="phone">Phone</a>
+            <a data-config="linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
+            <a data-config="github" href="#" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© <span id="year">2026</span> Amrutha Haridas. All rights reserved.</p>
+        <p class="footer__built font-mono">Designed &amp; built with precision — Kerala, India</p>
+        <button id="toTop" class="to-top magnetic" aria-label="Back to top">
+          <svg viewBox="0 0 24 24" class="w-4 h-4"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       13 · SCRIPTS — deferred so they never block first paint
+       ============================================================ -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
+
+  <!-- Project scripts -->
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/particles-config.js" defer></script>
+  <script src="assets/js/three-bg.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
