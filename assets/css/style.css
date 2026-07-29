@@ -1133,8 +1133,8 @@ img { max-width: 100%; display: block; }
 
 .portrait__badge {
   position: absolute;
-  left: -1.75rem;
-  top: 0.25rem;
+  left: 0.25rem;
+  top: -3.5rem;
   display: flex;
   align-items: center;
   gap: 0.7rem;
