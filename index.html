@@ -3,14 +3,14 @@
 <head>
   <!-- ============================================================
        AMRUTHA HARIDAS — PREMIUM DEVELOPER PORTFOLIO
-       Black Luxury Theme · Champagne Gold Accent (#C9A227)
+       Obsidian Theme (#0A0B0F) · Champagne Gold Accent (#C9A227)
        Stack: HTML5 · Tailwind CSS · Vanilla JS · GSAP · AOS
               Three.js · Typed.js · Particles.js
        ============================================================ -->
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#050505" />
+  <meta name="theme-color" content="#0A0B0F" />
 
   <!-- ── Primary SEO ──────────────────────────────────────────── -->
   <title>Amrutha Haridas — Software Engineer | Full Stack PHP Developer</title>
@@ -44,6 +44,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 
+  <!-- The hero portrait is the LCP element. Start it in parallel with the CSS
+       rather than waiting for layout; imagesrcset mirrors the <picture> below
+       exactly so the preload and the render pick the same file. -->
+  <link rel="preload" as="image" type="image/webp"
+        imagesrcset="assets/images/amrutha-cutout-384.webp 384w,
+                     assets/images/amrutha-cutout-640.webp 640w,
+                     assets/images/amrutha-cutout.webp 1023w"
+        imagesizes="(max-width: 640px) 68vw, (max-width: 1100px) 330px, 390px"
+        fetchpriority="high" />
+
   <!-- ── Typography ───────────────────────────────────────────── -->
   <link
     href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
@@ -58,9 +68,9 @@
       theme: {
         extend: {
           colors: {
-            ink:    { DEFAULT: '#050505', 800: '#0A0A0C', 700: '#0F0F12', 600: '#16161A' },
+            ink:    { DEFAULT: '#0A0B0F', 800: '#0F1116', 700: '#15181F', 600: '#1E222B', 500: '#2A2F3A' },
             accent: { DEFAULT: '#C9A227', light: '#E8C766', dark: '#7A5E12', glow: '#FFD766' },
-            bone:   { DEFAULT: '#EDEDED', muted: '#9A9AA2', dim: '#5E5E68' }
+            bone:   { DEFAULT: '#F4F3F0', muted: '#B3B4BB', dim: '#7C7E88' }
           },
           fontFamily: {
             display: ['Sora', 'system-ui', 'sans-serif'],
@@ -88,7 +98,7 @@
     "jobTitle": "Software Engineer | Full Stack PHP Developer",
     "description": "Software Engineer specializing in PHP, Laravel, CodeIgniter, Shopify and REST API development.",
     "url": "https://amruthaharidas.dev/",
-    "image": "https://amruthaharidas.dev/assets/images/profile.jpg",
+    "image": "https://amruthaharidas.dev/assets/images/amrutha-cutout.png",
     "address": { "@type": "PostalAddress", "addressRegion": "Kerala", "addressCountry": "IN" },
     "telephone": "+919946865197",
     "knowsAbout": ["PHP","Laravel","CodeIgniter","Shopify","MySQL","REST API","JavaScript","AWS"],
@@ -103,6 +113,59 @@
 </head>
 
 <body class="bg-ink text-bone font-body antialiased selection:bg-accent/30 selection:text-white">
+
+  <!-- ============================================================
+       BRAND ICON SPRITE
+       ------------------------------------------------------------
+       Each mark is defined once here and referenced with <use>, for
+       two reasons: the icons repeat in the hero, the contact list
+       and the footer, and Instagram's mark needs a gradient — an SVG
+       gradient is addressed by id, so pasting the icon inline three
+       times would put three elements with the same id in the
+       document and the fill would be undefined behaviour.
+
+       Colours are the official brand values:
+         LinkedIn  #0A66C2
+         GitHub    #FFFFFF  (the monochrome mark's dark-background variant;
+                             its light-background colour, #181717, would be
+                             invisible here)
+         Instagram the official gradient, yellow through violet
+         Gmail     #4285F4 / #34A853 / #FBBC04 / #EA4335 / #C5221F
+       ============================================================ -->
+  <svg width="0" height="0" class="icon-sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%"   stop-color="#FFD521"/>
+        <stop offset="20%"  stop-color="#F50000"/>
+        <stop offset="45%"  stop-color="#B900B4"/>
+        <stop offset="70%"  stop-color="#7000E0"/>
+        <stop offset="100%" stop-color="#4F5BD5"/>
+      </linearGradient>
+    </defs>
+
+    <symbol id="i-linkedin" viewBox="0 0 24 24">
+      <path fill="#0A66C2" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95C21.6 8.75 23 11 23 14.4V21h-4v-5.9c0-1.4-.03-3.2-2-3.2-2 0-2.3 1.5-2.3 3.1V21h-4V9Z"/>
+    </symbol>
+
+    <symbol id="i-github" viewBox="0 0 24 24">
+      <path fill="#fff" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/>
+    </symbol>
+
+    <symbol id="i-instagram" viewBox="0 0 24 24">
+      <path fill="url(#ig-grad)" d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.8 3.8 0 0 1-1.38-.9 3.8 3.8 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2Zm0 3.3a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Zm0 2.3a4.2 4.2 0 1 1 0 8.4 4.2 4.2 0 0 1 0-8.4Zm6.8-2.6a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
+    </symbol>
+
+    <!-- Gmail: white envelope, blue left rail, green right rail,
+         yellow top-right fold, red centre fold, dark-red corner wedge -->
+    <symbol id="i-gmail" viewBox="0 0 48 36">
+      <path fill="#fff"    d="M4 36h40a4 4 0 0 0 4-4V4a4 4 0 0 0-4-4H4a4 4 0 0 0-4 4v28a4 4 0 0 0 4 4Z"/>
+      <path fill="#4285F4" d="M3.3 36H11V17.5L0 9.25V32.7C0 34.6 1.5 36 3.3 36Z"/>
+      <path fill="#34A853" d="M37 36h7.7c1.8 0 3.3-1.4 3.3-3.3V9.25L37 17.5V36Z"/>
+      <path fill="#FBBC04" d="M37 3.3v14.2l11-8.25V5c0-4.1-4.7-6.4-8-3.9L37 3.3Z"/>
+      <path fill="#EA4335" d="M11 17.5V3.3L24 13l13-9.7v14.2L24 27.2 11 17.5Z"/>
+      <path fill="#C5221F" d="M0 5v4.25L11 17.5V3.3L8 1.1C4.7-1.4 0 .9 0 5Z"/>
+    </symbol>
+  </svg>
 
   <!-- Accessibility: keyboard users can jump past the chrome -->
   <a href="#hero" class="skip-link">Skip to main content</a>
@@ -162,7 +225,6 @@
         <li><a href="#about"        class="nav-link" data-nav>About</a></li>
         <li><a href="#experience"   class="nav-link" data-nav>Experience</a></li>
         <li><a href="#stack"        class="nav-link" data-nav>Stack</a></li>
-        <li><a href="#projects"     class="nav-link" data-nav>Projects</a></li>
         <li><a href="#services"     class="nav-link" data-nav>Services</a></li>
         <li><a href="#achievements" class="nav-link" data-nav>Awards</a></li>
       </ul>
@@ -185,10 +247,9 @@
       <li><a href="#about"        data-mobile-link><i>01</i> About</a></li>
       <li><a href="#experience"   data-mobile-link><i>02</i> Experience</a></li>
       <li><a href="#stack"        data-mobile-link><i>03</i> Tech Stack</a></li>
-      <li><a href="#projects"     data-mobile-link><i>04</i> Projects</a></li>
-      <li><a href="#services"     data-mobile-link><i>05</i> Services</a></li>
-      <li><a href="#achievements" data-mobile-link><i>06</i> Achievements</a></li>
-      <li><a href="#contact"      data-mobile-link><i>07</i> Contact</a></li>
+      <li><a href="#services"     data-mobile-link><i>04</i> Services</a></li>
+      <li><a href="#achievements" data-mobile-link><i>05</i> Achievements</a></li>
+      <li><a href="#contact"      data-mobile-link><i>06</i> Contact</a></li>
     </ul>
     <div class="mobile-menu__foot">
       <a data-config="linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
@@ -215,6 +276,7 @@
             <span class="pulse-dot" aria-hidden="true"></span>
             Available for work
           </p>
+
 
           <h1 class="hero__title" data-hero-el>
             <span class="hero__title-line">
@@ -245,27 +307,38 @@
               <svg viewBox="0 0 24 24" class="w-[18px] h-[18px]" aria-hidden="true"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               <span>Download Resume</span>
             </a>
-            <a href="#projects" class="btn btn--outline magnetic">
-              <span>View Projects</span>
+            <a href="#experience" class="btn btn--outline magnetic">
+              <span>View Experience</span>
             </a>
           </div>
         </div>
 
         <!-- ── Centre: portrait + floating 3D tech icons ──────── -->
         <div class="hero__visual" data-hero-el>
-          <!-- portrait--bare = no glass box, feathered edges.
-               Upgraded to portrait--cutout by main.js if a transparent
-               profile-cutout.png is present. -->
-          <div class="portrait portrait--bare" data-tilt>
+          <!-- portrait--cutout = no glass box, no frame, no backdrop. The
+               transparent cutout floats directly on the page background.
+
+               WebP carries the alpha at 74 KB against 713 KB for the same
+               picture as PNG, so it is offered first and the PNG is only
+               fetched by browsers that cannot decode WebP. The rungs match the
+               real rendered widths: a 2x phone takes the 640px file (39 KB),
+               a 2x desktop the native 1023px cut. -->
+          <div class="portrait portrait--cutout" data-tilt>
             <div class="portrait__ring" aria-hidden="true"></div>
             <div class="portrait__frame">
-              <!-- Drop your photo at assets/images/profile.jpg — falls back to the SVG placeholder -->
-              <img
-                src="assets/images/profile.jpg"
-                onerror="this.onerror=null;this.src='assets/images/profile-placeholder.svg';this.classList.add('is-placeholder')"
-                alt="Portrait of Amrutha Haridas, Software Engineer"
-                width="640" height="800" loading="eager" decoding="async"
-                class="portrait__img" />
+              <picture>
+                <source type="image/webp"
+                        srcset="assets/images/amrutha-cutout-384.webp 384w,
+                                assets/images/amrutha-cutout-640.webp 640w,
+                                assets/images/amrutha-cutout.webp 1023w"
+                        sizes="(max-width: 640px) 68vw, (max-width: 1100px) 330px, 390px" />
+                <img
+                  src="assets/images/amrutha-cutout.png"
+                  onerror="this.onerror=null;this.src='assets/images/profile-placeholder.svg';this.classList.add('is-placeholder')"
+                  alt="Portrait of Amrutha Haridas, Software Engineer"
+                  width="1023" height="1537" loading="eager" decoding="async" fetchpriority="high"
+                  class="portrait__img" />
+              </picture>
               <div class="portrait__grade" aria-hidden="true"></div>
               <div class="portrait__sheen" aria-hidden="true"></div>
             </div>
@@ -325,16 +398,16 @@
 
           <ul class="hero__social" data-hero-el aria-label="Social profiles">
             <li><a data-config="linkedin" href="#" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95C21.6 8.75 23 11 23 14.4V21h-4v-5.9c0-1.4-.03-3.2-2-3.2-2 0-2.3 1.5-2.3 3.1V21h-4V9Z"/></svg>
+              <svg class="w-[18px] h-[18px]" aria-hidden="true"><use href="#i-linkedin"/></svg>
             </a></li>
             <li><a data-config="github" href="#" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+              <svg class="w-[18px] h-[18px]" aria-hidden="true"><use href="#i-github"/></svg>
             </a></li>
             <li><a data-config="instagram" href="#" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.8 3.8 0 0 1-1.38-.9 3.8 3.8 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2Zm0 3.3a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Zm0 2.3a4.2 4.2 0 1 1 0 8.4 4.2 4.2 0 0 1 0-8.4Zm6.8-2.6a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg>
+              <svg class="w-[18px] h-[18px]" aria-hidden="true"><use href="#i-instagram"/></svg>
             </a></li>
             <li><a data-config="mailto" href="#" class="social-btn magnetic" aria-label="Email">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-[18px] h-[18px]"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6"/></svg>
+              <svg class="w-[18px] h-[18px]" aria-hidden="true"><use href="#i-gmail"/></svg>
             </a></li>
           </ul>
 
@@ -381,10 +454,14 @@
           <!-- Left column: signature card -->
           <aside class="about__aside" data-aos="fade-right" data-aos-delay="80">
             <div class="glass-card about__card" data-tilt>
-              <div class="about__avatar">
-                <img src="assets/images/profile.jpg"
-                     onerror="this.onerror=null;this.src='assets/images/profile-placeholder.svg';this.classList.add('is-placeholder')"
-                     alt="" aria-hidden="true" loading="lazy" decoding="async" width="200" height="200" />
+              <div class="about__avatar about__avatar--cutout">
+                <!-- Rendered at 150x225, so the 384px WebP covers 2x screens -->
+                <picture>
+                  <source type="image/webp" srcset="assets/images/amrutha-cutout-384.webp" />
+                  <img src="assets/images/amrutha-cutout.png"
+                       onerror="this.onerror=null;this.src='assets/images/profile-placeholder.svg';this.classList.add('is-placeholder')"
+                       alt="" aria-hidden="true" loading="lazy" decoding="async" width="150" height="225" />
+                </picture>
               </div>
               <b class="about__name">Amrutha Haridas</b>
               <em class="about__role">Software Engineer · Full Stack PHP</em>
@@ -630,207 +707,12 @@
     </section>
 
     <!-- ==========================================================
-         08 · PROJECTS
-         ========================================================== -->
-    <section id="projects" class="section section--alt" aria-labelledby="proj-title">
-      <div class="container">
-        <header class="section-head" data-aos="fade-up">
-          <span class="section-tag"><i>04</i> Projects</span>
-          <h2 id="proj-title" class="section-title">
-            Systems built to <span class="text-gradient">run the business</span>.
-          </h2>
-          <p class="section-sub">Hover a card to see the interface come alive.</p>
-        </header>
-
-        <!-- Filter -->
-        <div class="filters" data-aos="fade-up" data-aos-delay="60" role="tablist" aria-label="Project filters">
-          <button class="filter is-active" data-filter="all"       role="tab" aria-selected="true">All</button>
-          <button class="filter" data-filter="erp"        role="tab" aria-selected="false">ERP</button>
-          <button class="filter" data-filter="ecommerce"  role="tab" aria-selected="false">eCommerce</button>
-          <button class="filter" data-filter="api"        role="tab" aria-selected="false">API</button>
-          <button class="filter" data-filter="dashboard"  role="tab" aria-selected="false">Dashboard</button>
-        </div>
-
-        <div class="projects" id="projectGrid">
-
-          <!-- 01 ERP Management System -->
-          <article class="project project--wide" data-category="erp" data-aos="fade-up" data-tilt>
-            <div class="project__visual">
-              <div class="mock mock--erp" aria-hidden="true">
-                <div class="mock__bar"><i></i><i></i><i></i></div>
-                <div class="mock__body">
-                  <div class="mock__side"><span></span><span></span><span></span><span></span><span></span></div>
-                  <div class="mock__main">
-                    <div class="mock__kpis"><b></b><b></b><b></b></div>
-                    <div class="mock__chart"><i style="--h:38%"></i><i style="--h:64%"></i><i style="--h:47%"></i><i style="--h:82%"></i><i style="--h:56%"></i><i style="--h:71%"></i><i style="--h:90%"></i></div>
-                    <div class="mock__rows"><span></span><span></span><span></span></div>
-                  </div>
-                </div>
-              </div>
-              <span class="project__glow" aria-hidden="true"></span>
-            </div>
-            <div class="project__body">
-              <span class="project__index font-mono">01</span>
-              <h3 class="project__title">ERP Management System</h3>
-              <p class="project__desc">
-                A full enterprise resource platform tying Sales, Purchase, Inventory and reporting into a
-                single Laravel codebase — role-based access, audit trails and reports that reconcile to the rupee.
-              </p>
-              <ul class="tag-list tag-list--sm"><li>Laravel</li><li>MySQL</li><li>REST API</li><li>DataTables</li></ul>
-            </div>
-          </article>
-
-          <!-- 02 Inventory Management -->
-          <article class="project" data-category="erp" data-aos="fade-up" data-aos-delay="60" data-tilt>
-            <div class="project__visual">
-              <div class="mock mock--inventory" aria-hidden="true">
-                <div class="mock__bar"><i></i><i></i><i></i></div>
-                <div class="mock__stock">
-                  <span style="--w:82%"></span><span style="--w:46%"></span>
-                  <span style="--w:68%"></span><span style="--w:34%"></span><span style="--w:91%"></span>
-                </div>
-              </div>
-              <span class="project__glow" aria-hidden="true"></span>
-            </div>
-            <div class="project__body">
-              <span class="project__index font-mono">02</span>
-              <h3 class="project__title">Inventory Management</h3>
-              <p class="project__desc">
-                Real-time stock ledger with batch tracking, low-stock triggers and warehouse transfers —
-                every movement traceable to its source document.
-              </p>
-              <ul class="tag-list tag-list--sm"><li>Laravel</li><li>MySQL</li><li>AJAX</li></ul>
-            </div>
-          </article>
-
-          <!-- 03 Sales & Purchase System -->
-          <article class="project" data-category="erp" data-aos="fade-up" data-aos-delay="120" data-tilt>
-            <div class="project__visual">
-              <div class="mock mock--sales" aria-hidden="true">
-                <div class="mock__bar"><i></i><i></i><i></i></div>
-                <svg class="mock__line" viewBox="0 0 240 110" preserveAspectRatio="none">
-                  <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#C9A227" stop-opacity=".45"/>
-                    <stop offset="100%" stop-color="#C9A227" stop-opacity="0"/>
-                  </linearGradient></defs>
-                  <path class="mock__area" d="M0,90 L30,72 L60,80 L90,48 L120,58 L150,30 L180,42 L210,18 L240,26 L240,110 L0,110 Z" fill="url(#sg)"/>
-                  <path class="mock__stroke" d="M0,90 L30,72 L60,80 L90,48 L120,58 L150,30 L180,42 L210,18 L240,26" fill="none" stroke="#E8C766" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <span class="project__glow" aria-hidden="true"></span>
-            </div>
-            <div class="project__body">
-              <span class="project__index font-mono">03</span>
-              <h3 class="project__title">Sales &amp; Purchase System</h3>
-              <p class="project__desc">
-                Quotation → order → invoice → payment, with GST handling, credit limits and margin
-                reporting across the whole cycle.
-              </p>
-              <ul class="tag-list tag-list--sm"><li>Laravel</li><li>MySQL</li><li>Reports</li></ul>
-            </div>
-          </article>
-
-          <!-- 04 Dealer Portal -->
-          <article class="project" data-category="dashboard" data-aos="fade-up" data-tilt>
-            <div class="project__visual">
-              <div class="mock mock--dealer" aria-hidden="true">
-                <div class="mock__bar"><i></i><i></i><i></i></div>
-                <div class="mock__cards"><b></b><b></b><b></b><b></b></div>
-              </div>
-              <span class="project__glow" aria-hidden="true"></span>
-            </div>
-            <div class="project__body">
-              <span class="project__index font-mono">04</span>
-              <h3 class="project__title">Dealer Portal</h3>
-              <p class="project__desc">
-                Self-service portal where dealers place orders, track dispatch, download invoices and
-                view live account statements — no phone calls required.
-              </p>
-              <ul class="tag-list tag-list--sm"><li>Laravel</li><li>REST API</li><li>Bootstrap</li></ul>
-            </div>
-          </article>
-
-          <!-- 05 Shopify eCommerce Store -->
-          <article class="project project--wide" data-category="ecommerce" data-aos="fade-up" data-aos-delay="60" data-tilt>
-            <div class="project__visual">
-              <div class="mock mock--shop" aria-hidden="true">
-                <div class="mock__bar"><i></i><i></i><i></i></div>
-                <div class="mock__shop">
-                  <div class="mock__hero"></div>
-                  <div class="mock__products"><b></b><b></b><b></b><b></b></div>
-                </div>
-              </div>
-              <span class="project__glow" aria-hidden="true"></span>
-            </div>
-            <div class="project__body">
-              <span class="project__index font-mono">05</span>
-              <h3 class="project__title">Shopify eCommerce Store</h3>
-              <p class="project__desc">
-                Custom Liquid theme development and storefront customization — conversion-focused product
-                pages, tuned checkout flow and payment gateway integration.
-              </p>
-              <ul class="tag-list tag-list--sm"><li>Shopify</li><li>Liquid</li><li>JavaScript</li><li>Payments</li></ul>
-            </div>
-          </article>
-
-          <!-- 06 REST API Integrations -->
-          <article class="project" data-category="api" data-aos="fade-up" data-aos-delay="120" data-tilt>
-            <div class="project__visual">
-              <div class="mock mock--api" aria-hidden="true">
-                <div class="mock__bar"><i></i><i></i><i></i></div>
-                <pre class="mock__code"><code><span class="c-key">GET</span> <span class="c-str">/api/v1/orders</span>
-<span class="c-dim">200 OK · 42ms</span>
-{
-  <span class="c-str">"status"</span>: <span class="c-key">true</span>,
-  <span class="c-str">"data"</span>: [ … ]
-}</code></pre>
-              </div>
-              <span class="project__glow" aria-hidden="true"></span>
-            </div>
-            <div class="project__body">
-              <span class="project__index font-mono">06</span>
-              <h3 class="project__title">REST API Integrations</h3>
-              <p class="project__desc">
-                Versioned, token-authenticated APIs connecting ERP data to mobile apps, storefronts and
-                third-party services — documented and Postman-tested.
-              </p>
-              <ul class="tag-list tag-list--sm"><li>Laravel</li><li>JWT</li><li>Postman</li></ul>
-            </div>
-          </article>
-
-          <!-- 07 Admin Dashboard -->
-          <article class="project" data-category="dashboard" data-aos="fade-up" data-aos-delay="180" data-tilt>
-            <div class="project__visual">
-              <div class="mock mock--admin" aria-hidden="true">
-                <div class="mock__bar"><i></i><i></i><i></i></div>
-                <div class="mock__admin">
-                  <div class="mock__donut"></div>
-                  <div class="mock__list"><span></span><span></span><span></span><span></span></div>
-                </div>
-              </div>
-              <span class="project__glow" aria-hidden="true"></span>
-            </div>
-            <div class="project__body">
-              <span class="project__index font-mono">07</span>
-              <h3 class="project__title">Admin Dashboard</h3>
-              <p class="project__desc">
-                Operations command centre — live KPIs, drill-down reports, exportable datasets and
-                granular permissions, built to stay responsive at scale.
-              </p>
-              <ul class="tag-list tag-list--sm"><li>Laravel</li><li>Charts</li><li>DataTables</li></ul>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================================
          09 · SERVICES
          ========================================================== -->
-    <section id="services" class="section" aria-labelledby="svc-title">
+    <section id="services" class="section section--alt" aria-labelledby="svc-title">
       <div class="container">
         <header class="section-head" data-aos="fade-up">
-          <span class="section-tag"><i>05</i> Services</span>
+          <span class="section-tag"><i>04</i> Services</span>
           <h2 id="svc-title" class="section-title">
             What I can <span class="text-gradient">build for you</span>.
           </h2>
@@ -897,14 +779,42 @@
     <!-- ==========================================================
          10 · ACHIEVEMENTS
          ========================================================== -->
-    <section id="achievements" class="section section--alt" aria-labelledby="ach-title">
+    <section id="achievements" class="section" aria-labelledby="ach-title">
       <div class="container">
         <header class="section-head" data-aos="fade-up">
-          <span class="section-tag"><i>06</i> Achievements</span>
+          <span class="section-tag"><i>05</i> Achievements</span>
           <h2 id="ach-title" class="section-title">
             Numbers behind the <span class="text-gradient">work</span>.
           </h2>
         </header>
+
+        <!-- ── Headline credential ────────────────────────────── -->
+        <article class="medal" data-aos="fade-up">
+          <div class="medal__medallion" aria-hidden="true">
+            <span class="medal__ribbon medal__ribbon--l"></span>
+            <span class="medal__ribbon medal__ribbon--r"></span>
+            <span class="medal__disc">
+              <b>1<sup>st</sup></b>
+            </span>
+          </div>
+
+          <div class="medal__body">
+            <span class="medal__eyebrow font-mono">Academic Distinction</span>
+            <h3 class="medal__title">
+              MCA Class Topper — <span class="medal__gold">Gold Medalist</span>
+            </h3>
+            <p class="medal__note">
+              Ranked first in the Master of Computer Applications cohort and awarded the
+              gold medal for academic excellence.
+            </p>
+          </div>
+
+          <div class="medal__seal">
+            <span class="font-mono">Rank</span>
+            <b>01</b>
+            <em>Master of Computer Applications</em>
+          </div>
+        </article>
 
         <div class="stats" data-aos="fade-up" data-aos-delay="60">
           <div class="glass-card stat">
@@ -961,10 +871,10 @@
     <!-- ==========================================================
          11 · CONTACT
          ========================================================== -->
-    <section id="contact" class="section" aria-labelledby="contact-title">
+    <section id="contact" class="section section--alt" aria-labelledby="contact-title">
       <div class="container">
         <header class="section-head section-head--center" data-aos="fade-up">
-          <span class="section-tag"><i>07</i> Contact</span>
+          <span class="section-tag"><i>06</i> Contact</span>
           <h2 id="contact-title" class="section-title">
             Let's build something <span class="text-gradient">worth shipping</span>.
           </h2>
@@ -978,8 +888,8 @@
           <!-- Contact channels -->
           <div class="contact__info" data-aos="fade-right" data-aos-delay="60">
             <a data-config="mailto" href="#" class="glass-card contact-card magnetic">
-              <span class="contact-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6"/></svg>
+              <span class="contact-card__icon contact-card__icon--brand" aria-hidden="true">
+                <svg aria-hidden="true"><use href="#i-gmail"/></svg>
               </span>
               <div><em>Email</em><b data-config-text="email">—</b></div>
             </a>
@@ -992,15 +902,15 @@
             </a>
 
             <a data-config="linkedin" href="#" target="_blank" rel="noopener" class="glass-card contact-card magnetic">
-              <span class="contact-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95C21.6 8.75 23 11 23 14.4V21h-4v-5.9c0-1.4-.03-3.2-2-3.2-2 0-2.3 1.5-2.3 3.1V21h-4V9Z"/></svg>
+              <span class="contact-card__icon contact-card__icon--brand" aria-hidden="true">
+                <svg aria-hidden="true"><use href="#i-linkedin"/></svg>
               </span>
               <div><em>LinkedIn</em><b data-config-text="linkedinHandle">—</b></div>
             </a>
 
             <a data-config="github" href="#" target="_blank" rel="noopener" class="glass-card contact-card magnetic">
-              <span class="contact-card__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+              <span class="contact-card__icon contact-card__icon--brand" aria-hidden="true">
+                <svg aria-hidden="true"><use href="#i-github"/></svg>
               </span>
               <div><em>GitHub</em><b data-config-text="githubHandle">—</b></div>
             </a>
@@ -1073,11 +983,11 @@
           </p>
           <ul class="footer__social" aria-label="Social profiles">
             <li><a data-config="linkedin" href="#" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95C21.6 8.75 23 11 23 14.4V21h-4v-5.9c0-1.4-.03-3.2-2-3.2-2 0-2.3 1.5-2.3 3.1V21h-4V9Z"/></svg></a></li>
+              <svg class="w-[18px] h-[18px]" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
             <li><a data-config="github" href="#" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a></li>
+              <svg class="w-[18px] h-[18px]" aria-hidden="true"><use href="#i-github"/></svg></a></li>
             <li><a data-config="instagram" href="#" target="_blank" rel="noopener" class="social-btn magnetic" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.8 3.8 0 0 1-1.38-.9 3.8 3.8 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2Zm0 3.3a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Zm0 2.3a4.2 4.2 0 1 1 0 8.4 4.2 4.2 0 0 1 0-8.4Zm6.8-2.6a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg></a></li>
+              <svg class="w-[18px] h-[18px]" aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
           </ul>
         </div>
 
@@ -1087,7 +997,6 @@
             <a href="#about">About</a>
             <a href="#experience">Experience</a>
             <a href="#stack">Tech Stack</a>
-            <a href="#projects">Projects</a>
           </div>
           <div>
             <h3>Work</h3>

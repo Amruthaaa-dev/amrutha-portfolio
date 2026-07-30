@@ -1,7 +1,14 @@
 /* ============================================================================
    AMRUTHA HARIDAS — PORTFOLIO STYLESHEET
-   Midnight Sapphire (#070B18) · Champagne Gold (#C9A227) · Glassmorphism
+   Obsidian (#0A0B0F) · Champagne Gold (#C9A227) · Glassmorphism
    Dark Mode Only
+   ----------------------------------------------------------------------------
+   The surface is a deep neutral obsidian rather than a saturated navy, and the
+   gold is held back to accents — rules, tags, hovers, the odd word. A tinted
+   full-page wash reads cheap and drags every body-copy contrast ratio down
+   with it, so the ambient colour stays under 0.16 alpha and is pushed to the
+   edges by a vignette, leaving the centre column flat and legible. The one
+   place gold is allowed to be loud is the gold-medal card in Achievements.
    ----------------------------------------------------------------------------
    TABLE OF CONTENTS
    00 · Design tokens
@@ -16,24 +23,24 @@
    09 · About
    10 · Experience timeline
    11 · Tech stack & skill bars
-   12 · Projects
-   13 · Services
-   14 · Achievements
-   15 · Contact
-   16 · Footer
-   17 · Responsive
-   18 · Reduced motion & print
+   12 · Services
+   13 · Achievements
+   14 · Contact
+   15 · Footer
+   16 · Responsive
+   17 · Reduced motion & print
    ========================================================================== */
 
 /* ========================================================================== */
 /* 00 · DESIGN TOKENS                                                         */
 /* ========================================================================== */
 :root {
-  /* Surfaces — midnight sapphire, not neutral black */
-  --ink:            #070B18;
-  --ink-800:        #0B1022;
-  --ink-700:        #11182E;
-  --ink-600:        #1A2340;
+  /* Surfaces — obsidian: near-black, a touch cool, no colour cast to fight */
+  --ink:            #0A0B0F;
+  --ink-800:        #0F1116;
+  --ink-700:        #15181F;
+  --ink-600:        #1E222B;
+  --ink-500:        #2A2F3A;   /* hairlines, dividers, inset borders */
 
   /* Cool secondaries used by the background stack */
   --sapphire:       #2E5BD8;
@@ -45,15 +52,17 @@
   --accent-dark:     #7A5E12;
   --accent-glow:     #FFD766;
 
-  /* Type */
-  --bone:           #ededed;
-  --bone-muted:     #9a9aa2;
-  --bone-dim:       #5e5e68;
+  /* Type — warm ivory on obsidian. Every step is checked against --ink:
+     bone 17.9:1, muted 9.5:1, dim 4.9:1, so even the small mono labels
+     clear WCAG AA at their rendered size. */
+  --bone:           #F4F3F0;
+  --bone-muted:     #B3B4BB;
+  --bone-dim:       #7C7E88;
 
   /* Glass */
-  --glass-bg:       rgba(255, 255, 255, 0.035);
-  --glass-bg-hover: rgba(255, 255, 255, 0.055);
-  --glass-border:   rgba(255, 255, 255, 0.085);
+  --glass-bg:       rgba(255, 255, 255, 0.042);
+  --glass-bg-hover: rgba(255, 255, 255, 0.065);
+  --glass-border:   rgba(255, 255, 255, 0.095);
   --glass-blur:     18px;
 
   /* Motion */
@@ -345,6 +354,16 @@ img { max-width: 100%; display: block; }
 }
 
 /* Circular social button */
+/* The brand-icon sprite at the top of <body> is a definitions block only.
+   `display: none` would stop Safari resolving <use> against it, so it is
+   removed from flow and clipped instead. */
+.icon-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 .social-btn {
   display: grid;
   place-items: center;
@@ -357,6 +376,11 @@ img { max-width: 100%; display: block; }
   -webkit-backdrop-filter: blur(10px);
   transition: all 0.4s var(--ease-out);
 }
+.social-btn svg { width: 18px; height: 18px; }
+/* The marks carry their own brand colours, so `color` no longer reaches them.
+   Hover reads instead as the icon coming up to full strength. */
+.social-btn svg { opacity: 0.88; transition: opacity 0.4s var(--ease-out); }
+.social-btn:hover svg { opacity: 1; }
 .social-btn:hover {
   color: #fff;
   border-color: rgba(201,162,39,0.65);
@@ -471,31 +495,49 @@ img { max-width: 100%; display: block; }
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  background: var(--ink);
 }
 
-/* Aurora — three slow-drifting radial blobs */
-.aurora { position: absolute; inset: 0; filter: blur(90px); opacity: 0.55; }
+/* Vignette — pins the ambient colour to the edges so the middle of the page,
+   where all the body copy lives, stays flat obsidian. This is what keeps the
+   text legible while the corners still carry some depth. */
+.bg-stack::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;   /* over the aurora, under the particles/grid/spotlight */
+  background:
+    radial-gradient(ellipse 78% 62% at 50% 44%, rgba(10,11,15,0.86) 0%, rgba(10,11,15,0.45) 55%, transparent 100%),
+    linear-gradient(180deg, rgba(10,11,15,0.5) 0%, transparent 22%, transparent 78%, rgba(10,11,15,0.6) 100%);
+}
+
+/* Aurora — three slow-drifting radial blobs. Deliberately dim: this is
+   ambient depth, not a colour wash. */
+.aurora { position: absolute; inset: 0; z-index: 0; filter: blur(130px); opacity: 0.5; }
 .aurora__blob {
   position: absolute;
   border-radius: 50%;
   will-change: transform;
 }
+/* Cool steel, top-left */
 .aurora__blob--1 {
-  width: 46vw; height: 46vw;
-  top: -12vw; left: -8vw;
-  background: radial-gradient(circle, rgba(201,162,39,0.55), transparent 68%);
+  width: 52vw; height: 52vw;
+  top: -16vw; left: -12vw;
+  background: radial-gradient(circle, rgba(46,91,216,0.16), transparent 68%);
   animation: drift1 26s var(--ease-inout) infinite alternate;
 }
+/* The single warm note — bronze, kept low so nothing downstream turns yellow */
 .aurora__blob--2 {
-  width: 40vw; height: 40vw;
-  top: 34vh; right: -12vw;
-  background: radial-gradient(circle, rgba(122,94,18,0.6), transparent 66%);
+  width: 44vw; height: 44vw;
+  top: 30vh; right: -16vw;
+  background: radial-gradient(circle, rgba(201,162,39,0.13), transparent 66%);
   animation: drift2 32s var(--ease-inout) infinite alternate;
 }
+/* Deep teal shadow, bottom */
 .aurora__blob--3 {
-  width: 52vw; height: 52vw;
-  bottom: -22vw; left: 22vw;
-  background: radial-gradient(circle, rgba(232,199,102,0.28), transparent 70%);
+  width: 58vw; height: 58vw;
+  bottom: -26vw; left: 20vw;
+  background: radial-gradient(circle, rgba(14,138,160,0.11), transparent 70%);
   animation: drift3 38s var(--ease-inout) infinite alternate;
 }
 @keyframes drift1 { to { transform: translate3d(14vw, 10vh, 0) scale(1.25); } }
@@ -506,19 +548,21 @@ img { max-width: 100%; display: block; }
 .webgl-bg {
   position: absolute;
   inset: 0;
+  z-index: 2;
   width: 100%;
   height: 100%;
-  opacity: 0.75;
+  opacity: 0.6;
 }
 
 /* Faint technical grid */
 .grid-overlay {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background-image:
-    linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
-  background-size: 72px 72px;
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 80px 80px;
   mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 20%, transparent 78%);
   -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 20%, transparent 78%);
 }
@@ -526,6 +570,7 @@ img { max-width: 100%; display: block; }
 /* Film grain — kills banding on the big gradients */
 .noise-overlay {
   position: absolute;
+  z-index: 2;
   inset: -200%;
   width: 500%;
   height: 500%;
@@ -546,10 +591,11 @@ img { max-width: 100%; display: block; }
 .spotlight {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background: radial-gradient(
-    520px circle at var(--mx) var(--my),
-    rgba(201, 162, 39, 0.13),
-    transparent 62%
+    560px circle at var(--mx) var(--my),
+    rgba(232, 199, 102, 0.07),
+    transparent 64%
   );
   transition: opacity 0.4s var(--ease-out);
 }
@@ -997,9 +1043,9 @@ img { max-width: 100%; display: block; }
    a champagne bloom and grounded with a contact shadow.
 
    This is the best presentation available for a photo that still has its own
-   background baked in. Supply a true cutout (assets/images/profile-cutout.png)
-   and main.js upgrades this to `portrait--cutout`, which drops the mask
-   entirely because it is no longer needed.                                  */
+   background baked in. It is no longer the active mode — the site now ships a
+   true cutout and uses `portrait--cutout` below — but it is kept as the
+   fallback if a photo with its own backdrop is ever swapped back in.         */
 .portrait--bare .portrait__ring,
 .portrait--bare .portrait__grade,
 .portrait--bare .portrait__sheen { display: none; }
@@ -1053,20 +1099,20 @@ img { max-width: 100%; display: block; }
 }
 
 /* ── CUTOUT MODE ─────────────────────────────────────────────────────────
-   Activated automatically by main.js when assets/images/profile-cutout.png
-   exists (a background-removed, transparent PNG).
+   The active mode. assets/images/amrutha-cutout.png is a background-removed,
+   transparent PNG, so nothing needs to hide the photo's own backdrop.
 
-   The glass box, frame border and grading overlay all disappear; the figure
-   floats free over the aurora, lit from behind by a champagne-gold bloom and
-   grounded with a soft contact shadow. This is the look you want once the
-   background is actually removed — a framed box around a cutout looks wrong. */
+   The glass box, frame border, grading overlay and every backdrop tint
+   disappear. Nothing sits behind the figure but the page itself — no disc, no
+   champagne bloom, no colour wash — so the transparent PNG reads as if it were
+   printed straight onto the site background. */
 .portrait--cutout .portrait__ring,
 .portrait--cutout .portrait__grade,
 .portrait--cutout .portrait__sheen { display: none; }
 
-/* Match the container to the cutout's own 620x667 proportions so no vertical
+/* Match the container to the cutout's own 900x1352 proportions so no vertical
    space is wasted and the figure renders as large as the column allows. */
-.portrait--cutout { aspect-ratio: 1 / 1.08; }
+.portrait--cutout { aspect-ratio: 1 / 1.5; }
 
 .portrait--cutout .portrait__frame {
   background: none;
@@ -1078,57 +1124,25 @@ img { max-width: 100%; display: block; }
   -webkit-backdrop-filter: none;
 }
 
-/* Red bloom behind the subject — reads as rim lighting */
-.portrait--cutout .portrait__frame::before {
-  content: "";
-  position: absolute;
-  left: 50%; top: 46%;
-  width: 108%; aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,162,39,0.42) 0%, rgba(122,94,18,0.18) 42%, transparent 68%);
-  filter: blur(34px);
-  z-index: -1;
-}
+/* No bloom, no disc, no tint — the page background is the only backdrop. */
+.portrait--cutout .portrait__frame::before,
+.portrait--cutout .portrait__frame::after { content: none; }
 
-/* Contact shadow so the figure sits on the page rather than hovering in a void */
-.portrait--cutout .portrait__frame::after {
-  content: "";
-  position: absolute;
-  left: 50%; bottom: -2%;
-  width: 66%; height: 7%;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(0,0,0,0.75), transparent 72%);
-  filter: blur(14px);
-}
-
+/* Centred inside its box, with a neutral drop shadow that follows the
+   figure's own alpha rather than painting a shape behind it. The photo is
+   cropped mid-calf, so the last few percent are faded out — otherwise the
+   figure ends on a dead-straight horizontal line and reads as sliced. */
 .portrait--cutout .portrait__img {
   object-fit: contain;
-  object-position: 50% 100%;
-  filter: contrast(1.05) saturate(1.05) drop-shadow(0 26px 46px rgba(0,0,0,0.75));
+  object-position: 50% 50%;
+  filter: contrast(1.04) saturate(1.03) drop-shadow(0 24px 44px rgba(0,0,0,0.55));
   transform: none;
-  /* The cutout is cropped mid-torso, leaving a hard horizontal edge at the
-     bottom. Fade the last 12% so the figure dissolves into the page instead
-     of ending on a visible straight line. */
-  -webkit-mask-image: linear-gradient(180deg, #000 84%, rgba(0,0,0,0.45) 95%, transparent 100%);
-          mask-image: linear-gradient(180deg, #000 84%, rgba(0,0,0,0.45) 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 90%, rgba(0,0,0,0.5) 97%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 90%, rgba(0,0,0,0.5) 97%, transparent 100%);
 }
 .portrait--cutout:hover .portrait__img {
-  filter: contrast(1.09) saturate(1.12) drop-shadow(0 30px 52px rgba(201,162,39,0.42));
+  filter: contrast(1.08) saturate(1.08) drop-shadow(0 30px 52px rgba(0,0,0,0.6));
   transform: translateY(-6px);
-}
-
-/* Circular avatar keeps a subtle red disc behind the cutout */
-.about__avatar--cutout {
-  background: radial-gradient(circle at 50% 38%, rgba(201,162,39,0.4), rgba(10,10,12,0.9) 70%);
-  padding: 0;
-}
-.about__avatar--cutout img {
-  border: none;
-  object-fit: contain;
-  object-position: 50% 100%;
-  filter: none;
 }
 
 .portrait__badge {
@@ -1324,12 +1338,16 @@ img { max-width: 100%; display: block; }
   padding: clamp(5.5rem, 12vw, 9rem) 0;
   z-index: 2;
 }
-/* Alternating sections get a subtle lift out of the black */
+/* Alternating sections get a subtle lift out of the black, edged with a
+   hairline that fades out before it reaches the gutters. */
 .section--alt::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.018) 35%, rgba(255,255,255,0.018) 65%, transparent);
+  background:
+    linear-gradient(180deg, transparent, rgba(255,255,255,0.022) 30%, rgba(255,255,255,0.022) 70%, transparent),
+    linear-gradient(90deg, transparent, rgba(201,162,39,0.16) 18%, rgba(201,162,39,0.16) 82%, transparent) top / 100% 1px no-repeat,
+    linear-gradient(90deg, transparent, rgba(201,162,39,0.16) 18%, rgba(201,162,39,0.16) 82%, transparent) bottom / 100% 1px no-repeat;
   pointer-events: none;
 }
 
@@ -1407,6 +1425,45 @@ img { max-width: 100%; display: block; }
   filter: contrast(1.06) saturate(1.05);
 }
 .about__avatar img.is-placeholder { filter: none; }
+
+/* Cutout variant: a circular half-length portrait — head down to the hem of
+   the white shirt — rather than the whole standing figure.
+
+   That framing falls out of `cover` for free. The cutout is 1023x1537, so in a
+   square window `cover` scales to the width and shows exactly the top 66.6% of
+   the height: y 0 to 1023, and the shirt ends at y 1020. Top-aligning with
+   `object-position: 50% 0%` therefore lands the crop on the shirt hem to the
+   pixel, with the blank space above the head becoming headroom.
+
+   These must sit *after* the base rules above — the two selectors carry equal
+   specificity, so whichever is written last wins. */
+.about__avatar--cutout {
+  width: 150px;
+  height: 150px;
+  padding: 3px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.about__avatar--cutout picture {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  /* The cutout is transparent, so the disc needs its own ground or the head
+     floats loose on the card. */
+  background: radial-gradient(circle at 50% 32%, var(--ink-600), var(--ink) 78%);
+}
+.about__avatar--cutout img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0%;
+  border: none;
+  border-radius: 50%;
+  filter: contrast(1.04) saturate(1.03);
+}
 
 .about__name {
   display: block;
@@ -1713,296 +1770,7 @@ img { max-width: 100%; display: block; }
 @keyframes barShine { to { transform: translateX(100%); } }
 
 /* ========================================================================== */
-/* 12 · PROJECTS                                                              */
-/* ========================================================================== */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 2.25rem;
-}
-.filter {
-  padding: 0.55rem 1.15rem;
-  border-radius: 999px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--bone-muted);
-  background: rgba(255,255,255,0.035);
-  border: 1px solid rgba(255,255,255,0.07);
-  cursor: pointer;
-  transition: all 0.35s var(--ease-out);
-}
-.filter:hover { color: #fff; border-color: rgba(201,162,39,0.45); }
-.filter.is-active {
-  color: #fff;
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-  border-color: rgba(255,224,140,0.4);
-  box-shadow: 0 10px 26px -12px rgba(201,162,39,0.9);
-}
-
-.projects {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-}
-
-.project {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transform-style: preserve-3d;
-  transition: transform 0.5s var(--ease-out), border-color 0.5s, box-shadow 0.5s, background 0.5s;
-}
-.project--wide { grid-column: span 2; }
-.project:hover {
-  border-color: rgba(201,162,39,0.4);
-  background: var(--glass-bg-hover);
-  box-shadow: 0 40px 80px -40px rgba(0,0,0,1), 0 0 70px -26px rgba(201,162,39,0.55);
-}
-
-/* Filtered-out state (JS toggles .is-hidden) */
-.project.is-hidden {
-  display: none;
-}
-
-.project__visual {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background:
-    radial-gradient(120% 100% at 50% 0%, rgba(201,162,39,0.16), transparent 60%),
-    linear-gradient(160deg, var(--ink-600), var(--ink-800));
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.project--wide .project__visual { aspect-ratio: 21 / 9; }
-
-.project__glow {
-  position: absolute;
-  inset: auto -20% -60% -20%;
-  height: 70%;
-  background: radial-gradient(ellipse at center, rgba(201,162,39,0.55), transparent 70%);
-  filter: blur(40px);
-  opacity: 0;
-  transition: opacity 0.6s var(--ease-out);
-}
-.project:hover .project__glow { opacity: 1; }
-
-.project__body { padding: 1.6rem 1.65rem 1.85rem; flex: 1; }
-.project__index {
-  display: block;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  color: var(--accent);
-  margin-bottom: 0.6rem;
-}
-.project__title {
-  font-family: "Sora", sans-serif;
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  margin-bottom: 0.6rem;
-  transition: color 0.35s;
-}
-.project:hover .project__title { color: #fff; }
-.project__desc { font-size: 0.875rem; line-height: 1.72; color: var(--bone-muted); }
-
-/* ── Mock UI screens (pure CSS/SVG — no image assets, no requests) ───────── */
-.mock {
-  position: absolute;
-  inset: 8% 7%;
-  border-radius: 12px;
-  overflow: hidden;
-  background: rgba(10,10,12,0.9);
-  border: 1px solid rgba(255,255,255,0.09);
-  box-shadow: 0 24px 50px -24px rgba(0,0,0,1);
-  transform: translateY(6px) scale(0.97);
-  transition: transform 0.6s var(--ease-out), border-color 0.5s;
-}
-.project:hover .mock {
-  transform: translateY(0) scale(1);
-  border-color: rgba(201,162,39,0.3);
-}
-
-.mock__bar {
-  display: flex;
-  gap: 5px;
-  padding: 8px 10px;
-  background: rgba(255,255,255,0.045);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.mock__bar i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.2); }
-.mock__bar i:first-child { background: rgba(201,162,39,0.75); }
-
-.mock__body { display: flex; height: calc(100% - 26px); }
-.mock__side {
-  width: 22%;
-  padding: 10px 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  border-right: 1px solid rgba(255,255,255,0.06);
-}
-.mock__side span {
-  height: 5px;
-  border-radius: 3px;
-  background: rgba(255,255,255,0.1);
-}
-.mock__side span:first-child { background: rgba(201,162,39,0.7); width: 70%; }
-.mock__main { flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 9px; }
-.mock__kpis { display: flex; gap: 7px; }
-.mock__kpis b {
-  flex: 1;
-  height: 22px;
-  border-radius: 5px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
-  border: 1px solid rgba(255,255,255,0.05);
-}
-.mock__kpis b:first-child { background: linear-gradient(135deg, rgba(201,162,39,0.4), rgba(201,162,39,0.12)); }
-
-.mock__chart { display: flex; align-items: flex-end; gap: 5px; flex: 1; min-height: 40px; }
-.mock__chart i {
-  flex: 1;
-  height: 20%;
-  border-radius: 3px 3px 0 0;
-  background: linear-gradient(180deg, var(--accent-light), rgba(201,162,39,0.25));
-  transition: height 0.7s var(--ease-out);
-  transition-delay: calc(var(--d, 0) * 60ms);
-}
-.project:hover .mock__chart i { height: var(--h); }
-.mock__chart i:nth-child(1){--d:0}.mock__chart i:nth-child(2){--d:1}
-.mock__chart i:nth-child(3){--d:2}.mock__chart i:nth-child(4){--d:3}
-.mock__chart i:nth-child(5){--d:4}.mock__chart i:nth-child(6){--d:5}
-.mock__chart i:nth-child(7){--d:6}
-
-.mock__rows { display: flex; flex-direction: column; gap: 5px; }
-.mock__rows span { height: 5px; border-radius: 3px; background: rgba(255,255,255,0.08); }
-.mock__rows span:nth-child(2) { width: 78%; }
-.mock__rows span:nth-child(3) { width: 55%; }
-
-/* Inventory */
-.mock__stock { padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; }
-.mock__stock span {
-  position: relative;
-  height: 7px;
-  border-radius: 4px;
-  background: rgba(255,255,255,0.07);
-  overflow: hidden;
-}
-.mock__stock span::after {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 0;
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-light));
-  transition: width 0.8s var(--ease-out);
-}
-.project:hover .mock__stock span::after { width: var(--w); }
-.mock__stock span:nth-child(2)::after { transition-delay: 0.08s; }
-.mock__stock span:nth-child(3)::after { transition-delay: 0.16s; }
-.mock__stock span:nth-child(4)::after { transition-delay: 0.24s; }
-.mock__stock span:nth-child(5)::after { transition-delay: 0.32s; }
-
-/* Sales line chart — the stroke draws itself on hover */
-.mock__line { width: 100%; height: calc(100% - 26px); }
-.mock__stroke {
-  stroke-dasharray: 400;
-  stroke-dashoffset: 400;
-  transition: stroke-dashoffset 1.3s var(--ease-out);
-}
-.project:hover .mock__stroke { stroke-dashoffset: 0; }
-.mock__area { opacity: 0; transition: opacity 0.8s var(--ease-out) 0.35s; }
-.project:hover .mock__area { opacity: 1; }
-
-/* Dealer portal cards */
-.mock__cards {
-  padding: 14px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  height: calc(100% - 26px);
-}
-.mock__cards b {
-  border-radius: 7px;
-  background: linear-gradient(140deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,0.06);
-  transform: translateY(8px);
-  opacity: 0.5;
-  transition: transform 0.55s var(--ease-out), opacity 0.55s;
-}
-.project:hover .mock__cards b { transform: none; opacity: 1; }
-.project:hover .mock__cards b:nth-child(2) { transition-delay: 0.07s; }
-.project:hover .mock__cards b:nth-child(3) { transition-delay: 0.14s; }
-.project:hover .mock__cards b:nth-child(4) { transition-delay: 0.21s; }
-.mock__cards b:first-child { background: linear-gradient(140deg, rgba(201,162,39,0.42), rgba(201,162,39,0.1)); }
-
-/* Shopify storefront */
-.mock__shop { padding: 12px; height: calc(100% - 26px); display: flex; flex-direction: column; gap: 9px; }
-.mock__hero {
-  flex: 1.2;
-  border-radius: 7px;
-  background: linear-gradient(120deg, rgba(201,162,39,0.4), rgba(255,255,255,0.05));
-  transform: scale(0.96);
-  transition: transform 0.6s var(--ease-out);
-}
-.project:hover .mock__hero { transform: scale(1); }
-.mock__products { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
-.mock__products b {
-  border-radius: 6px;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.05);
-  transform: translateY(10px);
-  opacity: 0.4;
-  transition: transform 0.5s var(--ease-out), opacity 0.5s;
-}
-.project:hover .mock__products b { transform: none; opacity: 1; }
-.project:hover .mock__products b:nth-child(2) { transition-delay: 0.06s; }
-.project:hover .mock__products b:nth-child(3) { transition-delay: 0.12s; }
-.project:hover .mock__products b:nth-child(4) { transition-delay: 0.18s; }
-
-/* API response */
-.mock__code {
-  padding: 12px 14px;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.62rem;
-  line-height: 1.75;
-  color: var(--bone-muted);
-  white-space: pre;
-  overflow: hidden;
-}
-.mock__code .c-key { color: var(--accent-light); }
-.mock__code .c-str { color: #9fd6a0; }
-.mock__code .c-dim { color: var(--bone-dim); }
-
-/* Admin dashboard donut */
-.mock__admin { padding: 14px; height: calc(100% - 26px); display: flex; align-items: center; gap: 14px; }
-.mock__donut {
-  width: 62px; height: 62px;
-  flex: none;
-  border-radius: 50%;
-  background: conic-gradient(var(--accent) 0deg 0deg, rgba(255,255,255,0.08) 0deg 360deg);
-  mask: radial-gradient(circle, transparent 55%, #000 56%);
-  -webkit-mask: radial-gradient(circle, transparent 55%, #000 56%);
-  transition: background 1s var(--ease-out);
-}
-.project:hover .mock__donut {
-  background: conic-gradient(var(--accent-light) 0deg 128deg, var(--accent) 128deg 232deg, rgba(255,255,255,0.08) 232deg 360deg);
-}
-.mock__list { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.mock__list span { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.09); }
-.mock__list span:nth-child(1) { width: 90%; background: rgba(201,162,39,0.6); }
-.mock__list span:nth-child(2) { width: 72%; }
-.mock__list span:nth-child(3) { width: 84%; }
-.mock__list span:nth-child(4) { width: 58%; }
-
-/* ========================================================================== */
-/* 13 · SERVICES                                                              */
+/* 12 · SERVICES                                                              */
 /* ========================================================================== */
 .services {
   display: grid;
@@ -2051,8 +1819,164 @@ img { max-width: 100%; display: block; }
 .service p { font-size: 0.88rem; line-height: 1.75; color: var(--bone-muted); }
 
 /* ========================================================================== */
-/* 14 · ACHIEVEMENTS                                                          */
+/* 13 · ACHIEVEMENTS                                                          */
 /* ========================================================================== */
+/* ── Gold medal: the one element allowed to outrank everything else ──────── */
+.medal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.5rem, 3.5vw, 2.75rem);
+  margin-bottom: 1.25rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  /* A warm panel lifted out of the obsidian, held inside a gold hairline —
+     the only card on the page that is not neutral glass. */
+  background:
+    linear-gradient(120deg, rgba(201,162,39,0.14), rgba(30,34,43,0.6) 46%, rgba(10,11,15,0.5)),
+    var(--glass-bg);
+  border: 1px solid rgba(201,162,39,0.34);
+  box-shadow:
+    0 30px 70px -40px rgba(0,0,0,0.95),
+    0 0 60px -34px rgba(201,162,39,0.7),
+    inset 0 1px 0 rgba(232,199,102,0.16);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+/* Slow gold sheen — the only motion on the card */
+.medal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 34%, rgba(232,199,102,0.09) 48%, transparent 62%);
+  transform: translateX(-60%);
+  animation: medalSheen 7s var(--ease-inout) 1.5s infinite;
+  pointer-events: none;
+}
+@keyframes medalSheen {
+  0%, 62%  { transform: translateX(-60%); }
+  100%     { transform: translateX(60%); }
+}
+
+.medal__medallion {
+  position: relative;
+  flex: none;
+  width: 84px; height: 84px;
+  display: grid;
+  place-items: center;
+}
+/* Ribbon tails behind the disc */
+.medal__ribbon {
+  position: absolute;
+  top: -6px;
+  width: 15px; height: 40px;
+  background: linear-gradient(180deg, #6E5514, #33270A);
+  border-radius: 3px;
+}
+.medal__ribbon--l { left: 20px; transform: rotate(-16deg); }
+.medal__ribbon--r { right: 20px; transform: rotate(16deg); }
+
+.medal__disc {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 64px; height: 64px;
+  margin-top: 14px;
+  border-radius: 50%;
+  /* Struck-metal look: a bright edge, a warm face, a dark underside */
+  background:
+    radial-gradient(circle at 34% 28%, #FBEBA8 0%, var(--accent-light) 26%, var(--accent) 58%, #8A6B14 100%);
+  box-shadow:
+    0 0 0 3px rgba(201,162,39,0.22),
+    0 10px 26px -8px rgba(201,162,39,0.6),
+    inset 0 -3px 8px rgba(90,66,8,0.55),
+    inset 0 3px 7px rgba(255,246,214,0.75);
+}
+.medal__disc b {
+  font-family: "Sora", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #4A390A;
+  text-shadow: 0 1px 0 rgba(255,246,214,0.55);
+}
+.medal__disc sup { font-size: 0.6em; margin-left: 1px; }
+
+/* flex-basis 0 + grow, so the copy claims the space left over rather than
+   being squeezed to its longest word by the medallion and seal. */
+.medal__body { flex: 1 1 0; min-width: 0; }
+.medal__eyebrow {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.medal__title {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(1.25rem, 2.8vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+}
+.medal__gold {
+  background: linear-gradient(100deg, #FBEBA8, var(--accent-light) 38%, var(--accent) 72%, #F3DE9E);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  /* text-shadow cannot survive background-clip, so the glow is a drop-shadow */
+  filter: drop-shadow(0 0 14px rgba(201,162,39,0.35));
+}
+.medal__note {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--bone-muted);
+  max-width: 62ch;
+}
+
+/* Right-hand seal — balances the card so the copy is not stranded against a
+   wide empty gutter, and carries the qualification itself. */
+.medal__seal {
+  flex: none;
+  margin-left: auto;
+  padding-left: clamp(1.25rem, 3vw, 2.25rem);
+  border-left: 1px solid rgba(201,162,39,0.26);
+  text-align: right;
+  max-width: 15ch;
+}
+.medal__seal span {
+  display: block;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.medal__seal b {
+  display: block;
+  font-family: "Sora", sans-serif;
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  margin: 0.15rem 0 0.35rem;
+  background: linear-gradient(180deg, #FBEBA8 10%, var(--accent) 110%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.medal__seal em {
+  display: block;
+  font-style: normal;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--bone-muted);
+}
+
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -2112,7 +2036,7 @@ img { max-width: 100%; display: block; }
 .award p { font-size: 0.865rem; line-height: 1.7; color: var(--bone-muted); }
 
 /* ========================================================================== */
-/* 15 · CONTACT                                                               */
+/* 14 · CONTACT                                                               */
 /* ========================================================================== */
 .contact {
   display: grid;
@@ -2140,10 +2064,20 @@ img { max-width: 100%; display: block; }
   transition: transform 0.4s var(--ease-out), background 0.4s, color 0.4s;
 }
 .contact-card__icon svg { width: 19px; height: 19px; }
+/* Tiles holding a brand mark drop the gold fill — champagne behind LinkedIn
+   blue or the Gmail red muddies both. Phone and location keep it. */
+.contact-card__icon--brand {
+  background: rgba(255,255,255,0.055);
+  border-color: rgba(255,255,255,0.1);
+}
 .contact-card:hover .contact-card__icon {
   transform: scale(1.08) rotate(-6deg);
   background: rgba(201,162,39,0.22);
   color: #fff;
+}
+.contact-card:hover .contact-card__icon--brand {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.16);
 }
 .contact-card em {
   display: block;
@@ -2221,7 +2155,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ========================================================================== */
-/* 16 · FOOTER                                                                */
+/* 15 · FOOTER                                                                */
 /* ========================================================================== */
 .footer {
   position: relative;
@@ -2323,8 +2257,18 @@ img { max-width: 100%; display: block; }
 }
 
 /* ========================================================================== */
-/* 17 · RESPONSIVE                                                            */
+/* 16 · RESPONSIVE                                                            */
 /* ========================================================================== */
+/* Nothing here is a magic number for a specific handset — each breakpoint is
+   the width at which a particular layout actually breaks:
+     1100px  three hero columns stop fitting beside the portrait
+      860px  the horizontal nav runs out of room; the timeline rail centres badly
+      640px  two-up card grids drop below a comfortable reading measure
+      420px  the stat row and button pair stop fitting side by side          */
+
+/* Long unbroken strings (emails, URLs) must never force a horizontal scroll */
+body { overflow-wrap: break-word; }
+
 @media (max-width: 1100px) {
   /* Three columns collapse to one, portrait first so it stays the focal point */
   .hero__grid   { grid-template-columns: 1fr; justify-items: center; gap: 2.5rem; }
@@ -2351,8 +2295,6 @@ img { max-width: 100%; display: block; }
 
   .about            { grid-template-columns: 1fr; }
   .about__card      { position: static; }
-  .projects         { grid-template-columns: repeat(2, 1fr); }
-  .project--wide    { grid-column: span 2; }
   .services         { grid-template-columns: repeat(2, 1fr); }
   .skills           { grid-template-columns: 1fr; }
   .stats            { grid-template-columns: repeat(2, 1fr); }
@@ -2379,24 +2321,98 @@ img { max-width: 100%; display: block; }
   .about__pillars { grid-template-columns: 1fr; }
   .awards         { grid-template-columns: 1fr; }
   .floaters       { display: none; }
-  .portrait__badge { left: 50%; transform: translateX(-50%) translateZ(40px); top: -1.25rem; }
+
+  /* Medal card: three columns side by side leave the copy so little width it
+     wraps a character at a time. Stack it, and turn the seal's left rule into
+     a top rule so it still reads as a separate plate. */
+  .medal { flex-direction: column; align-items: flex-start; }
+  .medal__seal {
+    margin-left: 0;
+    padding-left: 0;
+    padding-top: 1.1rem;
+    border-left: none;
+    border-top: 1px solid rgba(201,162,39,0.26);
+    text-align: left;
+    max-width: none;
+    width: 100%;
+  }
+  .medal__seal b { margin-top: 0.1rem; }
+
+  /* Centred above the portrait, the badge wrapped to four lines and the block
+     grew downward straight over her face. Pin it to the foot of the figure
+     instead, and step the type down far enough that both labels hold one line
+     each inside the viewport — so it stays a compact two-line chip. */
+  /* Centred with auto margins, not translateX(-50%): the badge runs a
+     `floatSlow` keyframe on `transform`, and the animation replaces any static
+     transform outright — so a translate-based centring silently does nothing. */
+  .portrait__badge {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 4%;
+    width: max-content;
+    margin-inline: auto;
+    padding: 0.55rem 0.85rem;
+    gap: 0.55rem;
+  }
+  .portrait__badge-mark { width: 28px; height: 28px; }
+  .portrait__badge b  { font-size: 0.74rem; white-space: nowrap; }
+  .portrait__badge em { font-size: 0.62rem; white-space: nowrap; }
+
+  /* The cursor-follow effects are meaningless without a mouse */
+  .spotlight { display: none; }
 }
 
 @media (max-width: 640px) {
-  .projects      { grid-template-columns: 1fr; }
-  .project--wide { grid-column: span 1; }
-  .project--wide .project__visual { aspect-ratio: 16 / 9; }
   .services      { grid-template-columns: 1fr; }
   .stats         { grid-template-columns: repeat(2, 1fr); }
   .hero__stats   { gap: 1.5rem 2rem; }
   .brand__text   { display: none; }
   .footer__nav   { grid-template-columns: repeat(2, 1fr); }
   .footer__bottom { flex-direction: column; text-align: center; }
-  .hero          { padding-top: 7rem; }
+
+  .hero    { padding: 7rem 0 4.5rem; min-height: auto; }
+  .section { padding: clamp(4rem, 14vw, 5.5rem) 0; }
+
+  /* The portrait leads the stacked hero, so it is the only thing between the
+     top of the page and the name. Cap it against the viewport height as well
+     as the width, or the headline lands two screens down. */
+  .portrait { width: min(260px, 68vw); max-height: 52svh; }
+
+  /* Full-bleed buttons read better than two half-width ones on a phone */
+  .hero__cta { width: 100%; flex-direction: column; align-items: stretch; }
+  .hero__cta .btn { justify-content: center; }
+
+  /* Compact avatar — on a phone the card is the width of the screen, so a
+     large portrait would push the facts below the fold for no benefit. */
+  .about__avatar--cutout { width: 116px; height: 116px; }
+}
+
+@media (max-width: 420px) {
+  .hero__stats    { gap: 1.25rem 1.5rem; }
+  .hero__stats li { flex: 1 1 40%; }
+  .stats          { grid-template-columns: 1fr; }
+  .footer__nav    { grid-template-columns: 1fr; }
+  .about__avatar--cutout { width: 104px; height: 104px; }
+  .portrait__badge { font-size: 0.8rem; }
+}
+
+/* Coarse pointers get no hover-only affordances and a 44px minimum target */
+@media (hover: none) {
+  .magnetic { transform: none !important; }
+  .btn, .social-btn, .nav-link, .to-top { min-height: 44px; }
+  .social-btn { min-width: 44px; }
+}
+
+/* Short landscape phones: the hero must not demand a full viewport height */
+@media (max-height: 560px) and (orientation: landscape) {
+  .hero      { min-height: auto; padding: 6rem 0 3rem; }
+  .portrait  { max-height: 70svh; }
+  .scroll-cue { display: none; }
 }
 
 /* ========================================================================== */
-/* 18 · REDUCED MOTION & PRINT                                                */
+/* 17 · REDUCED MOTION & PRINT                                                */
 /* ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -2416,6 +2432,6 @@ img { max-width: 100%; display: block; }
   .bg-stack, .preloader, .navbar, .mobile-menu,
   .scroll-progress, .to-top, .marquee, .scroll-cue { display: none !important; }
   body { background: #fff; color: #000; }
-  .glass-card, .project { border: 1px solid #ccc; background: none; }
+  .glass-card { border: 1px solid #ccc; background: none; }
   a { text-decoration: underline; }
 }

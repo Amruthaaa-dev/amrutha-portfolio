@@ -49,9 +49,9 @@
     const positions = new Float32Array(COUNT * 3);
     const colors    = new Float32Array(COUNT * 3);
 
-    const cWhite = new THREE.Color('#ffffff');
-    const cAccent = new THREE.Color('#C9A227');
-    const cLight = new THREE.Color('#E8C766');
+    const cWhite  = new THREE.Color('#ffffff');
+    const cSilver = new THREE.Color('#9AA3B4');
+    const cGold   = new THREE.Color('#C9A227');
 
     for (let i = 0; i < COUNT; i++) {
       const i3 = i * 3;
@@ -65,9 +65,10 @@
       positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta) * 0.62;
       positions[i3 + 2] = radius * Math.cos(phi) * 0.55;
 
-      // Mostly champagne gold, a minority of white "sparks"
+      // Mostly cool silver dust, a minority of white sparks and the odd gold
+      // ember. Gold on every particle turned the whole field yellow.
       const roll = Math.random();
-      const c = roll > 0.88 ? cWhite : (roll > 0.55 ? cLight : cAccent);
+      const c = roll > 0.9 ? cGold : (roll > 0.72 ? cWhite : cSilver);
       colors[i3]     = c.r;
       colors[i3 + 1] = c.g;
       colors[i3 + 2] = c.b;

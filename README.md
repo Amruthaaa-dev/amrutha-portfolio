@@ -101,10 +101,9 @@ amrutha-portfolio/
 | 02 | About | Sticky profile card, four capability pillars |
 | 03 | Experience | Scroll-drawn timeline, three roles |
 | 04 | Tech Stack | 19 floating 3D tiles + animated skill bars |
-| 05 | Projects | 7 projects, category filter, animated CSS mock UIs on hover |
-| 06 | Services | 6 offerings |
-| 07 | Achievements | Animated counters + highlight cards |
-| 08 | Contact | Validated form (mailto handoff) + contact channels |
+| 05 | Services | 6 offerings |
+| 06 | Achievements | Animated counters + highlight cards |
+| 07 | Contact | Validated form (mailto handoff) + contact channels |
 | — | Footer | Sitemap, socials, back-to-top |
 
 ---

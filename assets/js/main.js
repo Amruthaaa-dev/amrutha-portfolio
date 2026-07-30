@@ -18,10 +18,9 @@
      10 · Magnetic buttons
      11 · 3D tilt cards
      12 · Parallax layers
-     13 · Project filtering
-     14 · Contact form
-     15 · Portrait source resolution (cutout vs framed)
-     16 · Misc (back-to-top, footer year)
+     13 · Contact form
+     14 · Portrait source resolution (cutout vs framed)
+     15 · Misc (back-to-top, footer year)
    ========================================================================== */
 
 (function () {
@@ -520,43 +519,7 @@
   }
 
   /* ======================================================================== */
-  /* 13 · PROJECT FILTERING                                                   */
-  /* ======================================================================== */
-  function initFilters() {
-    const buttons = $$('.filter');
-    const cards   = $$('.project');
-    if (!buttons.length || !cards.length) return;
-
-    buttons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
-
-        buttons.forEach((b) => {
-          const active = b === btn;
-          b.classList.toggle('is-active', active);
-          b.setAttribute('aria-selected', String(active));
-        });
-
-        cards.forEach((card) => {
-          const match = filter === 'all' || card.dataset.category === filter;
-          card.classList.toggle('is-hidden', !match);
-
-          if (match && hasGSAP() && !REDUCED) {
-            gsap.fromTo(card,
-              { opacity: 0, y: 22, scale: 0.97 },
-              { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: 'expo.out' }
-            );
-          }
-        });
-
-        // Grid heights changed — let ScrollTrigger recompute its positions.
-        if (hasST()) ScrollTrigger.refresh();
-      });
-    });
-  }
-
-  /* ======================================================================== */
-  /* 14 · CONTACT FORM                                                        */
+  /* 13 · CONTACT FORM                                                        */
   /* ======================================================================== */
   function initContactForm() {
     const form   = $('#contactForm');
@@ -763,48 +726,34 @@
   }
 
   /* ======================================================================== */
-  /* 15 · PORTRAIT SOURCE RESOLUTION                                          */
+  /* 14 · PORTRAIT SOURCE RESOLUTION                                          */
   /* ------------------------------------------------------------------------ */
-  /* Prefers a background-removed transparent PNG when one exists.            */
-  /*                                                                          */
-  /*   assets/images/profile-cutout.png  → frameless floating portrait        */
-  /*   assets/images/profile.jpg         → framed glass portrait (default)    */
-  /*   profile-placeholder.svg           → silhouette, if neither exists      */
-  /*                                                                          */
-  /* Drop the cutout file in and the layout switches on its own — no markup   */
-  /* or CSS edit required.                                                    */
+  /* The markup already resolves the source itself: a <picture> offers the     */
+  /* transparent WebP and falls back to the PNG, and the img's inline onerror  */
+  /* falls back again to the SVG silhouette.                                   */
+  /*                                                                           */
+  /* So there is nothing to probe here — and probing would be actively harmful, */
+  /* because fetching the PNG to test it would pull the 713 KB fallback down on */
+  /* every WebP-capable browser, which is every browser that matters. All this  */
+  /* does is watch the real element: if it ends up on the silhouette, drop the  */
+  /* cutout treatment so the placeholder is not stretched into a floating figure. */
   /* ======================================================================== */
   function initPortrait() {
-    const CUTOUT = 'assets/images/profile-cutout.png';
+    const heroImg = $('.portrait__img');
 
-    const probe = new Image();
-
-    probe.onload = () => {
-      // Guard against a 0-byte or corrupt file resolving as "loaded"
-      if (!probe.naturalWidth) return;
-
-      const portrait = $('.portrait');
-      const heroImg  = $('.portrait__img');
-
-      if (heroImg) {
-        heroImg.src = CUTOUT;
-        heroImg.classList.remove('is-placeholder');
-      }
-
-      // A real cutout needs no feather mask — swap bare mode for cutout mode.
-      if (portrait) {
-        portrait.classList.remove('portrait--bare');
-        portrait.classList.add('portrait--cutout');
-      }
-
-      // The About avatar deliberately keeps profile.jpg: a circular crop reads
-      // better as an avatar than a contained cutout floating in a disc.
+    const downgrade = () => {
+      $('.portrait')?.classList.remove('portrait--cutout');
+      $('.about__avatar')?.classList.remove('about__avatar--cutout');
     };
 
-    // No cutout available — the framed portrait already in the markup stands.
-    probe.onerror = () => {};
-
-    probe.src = CUTOUT;
+    if (heroImg) {
+      // The inline onerror swaps in the placeholder and tags it; catch both the
+      // already-swapped case and a swap that happens after this runs.
+      const check = () => { if (heroImg.classList.contains('is-placeholder')) downgrade(); };
+      if (heroImg.complete) check();
+      else heroImg.addEventListener('load', check, { once: true });
+      heroImg.addEventListener('error', downgrade, { once: true });
+    }
 
     resolveEmployerLogo();
   }
@@ -856,7 +805,7 @@
   }
 
   /* ======================================================================== */
-  /* 16 · MISC                                                                */
+  /* 15 · MISC                                                                */
   /* ======================================================================== */
   function initMisc() {
     /* Footer year, always current */
@@ -896,7 +845,19 @@
     initMisc();
 
     initPreloader(function afterPreloader() {
-      // AOS drives the generic fade/slide/zoom reveals across all sections
+      // AOS drives the generic fade/slide/zoom reveals across all sections.
+      //
+      // Its horizontal variants park the element 100px off to the side until
+      // it scrolls into view. On a narrow screen that sticks 100px past the
+      // right edge of a full-width element, which widens the layout viewport —
+      // enough to push the fixed nav's hamburger clean off screen. Below the
+      // point where the columns stack there is no sideways motion to convey
+      // anyway, so fold those reveals into the vertical one.
+      if (window.matchMedia('(max-width: 1100px)').matches) {
+        $$('[data-aos="fade-left"], [data-aos="fade-right"]')
+          .forEach((el) => el.setAttribute('data-aos', 'fade-up'));
+      }
+
       if (typeof AOS !== 'undefined') {
         AOS.init({
           duration: 850,
@@ -917,7 +878,6 @@
       initMagnetic();
       initTilt();
       initParallax();
-      initFilters();
       initContactForm();
 
       // Layout has settled — recalculate every scroll-driven position once.

@@ -27,7 +27,7 @@
           value: isSmall ? 26 : 55,
           density: { enable: true, value_area: 900 }
         },
-        color: { value: ['#C9A227', '#E8C766', '#FFFFFF'] },
+        color: { value: ['#9AA3B4', '#FFFFFF', '#C9A227'] },
         shape: { type: 'circle' },
         opacity: {
           value: 0.35,
@@ -42,8 +42,8 @@
         line_linked: {
           enable: true,
           distance: isSmall ? 110 : 150,
-          color: '#C9A227',
-          opacity: 0.14,
+          color: '#8892A6',
+          opacity: 0.12,
           width: 1
         },
         move: {
