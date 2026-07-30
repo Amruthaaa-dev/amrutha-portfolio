@@ -3,14 +3,13 @@
 <head>
   <!-- ============================================================
        AMRUTHA HARIDAS — PREMIUM DEVELOPER PORTFOLIO
-       Obsidian Theme (#0A0B0F) · Champagne Gold Accent (#C9A227)
-       Stack: HTML5 · Tailwind CSS · Vanilla JS · GSAP · AOS
-              Three.js · Typed.js · Particles.js
+       Deep Maroon (#2E1411) · Champagne Gold (#D4AF5F)
+       Stack: HTML5 · Tailwind CSS · Vanilla JS · GSAP · AOS · Typed.js
        ============================================================ -->
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0A0B0F" />
+  <meta name="theme-color" content="#2E1411" />
 
   <!-- ── Primary SEO ──────────────────────────────────────────── -->
   <title>Amrutha Haridas — Software Engineer | Full Stack PHP Developer</title>
@@ -68,9 +67,9 @@
       theme: {
         extend: {
           colors: {
-            ink:    { DEFAULT: '#0A0B0F', 800: '#0F1116', 700: '#15181F', 600: '#1E222B', 500: '#2A2F3A' },
-            accent: { DEFAULT: '#C9A227', light: '#E8C766', dark: '#7A5E12', glow: '#FFD766' },
-            bone:   { DEFAULT: '#F4F3F0', muted: '#B3B4BB', dim: '#7C7E88' }
+            ink:    { DEFAULT: '#2E1411', 800: '#381B17', 700: '#43221D', 600: '#532C26', 500: '#6A3A33' },
+            accent: { DEFAULT: '#D4AF5F', light: '#E8CB8A', dark: '#9C7C34', glow: '#F2DFAE' },
+            bone:   { DEFAULT: '#FBF7F2', muted: '#E6DCD4', dim: '#C8B9B1' }
           },
           fontFamily: {
             display: ['Sora', 'system-ui', 'sans-serif'],
@@ -193,17 +192,10 @@
   <!-- ============================================================
        02 · GLOBAL BACKGROUND LAYERS (aurora · webgl · noise)
        ============================================================ -->
-  <div class="bg-stack" aria-hidden="true">
-    <div class="aurora">
-      <span class="aurora__blob aurora__blob--1"></span>
-      <span class="aurora__blob aurora__blob--2"></span>
-      <span class="aurora__blob aurora__blob--3"></span>
-    </div>
-    <canvas id="webgl-bg" class="webgl-bg"></canvas>
-    <div class="grid-overlay"></div>
-    <div class="noise-overlay"></div>
-    <div id="spotlight" class="spotlight"></div>
-  </div>
+  <!-- Flat backdrop. Previously an aurora, a WebGL point cloud, a grid, film
+       grain and a cursor spotlight stacked here; the design is now a single
+       dark red, so they are gone rather than hidden. -->
+  <div class="bg-stack" aria-hidden="true"></div>
 
   <!-- Scroll progress -->
   <div class="scroll-progress" aria-hidden="true"><i id="scrollBar"></i></div>
@@ -264,9 +256,6 @@
          04 · HERO
          ========================================================== -->
     <section id="hero" class="hero" aria-label="Introduction">
-      <!-- Particles.js canvas host, hero-scoped for performance -->
-      <div id="particles-js" class="hero__particles" aria-hidden="true"></div>
-
       <!-- Three columns: identity left · portrait centre · context right -->
       <div class="container hero__grid">
 
@@ -1032,13 +1021,11 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
+  <!-- particles.js and three.js are gone with the animated background: they
+       were ~600 KB of library serving nothing but the glitter. -->
 
   <!-- Project scripts -->
   <script src="assets/js/config.js" defer></script>
-  <script src="assets/js/particles-config.js" defer></script>
-  <script src="assets/js/three-bg.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>

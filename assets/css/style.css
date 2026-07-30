@@ -1,21 +1,25 @@
 /* ============================================================================
    AMRUTHA HARIDAS — PORTFOLIO STYLESHEET
-   Obsidian (#0A0B0F) · Champagne Gold (#C9A227) · Glassmorphism
+   Deep Maroon (#2E1411) · Champagne Gold (#D4AF5F) · Glassmorphism
    Dark Mode Only
    ----------------------------------------------------------------------------
-   The surface is a deep neutral obsidian rather than a saturated navy, and the
-   gold is held back to accents — rules, tags, hovers, the odd word. A tinted
-   full-page wash reads cheap and drags every body-copy contrast ratio down
-   with it, so the ambient colour stays under 0.16 alpha and is pushed to the
-   edges by a vignette, leaving the centre column flat and legible. The one
-   place gold is allowed to be loud is the gold-medal card in Achievements.
+   The background is one flat colour, deliberately. There is no aurora, no
+   particle field, no film grain and no cursor spotlight — the whole animated
+   background stack was removed rather than merely hidden, along with the
+   three.js and particles.js libraries that existed only to drive it.
+
+   Dark mode is structural here, not a preference: panels are white at low
+   alpha, several headings are white-to-gold gradients, and the GitHub mark is
+   white. Swapping --ink to a light value would not produce a light theme, it
+   would produce invisible text. Gold stays an accent — rules, tags, hovers,
+   the odd word — and is only loud in one place, the gold-medal card.
    ----------------------------------------------------------------------------
    TABLE OF CONTENTS
    00 · Design tokens
    01 · Base & reset extensions
    02 · Utilities (glass, gradient text, container, buttons, chips)
    03 · Preloader
-   04 · Background stack (aurora, webgl, grid, noise, spotlight)
+   04 · Background (flat fill)
    05 · Scroll progress
    06 · Navigation & mobile menu
    07 · Hero
@@ -35,35 +39,46 @@
 /* 00 · DESIGN TOKENS                                                         */
 /* ========================================================================== */
 :root {
-  /* Surfaces — obsidian: near-black, a touch cool, no colour cast to fight */
-  --ink:            #0A0B0F;
-  --ink-800:        #0F1116;
-  --ink-700:        #15181F;
-  --ink-600:        #1E222B;
-  --ink-500:        #2A2F3A;   /* hairlines, dividers, inset borders */
+  /* Surfaces — a deep, low-chroma maroon. The chroma matters more than the
+     darkness here: the previous ground was #470F01, which is nearly pure hue
+     (channel spread 70). Any translucent panel laid over a ground that
+     saturated comes back as a pink block rather than as glass, which is what
+     made every card read heavy. This one has a spread of 29 — unmistakably
+     maroon, calm enough that the same panels read as a lift of the surface.
 
-  /* Cool secondaries used by the background stack */
-  --sapphire:       #2E5BD8;
-  --teal:           #0E8AA0;
+     Only --ink itself is painted flat across the page. The steps above it are
+     for the handful of places that genuinely cannot be transparent. */
+  --ink:            #2E1411;   /* page background */
+  --ink-800:        #381B17;
+  --ink-700:        #43221D;   /* the few surfaces that must be opaque */
+  --ink-600:        #532C26;
+  --ink-500:        #6A3A33;
 
-  /* Accent */
-  --accent:          #C9A227;
-  --accent-light:    #E8C766;
-  --accent-dark:     #7A5E12;
-  --accent-glow:     #FFD766;
+  /* Accent — champagne gold. Only --accent is specified; the other three are
+     derived from it for hover states, glows and gradient stops. */
+  --accent:          #D4AF5F;
+  --accent-light:    #E8CB8A;
+  --accent-dark:     #9C7C34;
+  --accent-glow:     #F2DFAE;
 
-  /* Type — warm ivory on obsidian. Every step is checked against --ink:
-     bone 17.9:1, muted 9.5:1, dim 4.9:1, so even the small mono labels
-     clear WCAG AA at their rendered size. */
-  --bone:           #F4F3F0;
-  --bone-muted:     #B3B4BB;
-  --bone-dim:       #7C7E88;
+  /* Type — warm ivory, each step raised against the previous ramp for
+     readability. Contrast on --ink: bone 16.1:1, muted 12.7:1, dim 9.0:1,
+     gold 8.2:1 (previously 14.0 / 10.4 / 7.3 / 7.5 on the redder ground).
+     The lift is largest on the two weakest steps, which is where long
+     paragraphs and small mono labels actually live. */
+  --bone:           #FBF7F2;   /* main text */
+  --bone-muted:     #E6DCD4;   /* secondary text */
+  --bone-dim:       #C8B9B1;   /* labels, captions */
 
-  /* Glass */
-  --glass-bg:       rgba(255, 255, 255, 0.042);
-  --glass-bg-hover: rgba(255, 255, 255, 0.065);
-  --glass-border:   rgba(255, 255, 255, 0.095);
-  --glass-blur:     18px;
+  /* Glass. The tint is warm white rather than pure white — neutral white over
+     a warm ground turns panels grey and fights the palette. Alpha stays low
+     and the blur does the separating, so cards read as depth rather than as
+     blocks sitting on top of the page. */
+  --glass-bg:       rgba(255, 246, 240, 0.045);
+  --glass-bg-hover: rgba(255, 246, 240, 0.075);
+  --glass-border:   rgba(255, 236, 228, 0.10);
+  --glass-blur:     22px;
+  --card-shadow:    0 18px 40px -28px rgba(0,0,0,0.75);
 
   /* Motion */
   --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
@@ -76,9 +91,6 @@
   --shell:          1280px;
   --gutter:         clamp(1.25rem, 4vw, 3rem);
 
-  /* Pointer position, written by JS (used by spotlight + cursor) */
-  --mx: 50vw;
-  --my: 50vh;
 }
 
 /* ========================================================================== */
@@ -165,8 +177,12 @@ img { max-width: 100%; display: block; }
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
-  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  box-shadow: var(--card-shadow);
+  /* saturate() was pushing the ground's own red through the panel and back
+     out the front, which is part of why cards looked like red blocks. Drop it
+     below 100% so the glass reads slightly calmer than what is behind it. */
+  backdrop-filter: blur(var(--glass-blur)) saturate(92%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(92%);
   transition:
     background 0.45s var(--ease-out),
     border-color 0.45s var(--ease-out),
@@ -181,7 +197,7 @@ img { max-width: 100%; display: block; }
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(160deg, rgba(255,255,255,0.22), transparent 42%, transparent 60%, rgba(201,162,39,0.24));
+  background: linear-gradient(160deg, rgba(255,246,240,0.22), transparent 42%, transparent 60%, rgba(212,175,95,0.24));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -191,11 +207,11 @@ img { max-width: 100%; display: block; }
 
 .glass-card:hover {
   background: var(--glass-bg-hover);
-  border-color: rgba(201, 162, 39, 0.35);
+  border-color: rgba(212,175,95, 0.35);
   box-shadow:
     0 24px 60px -24px rgba(0, 0, 0, 0.9),
-    0 0 0 1px rgba(201, 162, 39, 0.12),
-    0 0 60px -20px rgba(201, 162, 39, 0.4);
+    0 0 0 1px rgba(212,175,95, 0.12),
+    0 0 60px -20px rgba(212,175,95, 0.4);
 }
 
 /* ── Buttons ─────────────────────────────────────────────────────────────── */
@@ -226,20 +242,20 @@ img { max-width: 100%; display: block; }
   background: linear-gradient(135deg, var(--accent) 0%, #9c0f19 55%, var(--accent-dark) 100%);
   color: #fff;
   border: 1px solid rgba(255, 224, 140, 0.4);
-  box-shadow: 0 10px 34px -12px rgba(201, 162, 39, 0.85), inset 0 1px 0 rgba(255,255,255,0.18);
+  box-shadow: 0 10px 34px -12px rgba(212,175,95, 0.85), inset 0 1px 0 rgba(255,246,240,0.18);
 }
 .btn--primary::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.35) 50%, transparent 80%);
+  background: linear-gradient(110deg, transparent 20%, rgba(255,246,240,0.35) 50%, transparent 80%);
   transform: translateX(-130%);
   transition: transform 0.85s var(--ease-out);
   z-index: -1;
 }
 .btn--primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 20px 48px -14px rgba(201, 162, 39, 0.95), 0 0 40px -8px rgba(255, 215, 102, 0.5);
+  box-shadow: 0 20px 48px -14px rgba(212,175,95, 0.95), 0 0 40px -8px rgba(255, 215, 102, 0.5);
 }
 .btn--primary:hover::after { transform: translateX(130%); }
 
@@ -253,17 +269,17 @@ img { max-width: 100%; display: block; }
 }
 .btn--outline:hover {
   transform: translateY(-3px);
-  border-color: rgba(201, 162, 39, 0.6);
-  box-shadow: 0 16px 40px -18px rgba(201, 162, 39, 0.7);
+  border-color: rgba(212,175,95, 0.6);
+  box-shadow: 0 16px 40px -18px rgba(212,175,95, 0.7);
   color: #fff;
 }
 
 .btn--ghost {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,246,240,0.03);
   border: 1px solid var(--glass-border);
   color: var(--bone);
 }
-.btn--ghost:hover { border-color: rgba(201,162,39,0.55); color: #fff; }
+.btn--ghost:hover { border-color: rgba(212,175,95,0.55); color: #fff; }
 
 /* Text — animated underline */
 .btn--text {
@@ -296,15 +312,15 @@ img { max-width: 100%; display: block; }
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,246,240,0.05);
   border: 1px solid var(--glass-border);
   color: var(--bone-muted);
   white-space: nowrap;
 }
 .chip--live {
-  background: rgba(201, 162, 39, 0.12);
-  border-color: rgba(201, 162, 39, 0.4);
-  color: #E8C766;
+  background: rgba(212,175,95, 0.12);
+  border-color: rgba(212,175,95, 0.4);
+  color: #E8CB8A;
 }
 
 .tag-list {
@@ -319,38 +335,29 @@ img { max-width: 100%; display: block; }
   font-size: 0.74rem;
   font-weight: 500;
   color: var(--bone-muted);
-  background: rgba(255,255,255,0.035);
-  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,246,240,0.035);
+  border: 1px solid rgba(255,236,228,0.07);
   transition: color 0.3s, border-color 0.3s, background 0.3s, transform 0.3s;
 }
 .tag-list li:hover {
   color: #F7ECC4;
-  border-color: rgba(201,162,39,0.5);
-  background: rgba(201,162,39,0.1);
+  border-color: rgba(212,175,95,0.5);
+  background: rgba(212,175,95,0.1);
   transform: translateY(-2px);
 }
 .tag-list--sm li { font-size: 0.7rem; padding: 0.28rem 0.6rem; }
 
 /* Pulsing availability dot */
+/* Status dot on the "Available for work" pill and the timeline "Current"
+   chip. It used to fire an expanding ring on a 2s loop with a 12px glow
+   behind it, which read as a blinking light rather than a status marker —
+   distracting on a chip you are trying to read. Now it is a plain dot. */
 .pulse-dot {
   position: relative;
   width: 7px; height: 7px;
   border-radius: 50%;
   background: var(--accent-light);
   flex: none;
-  box-shadow: 0 0 12px var(--accent-glow);
-}
-.pulse-dot::after {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 1px solid var(--accent-light);
-  animation: pulseRing 2s var(--ease-out) infinite;
-}
-@keyframes pulseRing {
-  0%   { transform: scale(0.6); opacity: 1; }
-  100% { transform: scale(2.2); opacity: 0; }
 }
 
 /* Circular social button */
@@ -383,10 +390,10 @@ img { max-width: 100%; display: block; }
 .social-btn:hover svg { opacity: 1; }
 .social-btn:hover {
   color: #fff;
-  border-color: rgba(201,162,39,0.65);
-  background: rgba(201,162,39,0.16);
+  border-color: rgba(212,175,95,0.65);
+  background: rgba(212,175,95,0.13);
   transform: translateY(-4px);
-  box-shadow: 0 14px 30px -12px rgba(201,162,39,0.85);
+  box-shadow: 0 14px 30px -12px rgba(212,175,95,0.85);
 }
 
 /* ========================================================================== */
@@ -458,7 +465,7 @@ img { max-width: 100%; display: block; }
 .preloader__bar {
   height: 2px;
   width: 100%;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,246,240,0.08);
   border-radius: 99px;
   overflow: hidden;
 }
@@ -467,7 +474,6 @@ img { max-width: 100%; display: block; }
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, var(--accent-dark), var(--accent-light), #fff);
-  box-shadow: 0 0 18px var(--accent-glow);
   transition: width 0.25s linear;
 }
 
@@ -487,117 +493,18 @@ img { max-width: 100%; display: block; }
 }
 
 /* ========================================================================== */
-/* 04 · BACKGROUND STACK                                                      */
+/* 04 · BACKGROUND                                                            */
 /* ========================================================================== */
+/* One flat fill. The aurora blobs, WebGL point cloud, technical grid, film
+   grain and cursor spotlight that used to stack here have all been removed
+   from the markup, so there is nothing left to position — this element is
+   just the painted backdrop. */
 .bg-stack {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  overflow: hidden;
   background: var(--ink);
-}
-
-/* Vignette — pins the ambient colour to the edges so the middle of the page,
-   where all the body copy lives, stays flat obsidian. This is what keeps the
-   text legible while the corners still carry some depth. */
-.bg-stack::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;   /* over the aurora, under the particles/grid/spotlight */
-  background:
-    radial-gradient(ellipse 78% 62% at 50% 44%, rgba(10,11,15,0.86) 0%, rgba(10,11,15,0.45) 55%, transparent 100%),
-    linear-gradient(180deg, rgba(10,11,15,0.5) 0%, transparent 22%, transparent 78%, rgba(10,11,15,0.6) 100%);
-}
-
-/* Aurora — three slow-drifting radial blobs. Deliberately dim: this is
-   ambient depth, not a colour wash. */
-.aurora { position: absolute; inset: 0; z-index: 0; filter: blur(130px); opacity: 0.5; }
-.aurora__blob {
-  position: absolute;
-  border-radius: 50%;
-  will-change: transform;
-}
-/* Cool steel, top-left */
-.aurora__blob--1 {
-  width: 52vw; height: 52vw;
-  top: -16vw; left: -12vw;
-  background: radial-gradient(circle, rgba(46,91,216,0.16), transparent 68%);
-  animation: drift1 26s var(--ease-inout) infinite alternate;
-}
-/* The single warm note — bronze, kept low so nothing downstream turns yellow */
-.aurora__blob--2 {
-  width: 44vw; height: 44vw;
-  top: 30vh; right: -16vw;
-  background: radial-gradient(circle, rgba(201,162,39,0.13), transparent 66%);
-  animation: drift2 32s var(--ease-inout) infinite alternate;
-}
-/* Deep teal shadow, bottom */
-.aurora__blob--3 {
-  width: 58vw; height: 58vw;
-  bottom: -26vw; left: 20vw;
-  background: radial-gradient(circle, rgba(14,138,160,0.11), transparent 70%);
-  animation: drift3 38s var(--ease-inout) infinite alternate;
-}
-@keyframes drift1 { to { transform: translate3d(14vw, 10vh, 0) scale(1.25); } }
-@keyframes drift2 { to { transform: translate3d(-16vw, -12vh, 0) scale(1.15); } }
-@keyframes drift3 { to { transform: translate3d(8vw, -14vh, 0) scale(0.85); } }
-
-/* Three.js particle canvas */
-.webgl-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  opacity: 0.6;
-}
-
-/* Faint technical grid */
-.grid-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 20%, transparent 78%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 20%, transparent 78%);
-}
-
-/* Film grain — kills banding on the big gradients */
-.noise-overlay {
-  position: absolute;
-  z-index: 2;
-  inset: -200%;
-  width: 500%;
-  height: 500%;
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grain 8s steps(10) infinite;
-}
-@keyframes grain {
-  0%,100% { transform: translate(0,0); }
-  10% { transform: translate(-5%,-10%); }
-  30% { transform: translate(3%,-15%); }
-  50% { transform: translate(-8%,6%); }
-  70% { transform: translate(6%,12%); }
-  90% { transform: translate(-3%,4%); }
-}
-
-/* Mouse spotlight — follows --mx/--my written by JS */
-.spotlight {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: radial-gradient(
-    560px circle at var(--mx) var(--my),
-    rgba(232, 199, 102, 0.07),
-    transparent 64%
-  );
-  transition: opacity 0.4s var(--ease-out);
 }
 
 /* ========================================================================== */
@@ -608,14 +515,13 @@ img { max-width: 100%; display: block; }
   top: 0; left: 0; right: 0;
   height: 2px;
   z-index: 9997;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,246,240,0.05);
 }
 .scroll-progress i {
   display: block;
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, var(--accent-dark), var(--accent), var(--accent-light));
-  box-shadow: 0 0 14px var(--accent-glow);
 }
 
 /* ========================================================================== */
@@ -633,7 +539,7 @@ img { max-width: 100%; display: block; }
 .navbar.is-stuck {
   padding: 0.75rem 0;
   background: rgba(5,5,5,0.72);
-  border-bottom-color: rgba(255,255,255,0.07);
+  border-bottom-color: rgba(255,236,228,0.07);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
 }
@@ -662,7 +568,7 @@ img { max-width: 100%; display: block; }
   color: #fff;
   background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   border: 1px solid rgba(255,224,140,0.35);
-  box-shadow: 0 8px 24px -10px rgba(201,162,39,0.9), inset 0 1px 0 rgba(255,255,255,0.2);
+  box-shadow: 0 6px 16px -10px rgba(212,175,95,0.45), inset 0 1px 0 rgba(255,246,240,0.18);
   transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
 }
 .brand:hover .brand__mark {
@@ -694,8 +600,8 @@ img { max-width: 100%; display: block; }
   gap: 0.25rem;
   padding: 0.3rem;
   border-radius: 999px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,246,240,0.03);
+  border: 1px solid rgba(255,236,228,0.06);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
@@ -714,8 +620,8 @@ img { max-width: 100%; display: block; }
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(201,162,39,0.28), rgba(201,162,39,0.08));
-  border: 1px solid rgba(201,162,39,0.35);
+  background: linear-gradient(135deg, rgba(212,175,95,0.28), rgba(212,175,95,0.08));
+  border: 1px solid rgba(212,175,95,0.35);
   opacity: 0;
   transform: scale(0.85);
   transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
@@ -779,7 +685,7 @@ img { max-width: 100%; display: block; }
   font-weight: 600;
   letter-spacing: -0.03em;
   color: var(--bone);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,236,228,0.06);
   opacity: 0;
   transform: translateY(20px);
   transition: color 0.3s, opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
@@ -818,13 +724,6 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   padding: 9rem 0 7rem;
   overflow: hidden;
-}
-
-.hero__particles {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
 }
 
 /* Three columns: identity | portrait | context.
@@ -879,8 +778,8 @@ img { max-width: 100%; display: block; }
   font-weight: 500;
   letter-spacing: 0.02em;
   color: #F0DCA0;
-  background: rgba(201,162,39,0.1);
-  border: 1px solid rgba(201,162,39,0.3);
+  background: rgba(212,175,95,0.1);
+  border: 1px solid rgba(212,175,95,0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -919,7 +818,7 @@ img { max-width: 100%; display: block; }
   gap: 1rem clamp(1.25rem, 2.5vw, 2.25rem);
   width: 100%;
   padding-top: 1.6rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
+  border-top: 1px solid rgba(255,236,228,0.07);
 }
 .hero__stats li { display: flex; flex-direction: column; gap: 0.2rem; }
 .hero__stats b {
@@ -969,11 +868,11 @@ img { max-width: 100%; display: block; }
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    rgba(201,162,39,0.9) 50deg,
-    rgba(255,255,255,0.85) 95deg,
+    rgba(212,175,95,0.9) 50deg,
+    rgba(255,246,240,0.85) 95deg,
     transparent 150deg,
     transparent 250deg,
-    rgba(201,162,39,0.55) 310deg,
+    rgba(212,175,95,0.55) 310deg,
     transparent 360deg
   );
   animation: spinRing 7s linear infinite;
@@ -987,11 +886,11 @@ img { max-width: 100%; display: block; }
   border-radius: 30px;
   overflow: hidden;
   background: var(--ink-700);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,236,228,0.1);
   box-shadow:
     0 50px 100px -40px rgba(0,0,0,1),
-    0 0 90px -30px rgba(201,162,39,0.55),
-    inset 0 1px 0 rgba(255,255,255,0.12);
+    0 0 90px -30px rgba(212,175,95,0.55),
+    inset 0 1px 0 rgba(255,246,240,0.12);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
@@ -1022,7 +921,7 @@ img { max-width: 100%; display: block; }
   background:
     linear-gradient(180deg, transparent 58%, rgba(5,5,5,0.30) 82%, rgba(5,5,5,0.62) 100%),
     radial-gradient(130% 100% at 50% 32%, transparent 55%, rgba(0,0,0,0.42) 100%),
-    linear-gradient(140deg, rgba(201,162,39,0.12), transparent 48%);
+    linear-gradient(140deg, rgba(212,175,95,0.12), transparent 48%);
   pointer-events: none;
 }
 
@@ -1030,7 +929,7 @@ img { max-width: 100%; display: block; }
 .portrait__sheen {
   position: absolute;
   inset: 0;
-  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.16) 45%, transparent 60%);
+  background: linear-gradient(115deg, transparent 30%, rgba(255,246,240,0.16) 45%, transparent 60%);
   transform: translateX(-100%);
   transition: transform 1.1s var(--ease-out);
   pointer-events: none;
@@ -1068,7 +967,7 @@ img { max-width: 100%; display: block; }
   width: 112%; aspect-ratio: 1;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,162,39,0.34) 0%, rgba(122,94,18,0.16) 44%, transparent 68%);
+  background: radial-gradient(circle, rgba(212,175,95,0.34) 0%, rgba(156,124,52,0.16) 44%, transparent 68%);
   filter: blur(40px);
   z-index: -1;
 }
@@ -1166,9 +1065,9 @@ img { max-width: 100%; display: block; }
   width: 34px; height: 34px;
   border-radius: 11px;
   color: var(--accent-light);
-  background: linear-gradient(140deg, rgba(201,162,39,0.26), rgba(201,162,39,0.08));
-  border: 1px solid rgba(201,162,39,0.4);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.14);
+  background: linear-gradient(140deg, rgba(212,175,95,0.26), rgba(212,175,95,0.08));
+  border: 1px solid rgba(212,175,95,0.4);
+  box-shadow: inset 0 1px 0 rgba(255,246,240,0.14);
 }
 .portrait__badge-mark svg { width: 17px; height: 17px; }
 
@@ -1192,6 +1091,7 @@ img { max-width: 100%; display: block; }
 .portrait__badge-mark.has-logo .portrait__badge-fallback { display: none; }
 .portrait__badge-mark.has-logo .portrait__badge-live { top: -5px; right: -6px; }
 
+/* Live dot on the Impex badge — same treatment: no expanding ring, no halo. */
 .portrait__badge-live {
   position: absolute;
   top: -3px; right: -3px;
@@ -1199,15 +1099,6 @@ img { max-width: 100%; display: block; }
   border-radius: 50%;
   background: #34D399;
   border: 2px solid var(--ink-700);
-  box-shadow: 0 0 10px rgba(52,211,153,0.9);
-}
-.portrait__badge-live::after {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  border: 1px solid #34D399;
-  animation: pulseRing 2s var(--ease-out) infinite;
 }
 
 .portrait__badge b {
@@ -1237,11 +1128,11 @@ img { max-width: 100%; display: block; }
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--bone);
-  background: rgba(255,255,255,0.055);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,246,240,0.055);
+  border: 1px solid rgba(255,236,228,0.12);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
-  box-shadow: 0 18px 36px -18px rgba(0,0,0,0.95), inset 0 1px 0 rgba(255,255,255,0.16);
+  box-shadow: 0 18px 36px -18px rgba(0,0,0,0.95), inset 0 1px 0 rgba(255,246,240,0.16);
   will-change: transform;
 }
 /* Brand mark inside each chip. Its own drop-shadow keeps mid-tone logos
@@ -1271,7 +1162,7 @@ img { max-width: 100%; display: block; }
   z-index: 3;
   margin-top: clamp(3rem, 7vw, 5rem);
   padding: 1.15rem 0;
-  border-block: 1px solid rgba(255,255,255,0.06);
+  border-block: 1px solid rgba(255,236,228,0.06);
   overflow: hidden;
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
@@ -1288,11 +1179,11 @@ img { max-width: 100%; display: block; }
   font-size: clamp(1rem, 2vw, 1.35rem);
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: rgba(255,255,255,0.28);
+  color: rgba(255,246,240,0.28);
   white-space: nowrap;
   transition: color 0.3s;
 }
-.marquee:hover .marquee__track span { color: rgba(255,255,255,0.5); }
+.marquee:hover .marquee__track span { color: rgba(255,246,240,0.5); }
 .marquee__track i { color: var(--accent); font-size: 0.55rem; font-style: normal; }
 @keyframes scrollX { to { transform: translateX(-50%); } }
 
@@ -1312,7 +1203,7 @@ img { max-width: 100%; display: block; }
 .scroll-cue__line {
   position: relative;
   width: 1px; height: 44px;
-  background: rgba(255,255,255,0.14);
+  background: rgba(255,246,240,0.14);
   overflow: hidden;
 }
 .scroll-cue__line i {
@@ -1345,9 +1236,9 @@ img { max-width: 100%; display: block; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, transparent, rgba(255,255,255,0.022) 30%, rgba(255,255,255,0.022) 70%, transparent),
-    linear-gradient(90deg, transparent, rgba(201,162,39,0.16) 18%, rgba(201,162,39,0.16) 82%, transparent) top / 100% 1px no-repeat,
-    linear-gradient(90deg, transparent, rgba(201,162,39,0.16) 18%, rgba(201,162,39,0.16) 82%, transparent) bottom / 100% 1px no-repeat;
+    linear-gradient(180deg, transparent, rgba(255,246,240,0.02) 30%, rgba(255,246,240,0.02) 70%, transparent),
+    linear-gradient(90deg, transparent, rgba(212,175,95,0.1) 18%, rgba(212,175,95,0.1) 82%, transparent) top / 100% 1px no-repeat,
+    linear-gradient(90deg, transparent, rgba(212,175,95,0.1) 18%, rgba(212,175,95,0.1) 82%, transparent) bottom / 100% 1px no-repeat;
   pointer-events: none;
 }
 
@@ -1370,9 +1261,9 @@ img { max-width: 100%; display: block; }
   font-style: normal;
   padding: 0.2rem 0.5rem;
   border-radius: 6px;
-  color: #E8C766;
-  background: rgba(201,162,39,0.14);
-  border: 1px solid rgba(201,162,39,0.3);
+  color: #E8CB8A;
+  background: rgba(212,175,95,0.14);
+  border: 1px solid rgba(212,175,95,0.3);
 }
 
 .section-title {
@@ -1414,7 +1305,7 @@ img { max-width: 100%; display: block; }
   border-radius: 50%;
   overflow: hidden;
   padding: 3px;
-  background: conic-gradient(from 180deg, var(--accent), rgba(255,255,255,0.7), var(--accent-dark), var(--accent));
+  background: conic-gradient(from 180deg, var(--accent), rgba(255,246,240,0.7), var(--accent-dark), var(--accent));
 }
 .about__avatar img {
   width: 100%; height: 100%;
@@ -1492,7 +1383,7 @@ img { max-width: 100%; display: block; }
   align-items: center;
   gap: 1rem;
   padding: 0.7rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.055);
+  border-bottom: 1px solid rgba(255,236,228,0.055);
   font-size: 0.82rem;
 }
 .about__facts li:last-child { border-bottom: none; }
@@ -1520,7 +1411,7 @@ img { max-width: 100%; display: block; }
 .about__pillars {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 1.15rem;
   margin-top: 2.5rem;
 }
 .pillar { padding: 1.65rem 1.5rem; }
@@ -1531,8 +1422,8 @@ img { max-width: 100%; display: block; }
   margin-bottom: 1.1rem;
   border-radius: 13px;
   color: var(--accent-light);
-  background: rgba(201,162,39,0.12);
-  border: 1px solid rgba(201,162,39,0.28);
+  background: rgba(212,175,95,0.12);
+  border: 1px solid rgba(212,175,95,0.28);
 }
 .pillar__icon svg { width: 21px; height: 21px; }
 .pillar h3 {
@@ -1556,7 +1447,7 @@ img { max-width: 100%; display: block; }
   left: 50%;
   width: 1px;
   transform: translateX(-50%);
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,246,240,0.08);
   overflow: hidden;
 }
 .timeline__spine i {
@@ -1565,7 +1456,6 @@ img { max-width: 100%; display: block; }
   width: 100%;
   height: 0%;
   background: linear-gradient(180deg, var(--accent-light), var(--accent), transparent);
-  box-shadow: 0 0 18px var(--accent-glow);
 }
 
 .tl-item {
@@ -1589,7 +1479,7 @@ img { max-width: 100%; display: block; }
   place-items: center;
   border-radius: 50%;
   background: var(--ink);
-  border: 1px solid rgba(201,162,39,0.5);
+  border: 1px solid rgba(212,175,95,0.5);
   z-index: 3;
 }
 .tl-item--right .tl-node { right: auto; left: -8px; }
@@ -1597,10 +1487,9 @@ img { max-width: 100%; display: block; }
   width: 6px; height: 6px;
   border-radius: 50%;
   background: var(--accent-light);
-  box-shadow: 0 0 12px var(--accent-glow);
 }
 
-.tl-card { padding: 1.9rem 1.75rem; }
+.tl-card { padding: 2rem 1.85rem; }
 .tl-card__top {
   display: flex;
   align-items: flex-start;
@@ -1635,7 +1524,7 @@ img { max-width: 100%; display: block; }
 .stack-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(126px, 1fr));
-  gap: 0.85rem;
+  gap: 0.9rem;
   margin-bottom: clamp(3.5rem, 8vw, 5.5rem);
   perspective: 1000px;
 }
@@ -1666,9 +1555,9 @@ img { max-width: 100%; display: block; }
 .stack-tile:hover {
   animation-play-state: paused;
   transform: translateY(-8px) rotateX(9deg) rotateY(-9deg) scale(1.05);
-  border-color: rgba(201,162,39,0.55);
-  background: rgba(201,162,39,0.1);
-  box-shadow: 0 26px 50px -22px rgba(201,162,39,0.9);
+  border-color: rgba(212,175,95,0.55);
+  background: rgba(212,175,95,0.1);
+  box-shadow: 0 26px 50px -22px rgba(212,175,95,0.9);
 }
 /* Badge that holds each brand mark. Kept neutral (white glass, not gold) so
    the logos' own colours read cleanly rather than fighting the accent. */
@@ -1681,14 +1570,14 @@ img { max-width: 100%; display: block; }
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--accent-light);
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,246,240,0.05);
+  border: 1px solid rgba(255,236,228,0.08);
   transform: translateZ(24px);
   transition: background 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
 }
 .stack-tile:hover .stack-tile__glyph {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.16);
+  background: rgba(255,246,240,0.1);
+  border-color: rgba(255,236,228,0.16);
 }
 
 /* Official brand marks — full colour at rest, lifted slightly on hover. */
@@ -1727,7 +1616,7 @@ img { max-width: 100%; display: block; }
   color: var(--bone-muted);
   margin-bottom: 1.75rem;
   padding-bottom: 0.85rem;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,236,228,0.07);
 }
 .skill { margin-bottom: 1.35rem; }
 .skill__head {
@@ -1747,7 +1636,7 @@ img { max-width: 100%; display: block; }
   position: relative;
   height: 4px;
   border-radius: 99px;
-  background: rgba(255,255,255,0.07);
+  background: rgba(255,246,240,0.07);
   overflow: hidden;
 }
 .skill__fill {
@@ -1756,18 +1645,8 @@ img { max-width: 100%; display: block; }
   width: 0%;
   border-radius: 99px;
   background: linear-gradient(90deg, var(--accent-dark), var(--accent) 55%, var(--accent-light));
-  box-shadow: 0 0 14px rgba(232,199,102,0.65);
 }
 /* Travelling highlight inside the filled portion */
-.skill__fill::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
-  transform: translateX(-100%);
-  animation: barShine 2.6s var(--ease-inout) infinite;
-}
-@keyframes barShine { to { transform: translateX(100%); } }
 
 /* ========================================================================== */
 /* 12 · SERVICES                                                              */
@@ -1788,10 +1667,10 @@ img { max-width: 100%; display: block; }
   font-size: 2.4rem;
   font-weight: 500;
   line-height: 1;
-  color: rgba(255,255,255,0.045);
+  color: rgba(255,246,240,0.045);
   transition: color 0.45s var(--ease-out);
 }
-.service:hover .service__num { color: rgba(201,162,39,0.28); }
+.service:hover .service__num { color: rgba(212,175,95,0.28); }
 .service__icon {
   display: grid;
   place-items: center;
@@ -1799,14 +1678,14 @@ img { max-width: 100%; display: block; }
   margin-bottom: 1.35rem;
   border-radius: 15px;
   color: var(--accent-light);
-  background: rgba(201,162,39,0.11);
-  border: 1px solid rgba(201,162,39,0.26);
+  background: rgba(212,175,95,0.11);
+  border: 1px solid rgba(212,175,95,0.26);
   transition: transform 0.45s var(--ease-out), background 0.45s, color 0.45s;
 }
 .service__icon svg { width: 23px; height: 23px; }
 .service:hover .service__icon {
   transform: translateY(-4px) rotate(-6deg);
-  background: rgba(201,162,39,0.22);
+  background: rgba(212,175,95,0.17);
   color: #fff;
 }
 .service h3 {
@@ -1834,13 +1713,13 @@ img { max-width: 100%; display: block; }
   /* A warm panel lifted out of the obsidian, held inside a gold hairline —
      the only card on the page that is not neutral glass. */
   background:
-    linear-gradient(120deg, rgba(201,162,39,0.14), rgba(30,34,43,0.6) 46%, rgba(10,11,15,0.5)),
+    linear-gradient(120deg, rgba(212,175,95,0.14), rgba(116,36,10,0.6) 46%, rgba(71,15,1,0.5)),
     var(--glass-bg);
-  border: 1px solid rgba(201,162,39,0.34);
+  border: 1px solid rgba(212,175,95,0.34);
   box-shadow:
     0 30px 70px -40px rgba(0,0,0,0.95),
-    0 0 60px -34px rgba(201,162,39,0.7),
-    inset 0 1px 0 rgba(232,199,102,0.16);
+    0 0 60px -34px rgba(212,175,95,0.7),
+    inset 0 1px 0 rgba(232,203,138,0.16);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
 }
@@ -1849,7 +1728,7 @@ img { max-width: 100%; display: block; }
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(105deg, transparent 34%, rgba(232,199,102,0.09) 48%, transparent 62%);
+  background: linear-gradient(105deg, transparent 34%, rgba(232,203,138,0.09) 48%, transparent 62%);
   transform: translateX(-60%);
   animation: medalSheen 7s var(--ease-inout) 1.5s infinite;
   pointer-events: none;
@@ -1888,8 +1767,8 @@ img { max-width: 100%; display: block; }
   background:
     radial-gradient(circle at 34% 28%, #FBEBA8 0%, var(--accent-light) 26%, var(--accent) 58%, #8A6B14 100%);
   box-shadow:
-    0 0 0 3px rgba(201,162,39,0.22),
-    0 10px 26px -8px rgba(201,162,39,0.6),
+    0 0 0 3px rgba(212,175,95,0.17),
+    0 10px 26px -8px rgba(212,175,95,0.6),
     inset 0 -3px 8px rgba(90,66,8,0.55),
     inset 0 3px 7px rgba(255,246,214,0.75);
 }
@@ -1929,7 +1808,7 @@ img { max-width: 100%; display: block; }
   -webkit-text-fill-color: transparent;
   color: transparent;
   /* text-shadow cannot survive background-clip, so the glow is a drop-shadow */
-  filter: drop-shadow(0 0 14px rgba(201,162,39,0.35));
+  filter: drop-shadow(0 0 14px rgba(212,175,95,0.35));
 }
 .medal__note {
   font-size: 0.9rem;
@@ -1944,7 +1823,7 @@ img { max-width: 100%; display: block; }
   flex: none;
   margin-left: auto;
   padding-left: clamp(1.25rem, 3vw, 2.25rem);
-  border-left: 1px solid rgba(201,162,39,0.26);
+  border-left: 1px solid rgba(212,175,95,0.26);
   text-align: right;
   max-width: 15ch;
 }
@@ -1980,10 +1859,10 @@ img { max-width: 100%; display: block; }
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  gap: 1.15rem;
   margin-bottom: 1.25rem;
 }
-.stat { padding: 2rem 1.5rem; text-align: center; }
+.stat { padding: 2.15rem 1.6rem; text-align: center; }
 .stat b {
   display: block;
   font-family: "Sora", sans-serif;
@@ -2007,7 +1886,7 @@ img { max-width: 100%; display: block; }
 .awards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 1.15rem;
 }
 .award {
   display: flex;
@@ -2023,8 +1902,8 @@ img { max-width: 100%; display: block; }
   border-radius: 13px;
   font-size: 1.1rem;
   color: var(--accent-light);
-  background: rgba(201,162,39,0.12);
-  border: 1px solid rgba(201,162,39,0.28);
+  background: rgba(212,175,95,0.12);
+  border: 1px solid rgba(212,175,95,0.28);
 }
 .award h3 {
   font-family: "Sora", sans-serif;
@@ -2044,7 +1923,7 @@ img { max-width: 100%; display: block; }
   gap: clamp(1.25rem, 3vw, 2.5rem);
   align-items: start;
 }
-.contact__info { display: grid; gap: 0.75rem; }
+.contact__info { display: grid; gap: 0.85rem; }
 
 .contact-card {
   display: flex;
@@ -2059,25 +1938,25 @@ img { max-width: 100%; display: block; }
   width: 42px; height: 42px;
   border-radius: 12px;
   color: var(--accent-light);
-  background: rgba(201,162,39,0.11);
-  border: 1px solid rgba(201,162,39,0.26);
+  background: rgba(212,175,95,0.11);
+  border: 1px solid rgba(212,175,95,0.26);
   transition: transform 0.4s var(--ease-out), background 0.4s, color 0.4s;
 }
 .contact-card__icon svg { width: 19px; height: 19px; }
 /* Tiles holding a brand mark drop the gold fill — champagne behind LinkedIn
    blue or the Gmail red muddies both. Phone and location keep it. */
 .contact-card__icon--brand {
-  background: rgba(255,255,255,0.055);
-  border-color: rgba(255,255,255,0.1);
+  background: rgba(255,246,240,0.055);
+  border-color: rgba(255,236,228,0.1);
 }
 .contact-card:hover .contact-card__icon {
   transform: scale(1.08) rotate(-6deg);
-  background: rgba(201,162,39,0.22);
+  background: rgba(212,175,95,0.17);
   color: #fff;
 }
 .contact-card:hover .contact-card__icon--brand {
-  background: rgba(255,255,255,0.09);
-  border-color: rgba(255,255,255,0.16);
+  background: rgba(255,246,240,0.09);
+  border-color: rgba(255,236,228,0.16);
 }
 .contact-card em {
   display: block;
@@ -2114,8 +1993,8 @@ img { max-width: 100%; display: block; }
   font-family: inherit;
   font-size: 0.9rem;
   color: var(--bone);
-  background: rgba(255,255,255,0.035);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,246,240,0.035);
+  border: 1px solid rgba(255,236,228,0.08);
   transition: border-color 0.35s var(--ease-out), background 0.35s, box-shadow 0.35s;
   resize: vertical;
 }
@@ -2124,12 +2003,12 @@ img { max-width: 100%; display: block; }
 .field input:focus,
 .field textarea:focus {
   outline: none;
-  border-color: rgba(201,162,39,0.6);
-  background: rgba(255,255,255,0.055);
-  box-shadow: 0 0 0 4px rgba(201,162,39,0.12);
+  border-color: rgba(212,175,95,0.6);
+  background: rgba(255,246,240,0.055);
+  box-shadow: 0 0 0 4px rgba(212,175,95,0.12);
 }
 .field.has-error input,
-.field.has-error textarea { border-color: rgba(232,199,102,0.85); }
+.field.has-error textarea { border-color: rgba(232,203,138,0.85); }
 .field__error {
   display: block;
   min-height: 1rem;
@@ -2161,7 +2040,7 @@ img { max-width: 100%; display: block; }
   position: relative;
   z-index: 2;
   padding-top: clamp(3.5rem, 8vw, 5.5rem);
-  border-top: 1px solid rgba(255,255,255,0.07);
+  border-top: 1px solid rgba(255,236,228,0.07);
   overflow: hidden;
 }
 .footer__glow {
@@ -2169,7 +2048,7 @@ img { max-width: 100%; display: block; }
   left: 50%; bottom: -60%;
   width: 90vw; height: 60vh;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse at center, rgba(201,162,39,0.24), transparent 68%);
+  background: radial-gradient(ellipse at center, rgba(212,175,95,0.24), transparent 68%);
   filter: blur(60px);
   pointer-events: none;
 }
@@ -2231,7 +2110,7 @@ img { max-width: 100%; display: block; }
   flex-wrap: wrap;
   gap: 1rem;
   padding: 1.6rem 0;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(255,236,228,0.06);
   font-size: 0.8rem;
   color: var(--bone-dim);
 }
@@ -2251,9 +2130,9 @@ img { max-width: 100%; display: block; }
 .to-top:hover {
   color: #fff;
   transform: translateY(-4px);
-  border-color: rgba(201,162,39,0.6);
-  background: rgba(201,162,39,0.16);
-  box-shadow: 0 14px 30px -12px rgba(201,162,39,0.85);
+  border-color: rgba(212,175,95,0.6);
+  background: rgba(212,175,95,0.13);
+  box-shadow: 0 14px 30px -12px rgba(212,175,95,0.85);
 }
 
 /* ========================================================================== */
@@ -2331,36 +2210,42 @@ body { overflow-wrap: break-word; }
     padding-left: 0;
     padding-top: 1.1rem;
     border-left: none;
-    border-top: 1px solid rgba(201,162,39,0.26);
+    border-top: 1px solid rgba(212,175,95,0.26);
     text-align: left;
     max-width: none;
     width: 100%;
   }
   .medal__seal b { margin-top: 0.1rem; }
 
-  /* Centred above the portrait, the badge wrapped to four lines and the block
-     grew downward straight over her face. Pin it to the foot of the figure
-     instead, and step the type down far enough that both labels hold one line
-     each inside the viewport — so it stays a compact two-line chip. */
-  /* Centred with auto margins, not translateX(-50%): the badge runs a
+  /* Sits centred directly above the portrait. It has to clear the fixed navbar
+     and the brand mark beside it, which is what the extra hero padding below
+     buys it — and the type is stepped down so both labels hold one line each,
+     keeping it a compact two-line chip rather than the four-line slab that
+     used to grow downward over her face.
+
+     Centred with auto margins, not translateX(-50%): the badge runs a
      `floatSlow` keyframe on `transform`, and the animation replaces any static
      transform outright — so a translate-based centring silently does nothing. */
   .portrait__badge {
     left: 0;
     right: 0;
     top: auto;
-    bottom: 4%;
+    bottom: calc(100% + 0.6rem);
     width: max-content;
     margin-inline: auto;
     padding: 0.55rem 0.85rem;
     gap: 0.55rem;
+    /* The float keyframe swings it +/-10px. Centred, that would run it under
+       the brand mark at the top of its arc, and the 20px of slack would have
+       to be paid for in hero padding. Hold it still here. */
+    animation: none;
   }
   .portrait__badge-mark { width: 28px; height: 28px; }
   .portrait__badge b  { font-size: 0.74rem; white-space: nowrap; }
   .portrait__badge em { font-size: 0.62rem; white-space: nowrap; }
 
-  /* The cursor-follow effects are meaningless without a mouse */
-  .spotlight { display: none; }
+  /* Clears the brand mark, which ends at y65 once the wordmark is hidden */
+  .hero { padding-top: 9.5rem; }
 }
 
 @media (max-width: 640px) {
@@ -2368,16 +2253,35 @@ body { overflow-wrap: break-word; }
   .stats         { grid-template-columns: repeat(2, 1fr); }
   .hero__stats   { gap: 1.5rem 2rem; }
   .brand__text   { display: none; }
-  .footer__nav   { grid-template-columns: repeat(2, 1fr); }
-  .footer__bottom { flex-direction: column; text-align: center; }
 
-  .hero    { padding: 7rem 0 4.5rem; min-height: auto; }
+  /* Footer: the desktop rhythm makes this over 1000px tall on a phone, which
+     is most of a screen of nothing. Tighten the padding, close up the link
+     spacing, and keep every block on the same left edge — the centred
+     copyright under left-aligned columns was the misalignment. */
+  .footer          { padding-top: 3rem; }
+  .footer__top     { padding-bottom: 2rem; gap: 2rem; }
+  .footer__tag     { margin-bottom: 1.1rem; font-size: 0.85rem; line-height: 1.65; }
+  .footer__nav     { grid-template-columns: repeat(2, 1fr); gap: 1.25rem 1rem; }
+  .footer__nav h3  { margin-bottom: 0.6rem; }
+  .footer__nav a   { padding: 0.28rem 0; font-size: 0.85rem; }
+  .footer__bottom  {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.5rem;
+    padding: 1.1rem 0;
+  }
+
+  /* Top padding has to clear the fixed navbar *and* the role badge that now
+     sits above the portrait, or the two collide on first paint. */
+  .hero    { padding: 9.5rem 0 4rem; min-height: auto; }
   .section { padding: clamp(4rem, 14vw, 5.5rem) 0; }
 
   /* The portrait leads the stacked hero, so it is the only thing between the
      top of the page and the name. Cap it against the viewport height as well
-     as the width, or the headline lands two screens down. */
-  .portrait { width: min(260px, 68vw); max-height: 52svh; }
+     as the width — trimmed a step to pay for the badge now sitting above it,
+     so badge, portrait, status pill and name still land on the first screen. */
+  .portrait { width: min(248px, 64vw); max-height: 45svh; }
 
   /* Full-bleed buttons read better than two half-width ones on a phone */
   .hero__cta { width: 100%; flex-direction: column; align-items: stretch; }
@@ -2392,7 +2296,9 @@ body { overflow-wrap: break-word; }
   .hero__stats    { gap: 1.25rem 1.5rem; }
   .hero__stats li { flex: 1 1 40%; }
   .stats          { grid-template-columns: 1fr; }
-  .footer__nav    { grid-template-columns: 1fr; }
+  /* The footer nav stays two-up even here — "Achievements" is the longest
+     label and it fits. Dropping to one column was what made the footer over
+     1000px tall on a 390px screen. */
   .about__avatar--cutout { width: 104px; height: 104px; }
   .portrait__badge { font-size: 0.8rem; }
 }
@@ -2424,7 +2330,6 @@ body { overflow-wrap: break-word; }
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .webgl-bg, .hero__particles, .noise-overlay { display: none !important; }
   .skill__fill { width: var(--static-w, 0%); }
 }
 

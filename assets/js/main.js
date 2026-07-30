@@ -7,20 +7,19 @@
 
    MODULES
      01 · Preloader
-     02 · Mouse spotlight
-     03 · Navigation (sticky, scrollspy, mobile menu)
-     04 · Hero entrance timeline
-     05 · Typed.js headline
-     06 · Scroll progress bar
-     07 · Animated counters
-     08 · Animated skill bars
-     09 · Experience timeline draw
-     10 · Magnetic buttons
-     11 · 3D tilt cards
-     12 · Parallax layers
-     13 · Contact form
-     14 · Portrait source resolution (cutout vs framed)
-     15 · Misc (back-to-top, footer year)
+     02 · Navigation (sticky, scrollspy, mobile menu)
+     03 · Hero entrance timeline
+     04 · Typed.js headline
+     05 · Scroll progress bar
+     06 · Animated counters
+     07 · Animated skill bars
+     08 · Experience timeline draw
+     09 · Magnetic buttons
+     10 · 3D tilt cards
+     11 · Parallax layers
+     12 · Contact form
+     13 · Portrait source resolution (cutout vs framed)
+     14 · Misc (back-to-top, footer year)
    ========================================================================== */
 
 (function () {
@@ -121,31 +120,7 @@
   }
 
   /* ======================================================================== */
-  /* 02 · MOUSE SPOTLIGHT                                                     */
-  /* ======================================================================== */
-  function initCursor() {
-    const root = document.documentElement;
-
-    // Spotlight follows the pointer on every device that has one.
-    let sx = window.innerWidth / 2, sy = window.innerHeight / 2;
-    let spotQueued = false;
-
-    const paintSpotlight = () => {
-      root.style.setProperty('--mx', sx + 'px');
-      root.style.setProperty('--my', sy + 'px');
-      spotQueued = false;
-    };
-
-    if (IS_TOUCH) return;
-
-    window.addEventListener('pointermove', (e) => {
-      sx = e.clientX; sy = e.clientY;
-      if (!spotQueued) { spotQueued = true; requestAnimationFrame(paintSpotlight); }
-    }, { passive: true });
-  }
-
-  /* ======================================================================== */
-  /* 03 · NAVIGATION                                                          */
+  /* 02 · NAVIGATION                                                          */
   /* ======================================================================== */
   function initNav() {
     const navbar   = $('#navbar');
@@ -200,7 +175,7 @@
   }
 
   /* ======================================================================== */
-  /* 04 · HERO ENTRANCE                                                       */
+  /* 03 · HERO ENTRANCE                                                       */
   /* ======================================================================== */
   function initHeroIntro() {
     if (!hasGSAP() || REDUCED) return;
@@ -224,7 +199,7 @@
   }
 
   /* ======================================================================== */
-  /* 05 · TYPED HEADLINE                                                      */
+  /* 04 · TYPED HEADLINE                                                      */
   /* ======================================================================== */
   function initTyped() {
     const host = $('#typed');
@@ -252,7 +227,7 @@
   }
 
   /* ======================================================================== */
-  /* 06 · SCROLL PROGRESS                                                     */
+  /* 05 · SCROLL PROGRESS                                                     */
   /* ======================================================================== */
   function initScrollProgress() {
     const bar = $('#scrollBar');
@@ -273,7 +248,7 @@
   }
 
   /* ======================================================================== */
-  /* 07 · ANIMATED COUNTERS                                                   */
+  /* 06 · ANIMATED COUNTERS                                                   */
   /* ======================================================================== */
   function initCounters() {
     $$('.counter').forEach((el) => {
@@ -380,7 +355,7 @@
   }
 
   /* ======================================================================== */
-  /* 10 · MAGNETIC BUTTONS                                                    */
+  /* 09 · MAGNETIC BUTTONS                                                    */
   /* ======================================================================== */
   function initMagnetic() {
     if (IS_TOUCH || REDUCED) return;
@@ -417,7 +392,7 @@
   }
 
   /* ======================================================================== */
-  /* 11 · 3D TILT CARDS                                                       */
+  /* 10 · 3D TILT CARDS                                                       */
   /* ======================================================================== */
   function initTilt() {
     if (IS_TOUCH || REDUCED) return;
@@ -457,7 +432,7 @@
   }
 
   /* ======================================================================== */
-  /* 12 · PARALLAX LAYERS                                                     */
+  /* 11 · PARALLAX LAYERS                                                     */
   /* ======================================================================== */
   function initParallax() {
     if (REDUCED) return;
@@ -519,7 +494,7 @@
   }
 
   /* ======================================================================== */
-  /* 13 · CONTACT FORM                                                        */
+  /* 12 · CONTACT FORM                                                        */
   /* ======================================================================== */
   function initContactForm() {
     const form   = $('#contactForm');
@@ -726,7 +701,7 @@
   }
 
   /* ======================================================================== */
-  /* 14 · PORTRAIT SOURCE RESOLUTION                                          */
+  /* 13 · PORTRAIT SOURCE RESOLUTION                                          */
   /* ------------------------------------------------------------------------ */
   /* The markup already resolves the source itself: a <picture> offers the     */
   /* transparent WebP and falls back to the PNG, and the img's inline onerror  */
@@ -805,7 +780,7 @@
   }
 
   /* ======================================================================== */
-  /* 15 · MISC                                                                */
+  /* 14 · MISC                                                                */
   /* ======================================================================== */
   function initMisc() {
     /* Footer year, always current */
@@ -838,7 +813,6 @@
   /* ======================================================================== */
   function boot() {
     // Things that should be live before the curtain lifts
-    initCursor();
     initNav();
     initScrollProgress();
     initPortrait();
