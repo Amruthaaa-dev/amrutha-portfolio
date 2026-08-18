@@ -16,23 +16,25 @@
   <meta name="description" content="Amrutha Haridas — Software Engineer and Full Stack PHP Developer from Kerala, India. Building scalable ERP systems, Shopify stores and modern web applications with Laravel, CodeIgniter and REST APIs." />
   <meta name="keywords" content="Amrutha Haridas, Software Engineer, Full Stack PHP Developer, Laravel Developer, CodeIgniter, Shopify Developer, ERP Development, REST API, MySQL, Kerala India" />
   <meta name="author" content="Amrutha Haridas" />
-  <meta name="robots" content="index, follow, max-image-preview:large" />
-  <link rel="canonical" href="https://amruthaharidas.dev/" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <link rel="canonical" href="https://amruthaharidas.netlify.app/" />
 
   <!-- ── Open Graph / Social ──────────────────────────────────── -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Amrutha Haridas" />
   <meta property="og:title" content="Amrutha Haridas — Software Engineer | Full Stack PHP Developer" />
   <meta property="og:description" content="Building scalable ERP systems, Shopify Stores and Modern Web Applications." />
-  <meta property="og:url" content="https://amruthaharidas.dev/" />
-  <meta property="og:image" content="https://amruthaharidas.dev/assets/images/og-image.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://amruthaharidas.netlify.app/" />
+  <meta property="og:image" content="https://amruthaharidas.netlify.app/assets/images/amrutha-cutout.png" />
+  <meta property="og:image:width" content="760" />
+  <meta property="og:image:height" content="1142" />
+  <meta property="og:image:alt" content="Portrait of Amrutha Haridas, Software Engineer and Full Stack PHP Developer" />
   <meta property="og:locale" content="en_IN" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image:alt" content="Portrait of Amrutha Haridas, Software Engineer and Full Stack PHP Developer" />
   <meta name="twitter:title" content="Amrutha Haridas — Software Engineer" />
   <meta name="twitter:description" content="Building scalable ERP systems, Shopify Stores and Modern Web Applications." />
-  <meta name="twitter:image" content="https://amruthaharidas.dev/assets/images/og-image.jpg" />
+  <meta name="twitter:image" content="https://amruthaharidas.netlify.app/assets/images/amrutha-cutout.png" />
 
   <!-- ── Icons ────────────────────────────────────────────────── -->
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
@@ -88,24 +90,57 @@
   <!-- ── Project stylesheet (loads last so it wins) ───────────── -->
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- ── Structured data: rich results for recruiters/search ──── -->
+  <!-- ── Structured data: rich results for recruiters/search ────
+       One @graph rather than three loose blocks, so Google reads the
+       nodes as connected: the Person is the subject, the WebSite is
+       hers, and the ProfilePage is this URL describing her. The @id
+       values are what tie them together — keep them in sync with the
+       canonical URL above if the domain ever changes. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Amrutha Haridas",
-    "jobTitle": "Software Engineer | Full Stack PHP Developer",
-    "description": "Software Engineer specializing in PHP, Laravel, CodeIgniter, Shopify and REST API development.",
-    "url": "https://amruthaharidas.dev/",
-    "image": "https://amruthaharidas.dev/assets/images/amrutha-cutout.png",
-    "address": { "@type": "PostalAddress", "addressRegion": "Kerala", "addressCountry": "IN" },
-    "telephone": "+919946865197",
-    "knowsAbout": ["PHP","Laravel","CodeIgniter","Shopify","MySQL","REST API","JavaScript","AWS"],
-    "worksFor": { "@type": "Organization", "name": "Impex" },
-    "sameAs": [
-      "https://www.linkedin.com/in/amrutha-haridas-71533a257/",
-      "https://github.com/Amruthaaa-dev",
-      "https://www.instagram.com/amrutha_______haridas"
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://amruthaharidas.netlify.app/#amrutha",
+        "name": "Amrutha Haridas",
+        "givenName": "Amrutha",
+        "familyName": "Haridas",
+        "jobTitle": "Software Engineer | Full Stack PHP Developer",
+        "description": "Software Engineer and Full Stack PHP Developer from Kerala, India, building scalable ERP systems, Shopify stores and modern web applications with Laravel, CodeIgniter and REST APIs.",
+        "url": "https://amruthaharidas.netlify.app/",
+        "mainEntityOfPage": { "@id": "https://amruthaharidas.netlify.app/#webpage" },
+        "image": "https://amruthaharidas.netlify.app/assets/images/amrutha-cutout.png",
+        "email": "mailto:amruthaalayattil@gmail.com",
+        "telephone": "+919946865197",
+        "address": { "@type": "PostalAddress", "addressRegion": "Kerala", "addressCountry": "IN" },
+        "nationality": { "@type": "Country", "name": "India" },
+        "knowsAbout": ["PHP","Laravel","CodeIgniter","Shopify","MySQL","REST API","JavaScript","AWS","ERP Systems"],
+        "knowsLanguage": ["English","Malayalam"],
+        "worksFor": { "@type": "Organization", "name": "Impex" },
+        "sameAs": [
+          "https://www.linkedin.com/in/amrutha-haridas-71533a257/",
+          "https://github.com/Amruthaaa-dev",
+          "https://www.instagram.com/amrutha_______haridas"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://amruthaharidas.netlify.app/#website",
+        "url": "https://amruthaharidas.netlify.app/",
+        "name": "Amrutha Haridas — Software Engineer Portfolio",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://amruthaharidas.netlify.app/#amrutha" }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://amruthaharidas.netlify.app/#webpage",
+        "url": "https://amruthaharidas.netlify.app/",
+        "name": "Amrutha Haridas — Software Engineer | Full Stack PHP Developer",
+        "isPartOf": { "@id": "https://amruthaharidas.netlify.app/#website" },
+        "about": { "@id": "https://amruthaharidas.netlify.app/#amrutha" },
+        "inLanguage": "en"
+      }
     ]
   }
   </script>

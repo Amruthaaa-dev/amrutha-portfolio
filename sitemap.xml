@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Single-page site: one canonical URL. Update the domain before deploying. -->
+<!-- Single-page site: one canonical URL, matching the canonical tag in index.html. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://amruthaharidas.dev/</loc>
-    <lastmod>2026-07-29</lastmod>
+    <loc>https://amruthaharidas.netlify.app/</loc>
+    <lastmod>2026-08-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
