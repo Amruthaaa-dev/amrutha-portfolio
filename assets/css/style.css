@@ -94,9 +94,82 @@
 }
 
 /* ========================================================================== */
-/* 01 · BASE                                                                  */
+/* 01 · RESET                                                                 */
+/* -------------------------------------------------------------------------- */
+/* This page used to pull cdn.tailwindcss.com, which is not a stylesheet but a */
+/* 123 KB JIT compiler that runs in the browser, render-blocking, to produce   */
+/* about fifteen rules. It is gone; what it genuinely provided is below.       */
+/*                                                                            */
+/* Most of that was Preflight — Tailwind's reset — which everything downstream */
+/* silently depended on: border-box sizing, zeroed margins, headings stripped  */
+/* back to inherit, lists without bullets, form controls inheriting the page   */
+/* font. Drop the CDN without this and the page falls apart. Faithful subset,  */
+/* trimmed to the elements this document actually uses.                       */
 /* ========================================================================== */
-* { -webkit-tap-highlight-color: transparent; }
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: currentColor;
+}
+* { margin: 0; -webkit-tap-highlight-color: transparent; }
+
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  font-family: "Inter", system-ui, sans-serif;
+}
+body { line-height: inherit; }
+
+/* Headings and lists are laid out entirely by the component styles below */
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+ol, ul, menu { list-style: none; padding: 0; }
+a { color: inherit; text-decoration: inherit; }
+b, strong { font-weight: bolder; }
+code, kbd, samp, pre { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 1em; }
+small { font-size: 80%; }
+/* The medal disc renders "1st" — without this the ordinal sits on the baseline */
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sub { bottom: -0.25em; }
+sup { top: -0.5em; }
+table { text-indent: 0; border-color: inherit; border-collapse: collapse; }
+
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+button, select { text-transform: none; }
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+:-moz-focusring { outline: auto; }
+fieldset, legend { margin: 0; padding: 0; }
+textarea { resize: vertical; }
+input::placeholder, textarea::placeholder { opacity: 1; color: var(--bone-dim); }
+button, [role="button"] { cursor: pointer; }
+:disabled { cursor: default; }
+summary { display: list-item; }
+
+img, svg, video, canvas, iframe { display: block; vertical-align: middle; }
+img, video { max-width: 100%; height: auto; }
+[hidden] { display: none; }
+
+/* ========================================================================== */
+/* 01b · BASE                                                                 */
+/* ========================================================================== */
 
 html {
   scroll-behavior: smooth;
@@ -1992,6 +2065,10 @@ img { max-width: 100%; display: block; }
   border-radius: 13px;
   font-family: inherit;
   font-size: 0.9rem;
+  /* @tailwindcss/forms used to set this; without it controls inherit the
+     unitless 1.5 and each field loses ~3px of height. Pinned so the form
+     keeps the exact metrics it shipped with. */
+  line-height: 1.5rem;
   color: var(--bone);
   background: rgba(255,246,240,0.035);
   border: 1px solid rgba(255,236,228,0.08);
@@ -2340,3 +2417,34 @@ body { overflow-wrap: break-word; }
   .glass-card { border: 1px solid #ccc; background: none; }
   a { text-decoration: underline; }
 }
+
+
+/* ========================================================================== */
+/* 18 · UTILITIES (must stay last)                                            */
+/* -------------------------------------------------------------------------- */
+/* Tailwind emitted its utilities after every component rule, and the markup   */
+/* relies on that order: the nav CTA carries `hidden sm:inline-flex`, and      */
+/* `.hidden` only beats `.btn { display: inline-flex }` by coming later — both */
+/* are single-class selectors, so source order is the whole tiebreak. Keep     */
+/* this block at the bottom of the file.                                       */
+/* ========================================================================== */
+.antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.bg-ink      { background-color: var(--ink); }
+.font-body   { font-family: "Inter", system-ui, sans-serif; }
+.font-mono   { font-family: "JetBrains Mono", ui-monospace, monospace; }
+.text-accent     { color: var(--accent); }
+.text-bone       { color: var(--bone); }
+.text-bone-muted { color: var(--bone-muted); }
+.text-bone-dim   { color: var(--bone-dim); }
+.text-xs     { font-size: 0.75rem; line-height: 1rem; }
+.hidden      { display: none; }
+.w-4 { width: 1rem; }  .h-4 { height: 1rem; }
+/* Square-bracket names are Tailwind's arbitrary-value syntax, kept so the
+   markup did not have to change; the brackets are escaped in the selector. */
+.w-\[18px\] { width: 18px; }  .h-\[18px\] { height: 18px; }
+.tracking-\[0\.2em\] { letter-spacing: 0.2em; }
+.tracking-\[0\.3em\] { letter-spacing: 0.3em; }
+/* Tailwind's `sm` breakpoint */
+@media (min-width: 640px) { .sm\:inline-flex { display: inline-flex; } }
+
+::selection { background-color: rgba(212, 175, 95, 0.3); color: #fff; }

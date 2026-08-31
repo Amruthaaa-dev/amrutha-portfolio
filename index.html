@@ -25,16 +25,17 @@
   <meta property="og:title" content="Amrutha Haridas — Software Engineer | Full Stack PHP Developer" />
   <meta property="og:description" content="Building scalable ERP systems, Shopify Stores and Modern Web Applications." />
   <meta property="og:url" content="https://amruthaharidas.netlify.app/" />
-  <meta property="og:image" content="https://amruthaharidas.netlify.app/assets/images/amrutha-cutout.png" />
-  <meta property="og:image:width" content="760" />
-  <meta property="og:image:height" content="1142" />
-  <meta property="og:image:alt" content="Portrait of Amrutha Haridas, Software Engineer and Full Stack PHP Developer" />
+  <meta property="og:image" content="https://amruthaharidas.netlify.app/assets/images/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Amrutha Haridas — Software Engineer, Full Stack PHP Developer, MCA Class Topper and Gold Medalist" />
   <meta property="og:locale" content="en_IN" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image:alt" content="Portrait of Amrutha Haridas, Software Engineer and Full Stack PHP Developer" />
+  <meta name="twitter:image:alt" content="Amrutha Haridas — Software Engineer, Full Stack PHP Developer, MCA Class Topper and Gold Medalist" />
   <meta name="twitter:title" content="Amrutha Haridas — Software Engineer" />
   <meta name="twitter:description" content="Building scalable ERP systems, Shopify Stores and Modern Web Applications." />
-  <meta name="twitter:image" content="https://amruthaharidas.netlify.app/assets/images/amrutha-cutout.png" />
+  <meta name="twitter:image" content="https://amruthaharidas.netlify.app/assets/images/og-image.jpg" />
 
   <!-- ── Icons ────────────────────────────────────────────────── -->
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
@@ -60,29 +61,9 @@
     href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
 
-  <!-- ── Tailwind CSS (CDN build) ─────────────────────────────── -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-  <script>
-    /* Tailwind design tokens — single source of truth for the theme */
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            ink:    { DEFAULT: '#2E1411', 800: '#381B17', 700: '#43221D', 600: '#532C26', 500: '#6A3A33' },
-            accent: { DEFAULT: '#D4AF5F', light: '#E8CB8A', dark: '#9C7C34', glow: '#F2DFAE' },
-            bone:   { DEFAULT: '#FBF7F2', muted: '#E6DCD4', dim: '#C8B9B1' }
-          },
-          fontFamily: {
-            display: ['Sora', 'system-ui', 'sans-serif'],
-            body:    ['Inter', 'system-ui', 'sans-serif'],
-            mono:    ['"JetBrains Mono"', 'ui-monospace', 'monospace']
-          },
-          letterSpacing: { tightest: '-0.055em' }
-        }
-      }
-    };
-  </script>
+  <!-- Tailwind's CDN build used to load here. It was a 123 KB render-blocking
+       JIT compiler supplying ~15 rules and Preflight; both now live in
+       assets/css/style.css section 01. -->
 
   <!-- ── AOS (scroll reveal) ──────────────────────────────────── -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
@@ -117,6 +98,28 @@
         "nationality": { "@type": "Country", "name": "India" },
         "knowsAbout": ["PHP","Laravel","CodeIgniter","Shopify","MySQL","REST API","JavaScript","AWS","ERP Systems"],
         "knowsLanguage": ["English","Malayalam"],
+        "award": "MCA Class Topper — Gold Medalist for academic excellence",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "SCMS School of Technology and Management",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Aluva",
+            "addressRegion": "Kerala",
+            "addressCountry": "IN"
+          }
+        },
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "educationalLevel": "Postgraduate",
+          "name": "Master of Computer Applications (MCA)",
+          "description": "Ranked first in the cohort and awarded the gold medal for academic excellence.",
+          "recognizedBy": {
+            "@type": "CollegeOrUniversity",
+            "name": "SCMS School of Technology and Management"
+          }
+        },
         "worksFor": { "@type": "Organization", "name": "Impex" },
         "sameAs": [
           "https://www.linkedin.com/in/amrutha-haridas-71533a257/",
@@ -146,7 +149,7 @@
   </script>
 </head>
 
-<body class="bg-ink text-bone font-body antialiased selection:bg-accent/30 selection:text-white">
+<body class="bg-ink text-bone font-body antialiased">
 
   <!-- ============================================================
        BRAND ICON SPRITE
@@ -828,8 +831,9 @@
               MCA Class Topper — <span class="medal__gold">Gold Medalist</span>
             </h3>
             <p class="medal__note">
-              Ranked first in the Master of Computer Applications cohort and awarded the
-              gold medal for academic excellence.
+              Ranked first in the Master of Computer Applications cohort at
+              <strong>SCMS School of Technology and Management, Aluva</strong>,
+              and awarded the gold medal for academic excellence.
             </p>
           </div>
 
