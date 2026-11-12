@@ -1393,11 +1393,10 @@ img { max-width: 100%; display: block; }
 /* Cutout variant: a circular half-length portrait — head down to the hem of
    the white shirt — rather than the whole standing figure.
 
-   That framing falls out of `cover` for free. The cutout is 1023x1537, so in a
-   square window `cover` scales to the width and shows exactly the top 66.6% of
-   the height: y 0 to 1023, and the shirt ends at y 1020. Top-aligning with
-   `object-position: 50% 0%` therefore lands the crop on the shirt hem to the
-   pixel, with the blank space above the head becoming headroom.
+   That framing falls out of `cover` for free. The cutout is 565x847 (2:3), so
+   in a square window `cover` scales to the width and shows the top 66.6% of
+   the height. Top-aligning with `object-position: 50% 0%` keeps the head in
+   frame.
 
    These must sit *after* the base rules above — the two selectors carry equal
    specificity, so whichever is written last wins. */

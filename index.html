@@ -51,8 +51,7 @@
        exactly so the preload and the render pick the same file. -->
   <link rel="preload" as="image" type="image/webp"
         imagesrcset="assets/images/amrutha-cutout-384.webp 384w,
-                     assets/images/amrutha-cutout-640.webp 640w,
-                     assets/images/amrutha-cutout.webp 1023w"
+                     assets/images/amrutha-cutout.webp 565w"
         imagesizes="(max-width: 640px) 68vw, (max-width: 1100px) 330px, 390px"
         fetchpriority="high" />
 
@@ -349,21 +348,20 @@
                picture as PNG, so it is offered first and the PNG is only
                fetched by browsers that cannot decode WebP. The rungs match the
                real rendered widths: a 2x phone takes the 640px file (39 KB),
-               a 2x desktop the native 1023px cut. -->
+               a 2x desktop the native 565px cut. -->
           <div class="portrait portrait--cutout" data-tilt>
             <div class="portrait__ring" aria-hidden="true"></div>
             <div class="portrait__frame">
               <picture>
                 <source type="image/webp"
                         srcset="assets/images/amrutha-cutout-384.webp 384w,
-                                assets/images/amrutha-cutout-640.webp 640w,
-                                assets/images/amrutha-cutout.webp 1023w"
+                                assets/images/amrutha-cutout.webp 565w"
                         sizes="(max-width: 640px) 68vw, (max-width: 1100px) 330px, 390px" />
                 <img
                   src="assets/images/amrutha-cutout.png"
                   onerror="this.onerror=null;this.src='assets/images/profile-placeholder.svg';this.classList.add('is-placeholder')"
                   alt="Portrait of Amrutha Haridas, Software Engineer"
-                  width="1023" height="1537" loading="eager" decoding="async" fetchpriority="high"
+                  width="565" height="847" loading="eager" decoding="async" fetchpriority="high"
                   class="portrait__img" />
               </picture>
               <div class="portrait__grade" aria-hidden="true"></div>
